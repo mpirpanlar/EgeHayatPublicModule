@@ -22,6 +22,7 @@ namespace Sentez.NermaMetalManagementModule
 {
     public partial class NermaMetalManagementModule : IModule, ISentezModule
     {
+        //Deneme değişiklik
         IUnityContainer _container;
         SysMng _sysMng;
         LiveSession ActiveSession
