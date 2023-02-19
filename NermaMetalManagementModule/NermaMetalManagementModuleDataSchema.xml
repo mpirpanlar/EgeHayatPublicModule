@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SentezMetaData Application="3014" Version="1.0.5" >
+	<Tables>
+		<Table Id="359" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="RecId" Caption="Malzeme Kartı Birim Ölçü Detayları">
+			<Fields>
+				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
+				<Field Id="2" Name="InventoryId" Description="Malzeme Kartı Kayıt Numarası" DataType="Int64" Ordinal="2" UdtType="UdtInt64" Caption="Malzeme Kodu" Precision="19" />
+				<Field Id="3" Name="SizeDetailCode" Description="Ölçü Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Ölçü Kodu" Size="25" IsFilterField="True" />
+				<Field Id="4" Name="SizeDetailName" Description="Ölçü Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Ölçü Adı" Size="50" IsFilterField="True" />
+				<Field Id="5" Name="Width" Description="En" DataType="Decimal" Ordinal="31" UdtType="UdtQuantity" Caption="En" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="6" Name="Length" Description="Boy" DataType="Decimal" Ordinal="10" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Boy" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="7" Name="UnitItemId" Description="Birim Kartı Kayıt Numarası" DataType="Int32" Ordinal="3" UdtType="UdtInt32" Caption="Birim Kartı No" Precision="10" />
+				<Field Id="8" Name="InUse" Description="Kullanımda Bilgisi" DataType="Boolean" Ordinal="7" UdtType="UdtBool" Caption="Kullanımda Bilgisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+				<Field Id="9" Name="InsertedAt" Description="Kaydı Ekleme Zamanı" DataType="DateTime" Ordinal="8" UdtType="UdtDateTime" Caption="Kayıt Zamanı" />
+				<Field Id="10" Name="InsertedBy" Description="Kaydı Ekleyen" DataType="Int32" Ordinal="9" UdtType="UdtInt32" Caption="Kayıt Eden" Precision="10" />
+				<Field Id="11" Name="UpdatedAt" Description="Kaydı Değiştirme Zamanı" DataType="DateTime" Ordinal="10" UdtType="UdtDateTime" Caption="Değişiklik Zamanı" />
+				<Field Id="12" Name="UpdatedBy" Description="Kaydı Değiştiren" DataType="Int32" Ordinal="11" UdtType="UdtInt32" Caption="Değiştiren" Precision="10" />
+				<Field Id="13" Name="IsDeleted" Description="Silindi Bilgisi" DataType="Boolean" Ordinal="12" UdtType="UdtBool" Caption="Silindi" Precision="3" />
+				<Field Id="14" Name="DeletedAt" Description="Kaydı Silme Zamanı" DataType="DateTime" Ordinal="13" UdtType="UdtDateTime" Caption="Silme Zamanı" />
+				<Field Id="15" Name="DeletedBy" Description="Kaydı Silen" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Silen" Precision="10" />
+			</Fields>
+			<Indexes>
+				<Index Id="0" Name="Erp_InventoryUnitItemSizeSetDetails_IX0" Ordinal="2">
+					<IndexFields>
+						<IndexField Id="1" Name="InventoryId" Ordinal="1" />
+					</IndexFields>
+				</Index>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory" DestinationTable="Erp_Inventory" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="InventoryId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem" DestinationTable="Meta_UnitSetItem" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="UnitItemId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+	</Tables>
+</SentezMetaData>

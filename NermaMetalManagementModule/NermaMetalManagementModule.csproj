@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{17C58A3D-3B61-43A9-B72F-7838B0939190}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NermaMetalManagementModule</RootNamespace>
+    <AssemblyName>NermaMetalManagementModule</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\LiveOutputs\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\LiveOutputs\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiveQueryBuilder.Core">
+      <HintPath>..\..\..\..\Libs\ActiveQueryBuilder\ActiveQueryBuilder.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.MSSQLMetadataProvider">
+      <HintPath>..\..\..\..\Libs\ActiveQueryBuilder\ActiveQueryBuilder.MSSQLMetadataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.View">
+      <HintPath>..\..\..\..\Libs\ActiveQueryBuilder\ActiveQueryBuilder.View.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.View.WPF">
+      <HintPath>..\..\..\..\Libs\ActiveQueryBuilder\ActiveQueryBuilder.View.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Data.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Mvvm.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v16.1.Core">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.PivotGrid.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Utils.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1.UI">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Utils.v16.1.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Controls.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Core.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.1.Extensions">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Core.v16.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Docking.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Grid.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Core">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Grid.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Extensions">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Grid.v16.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v16.1">
+      <HintPath>..\..\..\..\Libs\DeveloperExpress.16.1.4\DevExpress.Xpf.Printing.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Libs\MicrosoftOffice\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Composite">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Composite.Presentation">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.Composite.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Composite.UnityExtensions">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.Composite.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Reeb.SqlOM">
+      <HintPath>..\..\..\..\Libs\Outputs\Release\Reeb.SqlOM.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PresentationModels\FaultTaskControlPM.cs" />
+    <Compile Include="PresentationModels\CollectiveActualCostPM.cs" />
+    <Compile Include="PresentationModels\OrderAllHistoryPM.cs" />
+    <Compile Include="PresentationModels\VCMMonthlyActualCostPM.cs" />
+    <Compile Include="PresentationModels\SalesShipmentDetailsPM.cs" />
+    <Compile Include="PresentationModels\SalesShipmentComparePM.cs" />
+    <Compile Include="SecurityDefinitions.cs" />
+    <Compile Include="SecurityEnumerations.cs" />
+    <Compile Include="Services\FaultQueryService.cs" />
+    <Compile Include="Services\FaultTaskControlPolicy.cs" />
+    <Compile Include="Services\SalesShipmentComparePolicy.cs" />
+    <Compile Include="Views\FaultControlMechanism.xaml.cs">
+      <DependentUpon>FaultControlMechanism.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FaultExplanationEntry.xaml.cs">
+      <DependentUpon>FaultExplanationEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NermaMetalManagementModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ModuleMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\SalesShipmentCompare.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\FaultControlMechanism.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Views\OrderAllHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Views\CollectiveActualCost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Views\FaultTaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Page Include="Views\FaultExplanationEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Views\VCMMonthlyActualCost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Views\SalesShipmentDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NermaMetalManagementModuleDataSchema.xml" />
+    <EmbeddedResource Include="NermaMetalManagementModuleDbUpdateScripts.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Core\LiveCore.csproj">
+      <Project>{09fc62a4-7270-4c4c-bba9-9631da552211}</Project>
+      <Name>LiveCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LiveCore.Cultures\LiveCore.Cultures.csproj">
+      <Project>{fb9b2aeb-e88c-4faa-9096-019cd62e46b2}</Project>
+      <Name>LiveCore.Cultures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LiveCore.Desktop\LiveCore.Desktop.csproj">
+      <Project>{7636b51a-a952-46cc-8dbd-ab6e1ce54aba}</Project>
+      <Name>LiveCore.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\ManufacturingModule\ManufacturingModule.csproj">
+      <Project>{7be09f82-7ce5-4f05-aa61-66c51b164c6d}</Project>
+      <Name>ManufacturingModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Products\Textile\Vogue\Modules\VogueModules\VModule\VModule.csproj">
+      <Project>{4d64b9f5-4f06-4912-8c05-1e6d81288d59}</Project>
+      <Name>VModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

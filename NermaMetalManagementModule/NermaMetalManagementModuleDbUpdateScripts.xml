@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DbScripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Application="3014">
+  <Updates>
+    <Version>
+      <Build>1</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>/****** Object:  Table [dbo].[Erp_InventoryUnitItemSizeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.objects
+    WHERE object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]')
+    AND type IN (N'U'))
+BEGIN
+  CREATE TABLE [Erp_InventoryUnitItemSizeSetDetails] (
+    [RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+   ,[InventoryId] [dbo].[UdtInt64] NULL
+   ,[SizeDetailCode] [dbo].[UdtCode] NULL
+   ,[SizeDetailName] [dbo].[UdtName] NULL
+   ,[Width] [dbo].[UdtQuantity] NULL
+   ,[Length] [dbo].[UdtQuantity] NULL
+   ,[UnitItemId] [dbo].[UdtInt32] NULL
+   ,[InUse] [dbo].[UdtBool] NULL
+   ,[InsertedAt] [dbo].[UdtDateTime] NULL
+   ,[InsertedBy] [dbo].[UdtInt32] NULL
+   ,[UpdatedAt] [dbo].[UdtDateTime] NULL
+   ,[UpdatedBy] [dbo].[UdtInt32] NULL
+   ,[IsDeleted] [dbo].[UdtBool] NULL
+   ,[DeletedAt] [dbo].[UdtDateTime] NULL
+   ,[DeletedBy] [dbo].[UdtInt32] NULL
+   ,CONSTRAINT [PK_Erp_InventoryUnitItemSizeSetDetails] PRIMARY KEY CLUSTERED
+    (
+    [RecId] ASC
+    ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+  ) ON [PRIMARY]
+END
+GO
+
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]')
+    AND name = N'Erp_InventoryUnitItemSizeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_InventoryUnitItemSizeSetDetails_IX0] ON [Erp_InventoryUnitItemSizeSetDetails]
+  (
+  [InventoryId] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+/****** Object:  ForeignKey [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]    Script Date: 02/10/2011 12:25:43 ******/
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory] FOREIGN KEY ([InventoryId])
+  REFERENCES [Erp_Inventory] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]
+GO
+
+/****** Object:  ForeignKey [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]    Script Date: 02/10/2011 12:25:43 ******/
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem] FOREIGN KEY ([UnitItemId])
+  REFERENCES [Meta_UnitSetItem] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]
+GO
+</Script>
+  </Updates>
+  <CreateScript>
+    <DbVersion>
+      <Build>1</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </DbVersion>
+    <CreateScript>/****** Object:  Table [dbo].[Erp_InventoryUnitItemSizeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.objects
+    WHERE object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]')
+    AND type IN (N'U'))
+BEGIN
+  CREATE TABLE [Erp_InventoryUnitItemSizeSetDetails] (
+    [RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+   ,[InventoryId] [dbo].[UdtInt64] NULL
+   ,[SizeDetailCode] [dbo].[UdtCode] NULL
+   ,[SizeDetailName] [dbo].[UdtName] NULL
+   ,[Width] [dbo].[UdtQuantity] NULL
+   ,[Length] [dbo].[UdtQuantity] NULL
+   ,[UnitItemId] [dbo].[UdtInt32] NULL
+   ,[InUse] [dbo].[UdtBool] NULL
+   ,[InsertedAt] [dbo].[UdtDateTime] NULL
+   ,[InsertedBy] [dbo].[UdtInt32] NULL
+   ,[UpdatedAt] [dbo].[UdtDateTime] NULL
+   ,[UpdatedBy] [dbo].[UdtInt32] NULL
+   ,[IsDeleted] [dbo].[UdtBool] NULL
+   ,[DeletedAt] [dbo].[UdtDateTime] NULL
+   ,[DeletedBy] [dbo].[UdtInt32] NULL
+   ,CONSTRAINT [PK_Erp_InventoryUnitItemSizeSetDetails] PRIMARY KEY CLUSTERED
+    (
+    [RecId] ASC
+    ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+  ) ON [PRIMARY]
+END
+GO
+
+SET ANSI_PADDING OFF
+GO
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]')
+    AND name = N'Erp_InventoryUnitItemSizeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_InventoryUnitItemSizeSetDetails_IX0] ON [Erp_InventoryUnitItemSizeSetDetails]
+  (
+  [InventoryId] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+/****** Object:  ForeignKey [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]    Script Date: 02/10/2011 12:25:43 ******/
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory] FOREIGN KEY ([InventoryId])
+  REFERENCES [Erp_Inventory] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory]
+GO
+
+/****** Object:  ForeignKey [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]    Script Date: 02/10/2011 12:25:43 ******/
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem] FOREIGN KEY ([UnitItemId])
+  REFERENCES [Meta_UnitSetItem] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]
+GO
+</CreateScript>
+  </CreateScript>
+</DbScripts>
