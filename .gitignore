@@ -2,4 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/NermaMetalManagementModule/FileContentIndex/merges
+/.vs/NermaMetalManagementModule/FileContentIndex
+/.vs/NermaMetalManagementModule/v17
+/.vs/NermaMetalManagementModule/obj
