@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SentezMetaData Application="3014" Version="1.0.5" >
 	<Tables>
-		<Table Id="359" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="RecId" Caption="Malzeme Kartı Birim Ölçü Detayları">
+		<Table Id="359" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
 				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
 				<Field Id="2" Name="InventoryId" Description="Malzeme Kartı Kayıt Numarası" DataType="Int64" Ordinal="2" UdtType="UdtInt64" Caption="Malzeme Kodu" Precision="19" />

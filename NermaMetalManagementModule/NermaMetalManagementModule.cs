@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using NermaMetalManagementModule.Services;
+using Sentez.Common.PresentationModels;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -67,16 +68,20 @@ namespace Sentez.NermaMetalManagementModule
 
         private void RegisterServices()
         {
-            BusinessObjectBase.AddCustomConstruction("ActualCostBO", CurrentAccountBoCustomCons);
+            BusinessObjectBase.AddCustomConstruction("InventoryBO", InventoryBoCustomCons);
+            BusinessObjectBase.AddCustomInit("InventoryBO", InventoryBo_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomInit("InventoryPM", InventoryPm_Init_InventoryUnitItemSizeSetDetails);
         }
-        private void CurrentAccountBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
+
+        private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
         {
             List<string> tableList = new List<string>();
             tableList.AddRange(Tables);
 
-            tableList.Add("Erp_ActualCostProcessDetail");
+            tableList.Add("Erp_InventoryUnitItemSizeSetDetails");
             Tables = tableList.ToArray();
         }
+
         private void RegisterRes()
         {
             ResMng.AddRes("VogueCostMenu", "NermaMetalManagementModule;component/ModuleMenu.xml", ResSource.Resource, ResourceType.MenuXml, Modules.ExternalModule15, 0, 0);
@@ -91,6 +96,8 @@ namespace Sentez.NermaMetalManagementModule
             ResMng.AddRes("VCMMonthlyActualCost", "NermaMetalManagementModule;component/Views/VCMMonthlyActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("CollectiveActualCost", "NermaMetalManagementModule;component/Views/CollectiveActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("OrderAllHistory", "NermaMetalManagementModule;component/Views/OrderAllHistory.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+
+            ResMng.AddRes("InventoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/InventoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
         private void RegisterPM()
         {
