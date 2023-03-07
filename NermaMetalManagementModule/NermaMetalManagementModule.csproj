@@ -90,6 +90,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\LiveOutputs\Debug\InventoryUIModule.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LiveOutputs\Debug\LiveCore.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCore.Desktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LiveOutputs\Debug\LiveCore.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -131,6 +139,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="VModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LiveOutputs\Debug\VModule.dll</HintPath>
+    </Reference>
+    <Reference Include="VUIModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LiveOutputs\Debug\VUIModule.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -201,28 +217,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NermaMetalManagementModuleDataSchema.xml" />
     <EmbeddedResource Include="NermaMetalManagementModuleDbUpdateScripts.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Core\LiveCore.csproj">
-      <Project>{09fc62a4-7270-4c4c-bba9-9631da552211}</Project>
-      <Name>LiveCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\LiveCore.Cultures\LiveCore.Cultures.csproj">
-      <Project>{fb9b2aeb-e88c-4faa-9096-019cd62e46b2}</Project>
-      <Name>LiveCore.Cultures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\LiveCore.Desktop\LiveCore.Desktop.csproj">
-      <Project>{7636b51a-a952-46cc-8dbd-ab6e1ce54aba}</Project>
-      <Name>LiveCore.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Modules\ManufacturingModule\ManufacturingModule.csproj">
-      <Project>{7be09f82-7ce5-4f05-aa61-66c51b164c6d}</Project>
-      <Name>ManufacturingModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Products\Textile\Vogue\Modules\VogueModules\VModule\VModule.csproj">
-      <Project>{4d64b9f5-4f06-4912-8c05-1e6d81288d59}</Project>
-      <Name>VModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

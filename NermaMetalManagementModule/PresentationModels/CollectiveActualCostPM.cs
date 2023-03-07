@@ -155,6 +155,7 @@ namespace Sentez.NermaMetalManagementModule.PresentationModels
             gparams = sysMng.getSession().ParamService.GetParameterClass<GeneralParameters>();
             wparams = sysMng.getSession().ParamService.GetParameterClass<VogueParameters>();
             amountDec = gparams.AmountDec;
+            //deneme
         }
 
         public override void LoadCommands()

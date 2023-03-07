@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\SourceControl\SENTEZ-ERP\dev\ExternalModules\NermaMetaManagementModule\NermaMetalManagementModule\obj\Debug\
+C:\SourceControl\SENTEZ-ERP\dev\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\
 NermaMetalManagementModule
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 2231471035
 
-151705949084
-471811267691
+161947649303
+471866075890
 Views\FaultControlMechanism.xaml;Views\FaultExplanationEntry.xaml;
 
 False
