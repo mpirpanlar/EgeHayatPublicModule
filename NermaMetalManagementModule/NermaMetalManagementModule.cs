@@ -10,7 +10,7 @@ using Sentez.Common.SBase;
 using Sentez.Common.SystemServices;
 using Sentez.Data.BusinessObjects;
 using Sentez.Data.MetaData.DatabaseControl;
-using Sentez.NermaMetalManagementModule.PresentationModels;
+//using Sentez.NermaMetalManagementModule.PresentationModels;
 using Sentez.NermaMetalManagementModule.Services;
 using System;
 using System.Collections.Generic;
@@ -101,12 +101,12 @@ namespace Sentez.NermaMetalManagementModule
         }
         private void RegisterPM()
         {
-            _container.RegisterType<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
-            _container.RegisterType<IPMBase, FaultTaskControlPM>("FaultTaskControlPM");
-            _container.RegisterType<IPMBase, VCMMonthlyActualCostPM>("VCMMonthlyActualCostPM");
-            _container.RegisterType<IPMBase, SalesShipmentDetailsPM>("SalesShipmentDetailsPM");
-            _container.RegisterType<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
-            _container.RegisterType<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
+            //_container.RegisterType<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
+            //_container.RegisterType<IPMBase, FaultTaskControlPM>("FaultTaskControlPM");
+            //_container.RegisterType<IPMBase, VCMMonthlyActualCostPM>("VCMMonthlyActualCostPM");
+            //_container.RegisterType<IPMBase, SalesShipmentDetailsPM>("SalesShipmentDetailsPM");
+            //_container.RegisterType<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
+            //_container.RegisterType<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
         }
         private void RegisterRpr()
         {
