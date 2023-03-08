@@ -1,18 +1,19 @@
 ﻿<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:live="clr-namespace:LiveCore.Desktop.UI.Controls;assembly=LiveCore.Desktop"
-    xmlns:sye="clr-namespace:Sentez.Common.Extension;assembly=LiveCore.Desktop"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:lange="clr-namespace:Sentez.Common.Localization;assembly=LiveCore.Desktop"
+    xmlns:syc="clr-namespace:Sentez.Controls;assembly=LiveCore.Desktop"
+    xmlns:sye="clr-namespace:Sentez.Common.Extension;assembly=LiveCore.Desktop"
+    xmlns:rec="clr-namespace:Sentez.Common.Utilities;assembly=LiveCore.Desktop"    
     xmlns:UtilCore="clr-namespace:Sentez.Common.Utilities;assembly=LiveCore" 
-    x:Name="InventoryUnitItemSizeSetDetails"
-    Tag="{lange:TranslateExtension Ölçü Detayı}">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <live:LiveGridControl  MaxHeight="2000"  x:Name="gridInventoryUnitItemSizeSetDetails" TableName="Erp_InventoryUnitItemSizeSetDetails" BusinessObject="{Binding ActiveBO}" ForeignKey="FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory" Lookups="{sye:SBinding Lists}">
+    xmlns:live="clr-namespace:LiveCore.Desktop.UI.Controls;assembly=LiveCore.Desktop"
+    x:Name="UnitItemSizeSetDetails"
+    Tag="{lange:TranslateExtension Ölçü Tanımları}"
+    >
+    
+    <Grid   Margin="5,5,5,5" >
+        <live:LiveGridControl  MaxHeight="2000"  x:Name="gridDetail" TableName="Erp_UnitItemSizeSetDetails" BusinessObject="{Binding ActiveBO}" ItemsSource="{Binding ActiveBO.MasterTable}" Lookups="{sye:SBinding Lists}">
             <live:LiveGridControl.ColumnDefinitions>
                 <UtilCore:ReceiptColumn ColumnName="SizeDetailCode" Caption="Kodu" EditorType="TextEditor" NewRowCheckColumn="True" Width="90"/>
                 <UtilCore:ReceiptColumn ColumnName="SizeDetailName" Caption="Adı" EditorType="TextEditor" Width="150"/>

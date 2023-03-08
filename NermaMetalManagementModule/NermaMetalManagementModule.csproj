@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\NermaMetalManagementModule.Inventory.cs" />
+    <Compile Include="Models\UnitItemSizeSetDetailsBO.cs" />
     <Compile Include="SecurityDefinitions.cs" />
     <Compile Include="SecurityEnumerations.cs" />
     <Compile Include="Services\FaultQueryService.cs" />
@@ -174,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PresentationModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UnitItemSizeSetDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

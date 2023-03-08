@@ -18,6 +18,7 @@ using System.IO;
 using System.Reflection;
 using NermaMetalManagementModule.Services;
 using Sentez.Common.PresentationModels;
+using Sentez.NermaMetalManagementModule.Models;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -54,6 +55,7 @@ namespace Sentez.NermaMetalManagementModule
         public void Initialize()
         {
             RegisterCoreDocuments();
+            RegisterBO();
             RegisterViews();
             RegisterRes();
             RegisterRpr();
@@ -62,8 +64,13 @@ namespace Sentez.NermaMetalManagementModule
             RegisterServices();
             VogueCostModuleSecurity.RegisterSecurityDefinitions();
 
-            MenuManager.Instance.RegisterMenu("NermaMetalManagementModule", "VogueCostMenu", moduleID, true);
+            MenuManager.Instance.RegisterMenu("NermaMetalManagementModule", "NermaMetalManagementModuleMenu", moduleID, true);
             _sysMng.AddApplication("NermaMetalManagementModule");
+        }
+
+        private void RegisterBO()
+        {
+            _container.RegisterType<IBusinessObject, UnitItemSizeSetDetailsBO>("UnitItemSizeSetDetailsBO");
         }
 
         private void RegisterServices()
@@ -84,21 +91,24 @@ namespace Sentez.NermaMetalManagementModule
 
         private void RegisterRes()
         {
-            ResMng.AddRes("VogueCostMenu", "NermaMetalManagementModule;component/ModuleMenu.xml", ResSource.Resource, ResourceType.MenuXml, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("NermaMetalManagementModuleMenu", "NermaMetalManagementModule;component/ModuleMenu.xml", ResSource.Resource, ResourceType.MenuXml, Modules.ExternalModule15, 0, 0);
         }
+
         private void RegisterViews()
         {
-            ResMng.AddRes("SalesShipmentCompare", "NermaMetalManagementModule;component/Views/SalesShipmentCompare.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("SalesShipmentDetails", "NermaMetalManagementModule;component/Views/SalesShipmentDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("FaultControlMechanism", "NermaMetalManagementModule;component/Views/FaultControlMechanism.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("FaultTaskControl", "NermaMetalManagementModule;component/Views/FaultTaskControl.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("FaultExplanationEntry", "NermaMetalManagementModule;component/Views/FaultExplanationEntry.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("VCMMonthlyActualCost", "NermaMetalManagementModule;component/Views/VCMMonthlyActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("CollectiveActualCost", "NermaMetalManagementModule;component/Views/CollectiveActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
-            ResMng.AddRes("OrderAllHistory", "NermaMetalManagementModule;component/Views/OrderAllHistory.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("SalesShipmentCompare", "NermaMetalManagementModule;component/Views/SalesShipmentCompare.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("SalesShipmentDetails", "NermaMetalManagementModule;component/Views/SalesShipmentDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("FaultControlMechanism", "NermaMetalManagementModule;component/Views/FaultControlMechanism.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("FaultTaskControl", "NermaMetalManagementModule;component/Views/FaultTaskControl.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("FaultExplanationEntry", "NermaMetalManagementModule;component/Views/FaultExplanationEntry.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("VCMMonthlyActualCost", "NermaMetalManagementModule;component/Views/VCMMonthlyActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("CollectiveActualCost", "NermaMetalManagementModule;component/Views/CollectiveActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            //ResMng.AddRes("OrderAllHistory", "NermaMetalManagementModule;component/Views/OrderAllHistory.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
             ResMng.AddRes("InventoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/InventoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("UnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/UnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
+
         private void RegisterPM()
         {
             //_container.RegisterType<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
@@ -108,16 +118,18 @@ namespace Sentez.NermaMetalManagementModule
             //_container.RegisterType<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
             //_container.RegisterType<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
         }
+
         private void RegisterRpr()
         {
             _container.RegisterType<IReport, SalesShipmentComparePolicy>("SalesShipmentComparePolicy");
             _container.RegisterType<IReport, FaultTaskControlPolicy>("FaultTaskControlPolicy");
             _container.RegisterType<ISystemService, FaultQueryService>("FaultQueryService");
         }
+
         public void RegisterModuleCommands()
         {
-
         }
+
         public void RegisterCoreDocuments()
         {
             Data.MetaData.Schema.ReadXml(Assembly.GetAssembly(typeof(NermaMetalManagementModule)).GetManifestResourceStream("NermaMetalManagementModule.NermaMetalManagementModuleDataSchema.xml"));

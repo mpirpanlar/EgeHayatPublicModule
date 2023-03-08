@@ -3,20 +3,8 @@
 	<Application Name="Live">
 		<MenuRoot Caption="Nerma Metal Yönetim Modülü" ImagePath="M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z" Order="90000" >
 			<MenuItem CommandName="ModuleDefault"  Caption="Tanımlamalar" WebLink="" >
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Satış-Sevkiyat Karşılaştırması">
-					<CommandParam viewname="SalesShipmentCompare" pmname="SalesShipmentComparePM"  pmparam="SalesShipmentComparePM" modulename="NermaMetalManagementModule" secname="VogueCostModuleSecurityItems.SalesShipmentCompare" subsecname="VogueCostModuleSecuritySubItems.None"/>
-				</MenuItem>
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Hata Görev Kontrolü">
-					<CommandParam viewname="FaultTaskControl" pmname="FaultTaskControlPM"  pmparam="FaultTaskControlPM" modulename="NermaMetalManagementModule" secname="VogueCostModuleSecurityItems.FaultTaskControl" subsecname="VogueCostModuleSecuritySubItems.None"/>
-				</MenuItem>
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Kümülatif Gerçek Maliyet">
-					<CommandParam viewname="CollectiveActualCost" boname="ActualCostBO" boparam="ActualCostBO" pmname="CollectiveActualCostPM"  pmparam="CollectiveActualCostPM" modulename="NermaMetalManagementModule" secname="VogueCostModuleSecurityItems.MonthlyActualCost" subsecname="VogueCostModuleSecuritySubItems.None"/>
-				</MenuItem>
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Aylık Gerçek Maliyet">
-					<CommandParam viewname="VCMMonthlyActualCost" boname="ActualCostBO" boparam="ActualCostBO" pmname="VCMMonthlyActualCostPM"  pmparam="VCMMonthlyActualCostPM" modulename="NermaMetalManagementModule" secname="VogueCostModuleSecurityItems.MonthlyActualCost" subsecname="VogueCostModuleSecuritySubItems.None"/>
-				</MenuItem>
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Order Tarihçesi">
-					<CommandParam viewname="OrderAllHistory" pmname="OrderAllHistoryPM"  pmparam="OrderAllHistoryPM" modulename="NermaMetalManagementModule" secname="VogueCostModuleSecurityItems.OrderAllHistory" subsecname="VogueCostModuleSecuritySubItems.None"/>
+				<MenuItem CommandName="CmdGeneralOpen" Caption="Ölçü Tanımları">
+					<CommandParam viewname="UnitItemSizeSetDetailsView" boname="UnitItemSizeSetDetailsBO" pmparam="UnitItemSizeSetDetailsListEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
 				</MenuItem>
 			</MenuItem>
 		</MenuRoot>
