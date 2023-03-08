@@ -1,39 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SentezMetaData Application="3014" Version="1.0.5" >
 	<Tables>
-		<Table Id="359" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
+		<Table Id="600" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
 				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
 				<Field Id="2" Name="InventoryId" Description="Malzeme Kartı Kayıt Numarası" DataType="Int64" Ordinal="2" UdtType="UdtInt64" Caption="Malzeme Kodu" Precision="19" />
 				<Field Id="3" Name="SizeDetailCode" Description="Ölçü Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Ölçü Kodu" Size="25" IsFilterField="True" />
-
 				<Field Id="4" Name="SizeDetailName" Description="Ölçü Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Ölçü Adı" Size="50" IsFilterField="True" />
 				<Field Id="5" Name="UnitFactor" Description="Birim Faktör" DataType="Decimal" Ordinal="5" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Çarpan" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="6" Name="UnitDivisor" Description="Birim Bölen" DataType="Decimal" Ordinal="6" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Bölen" Precision="28" Scale="8" IsFilterField="True" />
-
 				<Field Id="7" Name="UnitWidth" Description="Birim Genişlik" DataType="Decimal" Ordinal="7" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Genişlik" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="8" Name="UnitWidthUnitId" Description="Birim Geniş.No" DataType="Int32" Ordinal="8" UdtType="UdtInt32" Caption="Birim Geniş.No" Precision="10" IsFilterField="True" />
-				
 				<Field Id="9" Name="UnitLength" Description="Birim Uzunluk" DataType="Decimal" Ordinal="9" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Uzunluk" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="10" Name="UnitLengthUnitId" Description="Birim Uzun.No" DataType="Int32" Ordinal="10" UdtType="UdtInt32" Caption="Birim Uzun.No" Precision="10" IsFilterField="True" />
-				
 				<Field Id="11" Name="UnitHeight" Description="Birim Yükseklik" DataType="Decimal" Ordinal="11" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Yükseklik" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="12" Name="UnitHeightUnitId" Description="Birim Yüksek. No" DataType="Int32" Ordinal="12" UdtType="UdtInt32" Caption="Birim Yüksek. No" Precision="10" IsFilterField="True" />
-
 				<Field Id="13" Name="GrossUnitArea" Description="Brüt Alan" DataType="Decimal" Ordinal="13" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Alan" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="14" Name="UnitArea" Description="Net Alan" DataType="Decimal" Ordinal="13" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Alan" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="15" Name="UnitAreaUnitId" Description="Alan Birimi" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Alan Birimi" Precision="10" IsFilterField="True" />
-
 				<Field Id="16" Name="GrossUnitVolume" Description="Brüt Hacim" DataType="Decimal" Ordinal="15" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Hacim" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="17" Name="UnitVolume" Description="Net Hacim" DataType="Decimal" Ordinal="15" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Hacim" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="18" Name="UnitVolumeUnitId" Description="Hacim Birimi" DataType="Int32" Ordinal="16" UdtType="UdtInt32" Caption="Hacim Birimi" Precision="10" IsFilterField="True" />
-				
 				<Field Id="19" Name="UnitWeight" Description="Net Ağırlık" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Ağırlık" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="20" Name="GrossUnitWeight" Description="Brüt Ağırlık" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Ağırlık" Precision="28" Scale="8" IsFilterField="True" />
 				<Field Id="21" Name="UnitWeightUnitId" Description="Ağırlık Birimi" DataType="Int32" Ordinal="18" UdtType="UdtInt32" Caption="Ağırlık Birimi" Precision="10" IsFilterField="True" />
-
 				<Field Id="19" Name="UnitDesi" Description="Desi" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Desi" Precision="28" Scale="8" IsFilterField="True" />
-
 				<Field Id="22" Name="IsMainUnit" Description="Ana Birim mi ?" DataType="Boolean" Ordinal="19" UdtType="UdtBool" Caption="Ana Birim" Precision="3" IsFilterField="True" />
 				<Field Id="22" Name="IsDefault" Description="Ön Değer" DataType="Boolean" Ordinal="19" UdtType="UdtBool" Caption="Ön Değer" Precision="3" IsFilterField="True" />
 				<Field Id="23" Name="UniversalCode" Description="Uluslararası Kodu" DataType="String" Ordinal="20" UdtType="UdtSpecial" Caption="Uluslararası Kodu" Size="15" IsFilterField="True" />
@@ -60,6 +51,62 @@
 					</RelationFields>
 				</Relation>
 				<Relation Id="1" Name="FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem" DestinationTable="Meta_UnitSetItem" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="UnitItemId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+
+		<Table Id="600" Name="Erp_UnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
+			<Fields>
+				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
+				<Field Id="3" Name="SizeDetailCode" Description="Ölçü Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Ölçü Kodu" Size="25" IsFilterField="True" />
+				<Field Id="4" Name="SizeDetailName" Description="Ölçü Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Ölçü Adı" Size="50" IsFilterField="True" />
+				<Field Id="5" Name="UnitFactor" Description="Birim Faktör" DataType="Decimal" Ordinal="5" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Çarpan" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="6" Name="UnitDivisor" Description="Birim Bölen" DataType="Decimal" Ordinal="6" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Bölen" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="7" Name="UnitWidth" Description="Birim Genişlik" DataType="Decimal" Ordinal="7" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Genişlik" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="8" Name="UnitWidthUnitId" Description="Birim Geniş.No" DataType="Int32" Ordinal="8" UdtType="UdtInt32" Caption="Birim Geniş.No" Precision="10" IsFilterField="True" />
+				<Field Id="9" Name="UnitLength" Description="Birim Uzunluk" DataType="Decimal" Ordinal="9" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Uzunluk" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="10" Name="UnitLengthUnitId" Description="Birim Uzun.No" DataType="Int32" Ordinal="10" UdtType="UdtInt32" Caption="Birim Uzun.No" Precision="10" IsFilterField="True" />
+				<Field Id="11" Name="UnitHeight" Description="Birim Yükseklik" DataType="Decimal" Ordinal="11" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Birim Yükseklik" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="12" Name="UnitHeightUnitId" Description="Birim Yüksek. No" DataType="Int32" Ordinal="12" UdtType="UdtInt32" Caption="Birim Yüksek. No" Precision="10" IsFilterField="True" />
+				<Field Id="13" Name="GrossUnitArea" Description="Brüt Alan" DataType="Decimal" Ordinal="13" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Alan" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="14" Name="UnitArea" Description="Net Alan" DataType="Decimal" Ordinal="13" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Alan" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="15" Name="UnitAreaUnitId" Description="Alan Birimi" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Alan Birimi" Precision="10" IsFilterField="True" />
+				<Field Id="16" Name="GrossUnitVolume" Description="Brüt Hacim" DataType="Decimal" Ordinal="15" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Hacim" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="17" Name="UnitVolume" Description="Net Hacim" DataType="Decimal" Ordinal="15" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Hacim" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="18" Name="UnitVolumeUnitId" Description="Hacim Birimi" DataType="Int32" Ordinal="16" UdtType="UdtInt32" Caption="Hacim Birimi" Precision="10" IsFilterField="True" />
+				<Field Id="19" Name="UnitWeight" Description="Net Ağırlık" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Net Ağırlık" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="20" Name="GrossUnitWeight" Description="Brüt Ağırlık" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Brüt Ağırlık" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="21" Name="UnitWeightUnitId" Description="Ağırlık Birimi" DataType="Int32" Ordinal="18" UdtType="UdtInt32" Caption="Ağırlık Birimi" Precision="10" IsFilterField="True" />
+				<Field Id="19" Name="UnitDesi" Description="Desi" DataType="Decimal" Ordinal="17" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Desi" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="22" Name="IsMainUnit" Description="Ana Birim mi ?" DataType="Boolean" Ordinal="19" UdtType="UdtBool" Caption="Ana Birim" Precision="3" IsFilterField="True" />
+				<Field Id="22" Name="IsDefault" Description="Ön Değer" DataType="Boolean" Ordinal="19" UdtType="UdtBool" Caption="Ön Değer" Precision="3" IsFilterField="True" />
+				<Field Id="23" Name="UniversalCode" Description="Uluslararası Kodu" DataType="String" Ordinal="20" UdtType="UdtSpecial" Caption="Uluslararası Kodu" Size="15" IsFilterField="True" />
+				<Field Id="24" Name="InUse" Description="Kullanımda Bilgisi" DataType="Boolean" Ordinal="7" UdtType="UdtBool" Caption="Kullanımda Bilgisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+				<Field Id="25" Name="InsertedAt" Description="Kaydı Ekleme Zamanı" DataType="DateTime" Ordinal="8" UdtType="UdtDateTime" Caption="Kayıt Zamanı" />
+				<Field Id="26" Name="InsertedBy" Description="Kaydı Ekleyen" DataType="Int32" Ordinal="9" UdtType="UdtInt32" Caption="Kayıt Eden" Precision="10" />
+				<Field Id="27" Name="UpdatedAt" Description="Kaydı Değiştirme Zamanı" DataType="DateTime" Ordinal="10" UdtType="UdtDateTime" Caption="Değişiklik Zamanı" />
+				<Field Id="28" Name="UpdatedBy" Description="Kaydı Değiştiren" DataType="Int32" Ordinal="11" UdtType="UdtInt32" Caption="Değiştiren" Precision="10" />
+				<Field Id="29" Name="IsDeleted" Description="Silindi Bilgisi" DataType="Boolean" Ordinal="12" UdtType="UdtBool" Caption="Silindi" Precision="3" />
+				<Field Id="30" Name="DeletedAt" Description="Kaydı Silme Zamanı" DataType="DateTime" Ordinal="13" UdtType="UdtDateTime" Caption="Silme Zamanı" />
+				<Field Id="31" Name="DeletedBy" Description="Kaydı Silen" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Silen" Precision="10" />
+			</Fields>
+			<Indexes>
+				<Index Id="0" Name="Erp_UnitItemSizeSetDetails_IX0" Ordinal="2">
+					<IndexFields>
+						<IndexField Id="1" Name="InventoryId" Ordinal="1" />
+					</IndexFields>
+				</Index>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_UnitItemSizeSetDetails_Erp_Inventory" DestinationTable="Erp_Inventory" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="InventoryId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem" DestinationTable="Meta_UnitSetItem" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="UnitItemId" DestinationField="RecId" />
 					</RelationFields>

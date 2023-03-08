@@ -151,23 +151,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\NermaMetalManagementModule.Inventory.cs" />
-    <Compile Include="PresentationModels\FaultTaskControlPM.cs" />
-    <Compile Include="PresentationModels\CollectiveActualCostPM.cs" />
-    <Compile Include="PresentationModels\OrderAllHistoryPM.cs" />
-    <Compile Include="PresentationModels\VCMMonthlyActualCostPM.cs" />
-    <Compile Include="PresentationModels\SalesShipmentDetailsPM.cs" />
-    <Compile Include="PresentationModels\SalesShipmentComparePM.cs" />
     <Compile Include="SecurityDefinitions.cs" />
     <Compile Include="SecurityEnumerations.cs" />
     <Compile Include="Services\FaultQueryService.cs" />
     <Compile Include="Services\FaultTaskControlPolicy.cs" />
     <Compile Include="Services\SalesShipmentComparePolicy.cs" />
-    <Compile Include="Views\FaultControlMechanism.xaml.cs">
-      <DependentUpon>FaultControlMechanism.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FaultExplanationEntry.xaml.cs">
-      <DependentUpon>FaultExplanationEntry.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NermaMetalManagementModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -175,48 +163,17 @@
     <Resource Include="ModuleMenu.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\SalesShipmentCompare.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Views\InventoryUnitItemSizeSetDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Resource>
-    <Page Include="Views\FaultControlMechanism.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Resource Include="Views\OrderAllHistory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Views\CollectiveActualCost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <Resource Include="Views\FaultTaskControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Page Include="Views\FaultExplanationEntry.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Resource Include="Views\VCMMonthlyActualCost.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="Views\SalesShipmentDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NermaMetalManagementModuleDataSchema.xml" />
     <EmbeddedResource Include="NermaMetalManagementModuleDbUpdateScripts.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PresentationModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

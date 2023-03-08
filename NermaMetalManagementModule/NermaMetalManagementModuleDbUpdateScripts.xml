@@ -110,9 +110,88 @@
 		GO
 	</Script>
   </Updates>
+  <Updates>
+    <Version>
+      <Build>2</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>/****** Object:  Table [dbo].[Erp_UnitItemSizeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_UnitItemSizeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[SizeDetailCode] [dbo].[UdtCode] NULL
+		,[SizeDetailName] [dbo].[UdtName] NULL
+		,[UnitItemId] [dbo].[UdtInt32] NULL
+		,[UnitFactor] [dbo].[UdtQuantity] NULL
+		,[UnitDivisor] [dbo].[UdtQuantity] NULL
+		,[UnitWidth] [dbo].[UdtQuantity] NULL
+		,[UnitWidthUnitId] [dbo].[UdtInt32] NULL
+		,[UnitLength] [dbo].[UdtQuantity] NULL
+		,[UnitLengthUnitId] [dbo].[UdtInt32] NULL
+		,[UnitHeight] [dbo].[UdtQuantity] NULL
+		,[UnitHeightUnitId] [dbo].[UdtInt32] NULL
+		,[GrossUnitArea] [dbo].[UdtQuantity] NULL
+		,[UnitArea] [dbo].[UdtQuantity] NULL
+		,[UnitAreaUnitId] [dbo].[UdtInt32] NULL
+		,[GrossUnitVolume] [dbo].[UdtQuantity] NULL
+		,[UnitVolume] [dbo].[UdtQuantity] NULL
+		,[UnitVolumeUnitId] [dbo].[UdtInt32] NULL
+		,[UnitWeight] [dbo].[UdtQuantity] NULL
+		,[GrossUnitWeight] [dbo].[UdtQuantity] NULL
+		,[UnitWeightUnitId] [dbo].[UdtInt32] NULL
+		,[UnitDesi] [dbo].[UdtQuantity] NULL
+		,[IsMainUnit] [dbo].[UdtBool] NULL
+		,[IsDefault] [dbo].[UdtBool] NULL
+		,[UniversalCode] [dbo].[UdtCode] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_UnitItemSizeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+		/****** Object:  ForeignKey [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]    Script Date: 02/10/2011 12:25:43 ******/
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+		ALTER TABLE [Erp_UnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem] FOREIGN KEY ([UnitItemId])
+		REFERENCES [Meta_UnitSetItem] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+		ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]
+		GO</Script>
+  </Updates>
   <CreateScript>
     <DbVersion>
-      <Build>1</Build>
+      <Build>2</Build>
       <Major>1</Major>
       <Minor>0</Minor>
       <Revision>-1</Revision>
@@ -218,6 +297,77 @@
 		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
 		ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Meta_UnitSetItem]
 		GO
-	</CreateScript>
+
+/****** Object:  Table [dbo].[Erp_UnitItemSizeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_UnitItemSizeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[SizeDetailCode] [dbo].[UdtCode] NULL
+		,[SizeDetailName] [dbo].[UdtName] NULL
+		,[UnitItemId] [dbo].[UdtInt32] NULL
+		,[UnitFactor] [dbo].[UdtQuantity] NULL
+		,[UnitDivisor] [dbo].[UdtQuantity] NULL
+		,[UnitWidth] [dbo].[UdtQuantity] NULL
+		,[UnitWidthUnitId] [dbo].[UdtInt32] NULL
+		,[UnitLength] [dbo].[UdtQuantity] NULL
+		,[UnitLengthUnitId] [dbo].[UdtInt32] NULL
+		,[UnitHeight] [dbo].[UdtQuantity] NULL
+		,[UnitHeightUnitId] [dbo].[UdtInt32] NULL
+		,[GrossUnitArea] [dbo].[UdtQuantity] NULL
+		,[UnitArea] [dbo].[UdtQuantity] NULL
+		,[UnitAreaUnitId] [dbo].[UdtInt32] NULL
+		,[GrossUnitVolume] [dbo].[UdtQuantity] NULL
+		,[UnitVolume] [dbo].[UdtQuantity] NULL
+		,[UnitVolumeUnitId] [dbo].[UdtInt32] NULL
+		,[UnitWeight] [dbo].[UdtQuantity] NULL
+		,[GrossUnitWeight] [dbo].[UdtQuantity] NULL
+		,[UnitWeightUnitId] [dbo].[UdtInt32] NULL
+		,[UnitDesi] [dbo].[UdtQuantity] NULL
+		,[IsMainUnit] [dbo].[UdtBool] NULL
+		,[IsDefault] [dbo].[UdtBool] NULL
+		,[UniversalCode] [dbo].[UdtCode] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_UnitItemSizeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+		/****** Object:  ForeignKey [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]    Script Date: 02/10/2011 12:25:43 ******/
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+		ALTER TABLE [Erp_UnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem] FOREIGN KEY ([UnitItemId])
+		REFERENCES [Meta_UnitSetItem] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+		ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]
+		GO		</CreateScript>
   </CreateScript>
 </DbScripts>
