@@ -159,6 +159,7 @@
     <Compile Include="Services\SalesShipmentComparePolicy.cs" />
     <Compile Include="NermaMetalManagementModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkList\UnitItemSizeSetDetailsList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ModuleMenu.xml" />

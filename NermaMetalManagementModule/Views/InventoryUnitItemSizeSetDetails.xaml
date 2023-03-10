@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <live:LiveGridControl  MaxHeight="2000"  x:Name="gridInventoryUnitItemSizeSetDetails" TableName="Erp_InventoryUnitItemSizeSetDetails" BusinessObject="{Binding ActiveBO}" ForeignKey="FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Inventory" Lookups="{sye:SBinding Lists}">
             <live:LiveGridControl.ColumnDefinitions>
-                <UtilCore:ReceiptColumn ColumnName="SizeDetailCode" Caption="Kodu" EditorType="TextEditor" NewRowCheckColumn="True" Width="90"/>
+                <UtilCore:ReceiptColumn ColumnName="SizeDetailCode" Caption="Kodu" EditorType="ListSelector" NewRowCheckColumn="True" Width="90" ListWorkListName="Erp_UnitItemSizeSetDetailsSizeDetailCodeList" ListIdField="SizeDetailCode"/>
                 <UtilCore:ReceiptColumn ColumnName="SizeDetailName" Caption="Adı" EditorType="TextEditor" Width="150"/>
                 <UtilCore:ReceiptColumn ColumnName="UnitFactor" Caption="Çevrim Kat Sayısı" EditorType="TextEditor" Width="80"/>
                 <UtilCore:ReceiptColumn ColumnName="UnitDivisor" Caption="Bölen" EditorType="TextEditor" Width="80" IsVisible="False"/>

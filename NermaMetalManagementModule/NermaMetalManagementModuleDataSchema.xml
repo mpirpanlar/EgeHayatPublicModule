@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SentezMetaData Application="3014" Version="1.0.5" >
+<SentezMetaData Application="3014" Version="1.0.2" >
 	<Tables>
 		<Table Id="600" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
@@ -58,7 +58,7 @@
 			</Relations>
 		</Table>
 
-		<Table Id="600" Name="Erp_UnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
+		<Table Id="601" Name="Erp_UnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
 				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
 				<Field Id="3" Name="SizeDetailCode" Description="Ölçü Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Ölçü Kodu" Size="25" IsFilterField="True" />

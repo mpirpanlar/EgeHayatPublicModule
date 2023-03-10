@@ -19,6 +19,8 @@ using System.Reflection;
 using NermaMetalManagementModule.Services;
 using Sentez.Common.PresentationModels;
 using Sentez.NermaMetalManagementModule.Models;
+using Sentez.Common.Utilities;
+using Sentez.NermaMetalManagementModule.WorkList;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -62,6 +64,7 @@ namespace Sentez.NermaMetalManagementModule
             RegisterPM();
             RegisterModuleCommands();
             RegisterServices();
+            RegisterList();
             VogueCostModuleSecurity.RegisterSecurityDefinitions();
 
             MenuManager.Instance.RegisterMenu("NermaMetalManagementModule", "NermaMetalManagementModuleMenu", moduleID, true);
@@ -92,6 +95,25 @@ namespace Sentez.NermaMetalManagementModule
         private void RegisterRes()
         {
             ResMng.AddRes("NermaMetalManagementModuleMenu", "NermaMetalManagementModule;component/ModuleMenu.xml", ResSource.Resource, ResourceType.MenuXml, Modules.ExternalModule15, 0, 0);
+        }
+
+        private void RegisterList()
+        {
+            _container.RegisterType<IReport, UnitItemSizeSetDetailsList>("Erp_UnitItemSizeSetDetailsSizeDetailCodeList");
+            //_container.RegisterType<IReport, MetaCurrentAccountAnalysisSubjectList>("Meta_CurrentAccountAnalysisSubjectAnalysisSubjectCodeList");
+            //_container.RegisterType<IReport, MetaCurrentAccountAnalysisElementList>("Meta_CurrentAccountAnalysisElementAnalysisElementCodeList");
+
+            //LookupList.Instance.AddLookupList("CekCalismasiList", "Display", typeof(string), new object[] {
+            //    "Sorunlu","Sorunsuz"
+            //}, "Value", typeof(byte), new object[] { (byte)0, (byte)1 });
+
+            //LookupList.Instance.AddLookupList("MoralitesiList", "Display", typeof(string), new object[] {
+            //    "Sorunlu","Sorunsuz"
+            //}, "Value", typeof(byte), new object[] { (byte)0, (byte)1 });
+
+            //LookupList.Instance.AddLookupList("StatuYilList", "Display", typeof(string), new object[] {
+            //    "411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430"
+            //}, "Value", typeof(int), new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
         }
 
         private void RegisterViews()
