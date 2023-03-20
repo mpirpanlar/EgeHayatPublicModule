@@ -113,5 +113,17 @@
 				</Relation>
 			</Relations>
 		</Table>
+		<Table Id="216" Name="Erp_QuotationReceiptItem" Description="Teklif Fişleri Detay Bilgileri" PrimaryKey="RecId" KeyField="Explanation" Caption="Teklif Fişi Detay">
+			<Fields>
+				<Field Id="500" Name="UnitItemSizeSetDetailsId" Description="Ölçü Tanımı Kayıt Numarası" DataType="Int64" Ordinal="11" UdtType="UdtInt64" Caption="Ölçü Tanımı Kayıt Numarası" Precision="19" />
+			</Fields>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_QuotationReceiptItem_Erp_UnitItemSizeSetDetails_UnitItemSizeSetDetailsId" DestinationTable="Erp_UnitItemSizeSetDetails" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="UnitItemSizeSetDetailsId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
 	</Tables>
 </SentezMetaData>

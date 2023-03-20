@@ -23,9 +23,6 @@ namespace Sentez.NermaMetalManagementModule
 {
     public partial class NermaMetalManagementModule : IModule, ISentezModule
     {
-        public LookupList Lists { get; set; }
-        LiveDocumentPanel ldpInventoryUnitItemSizeSetDetails;
-        InventoryPM inventoryPm;
         private void InventoryPm_Init_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
         {
             inventoryPm = pm as InventoryPM;
@@ -48,12 +45,24 @@ namespace Sentez.NermaMetalManagementModule
             }
             if (inventoryPm.ActiveBO != null)
             {
-                inventoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
+                //inventoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
                 inventoryPm.ActiveBO.ColumnChanged += ActiveBO_ColumnChanged;
             }
         }
 
-        bool _suppressEvent = false;
+        private void InventoryPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
+        {
+            inventoryPm = pm as InventoryPM;
+            if (inventoryPm == null)
+            {
+                return;
+            }
+            if (inventoryPm.ActiveBO != null)
+            {
+                inventoryPm.ActiveBO.ColumnChanged -= ActiveBO_ColumnChanged;
+            }
+        }
+
         private void ActiveBO_ColumnChanged(object sender, System.Data.DataColumnChangeEventArgs e)
         {
             if (_suppressEvent)
@@ -116,7 +125,7 @@ namespace Sentez.NermaMetalManagementModule
             }
         }
 
-        private void İnventoryPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void InventoryPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.F9)
             {
@@ -124,22 +133,12 @@ namespace Sentez.NermaMetalManagementModule
             }
         }
 
-        private void ActiveBO_AfterGet(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
         private void InventoryBo_Init_InventoryUnitItemSizeSetDetails(BusinessObjectBase bo, BoParam parameter)
         {
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "InUse", 1);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsMainUnit", 0);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsDefault", 0);
-            bo.AfterGet += Bo_AfterGet;
-        }
-
-        private void Bo_AfterGet(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
+            //bo.AfterGet += Bo_AfterGet;
         }
     }
 }

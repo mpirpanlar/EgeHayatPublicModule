@@ -21,6 +21,9 @@ using Sentez.Common.PresentationModels;
 using Sentez.NermaMetalManagementModule.Models;
 using Sentez.Common.Utilities;
 using Sentez.NermaMetalManagementModule.WorkList;
+using Sentez.Data.MetaData;
+using Sentez.Data.Tools;
+using Sentez.Localization;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -52,6 +55,16 @@ namespace Sentez.NermaMetalManagementModule
         {
             _container = container;
             _sysMng = _container.Resolve<SysMng>();
+            if (_sysMng != null)
+            {
+                _sysMng.AfterDesktopLogin += _sysMng_AfterDesktopLogin;
+            }
+        }
+
+        private void _sysMng_AfterDesktopLogin(object sender, EventArgs e)
+        {
+            if (!Schema.Tables["Erp_DemandReceiptItem"].Fields.Contains("UD_SizeDetailCode"))
+                CreatMetaDataFieldsService.CreatMetaDataFields("Erp_DemandReceiptItem", "UD_SizeDetailCode", SLanguage.GetString("Ölçü Kodu"), (byte)UdtType.UdtCode, (byte)FieldUsage.Code, (byte)EditorType.ListSelector, (byte)ValueInputMethod.FreeType, 0);
         }
 
         public void Initialize()
@@ -78,9 +91,14 @@ namespace Sentez.NermaMetalManagementModule
 
         private void RegisterServices()
         {
+            _container.RegisterType<ISystemService, CreatMetaDataFieldsService>("CreatMetaDataFieldsService");
             BusinessObjectBase.AddCustomConstruction("InventoryBO", InventoryBoCustomCons);
             BusinessObjectBase.AddCustomInit("InventoryBO", InventoryBo_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomInit("InventoryPM", InventoryPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("InventoryPM", InventoryPm_Dispose_InventoryUnitItemSizeSetDetails);
+
+            BusinessObjectBase.AddCustomInit("QuotationReceiptBO", QuotationReceiptBo_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomInit("QuotationReceiptPM", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
         }
 
         private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
