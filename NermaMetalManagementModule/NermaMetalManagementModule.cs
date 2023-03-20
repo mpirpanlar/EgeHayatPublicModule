@@ -24,6 +24,7 @@ using Sentez.NermaMetalManagementModule.WorkList;
 using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
 using Sentez.Localization;
+using System.Windows;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -99,6 +100,8 @@ namespace Sentez.NermaMetalManagementModule
 
             BusinessObjectBase.AddCustomInit("QuotationReceiptBO", QuotationReceiptBo_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomInit("QuotationReceiptPM", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("QuotationReceiptPM", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("QuotationReceiptPM", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
         }
 
         private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
@@ -118,6 +121,7 @@ namespace Sentez.NermaMetalManagementModule
         private void RegisterList()
         {
             _container.RegisterType<IReport, UnitItemSizeSetDetailsList>("Erp_UnitItemSizeSetDetailsSizeDetailCodeList");
+            _container.RegisterType<IReport, InventoryUnitItemSizeSetDetails>("Erp_InventoryUnitItemSizeSetDetailsSizeDetailCodeList");
             //_container.RegisterType<IReport, MetaCurrentAccountAnalysisSubjectList>("Meta_CurrentAccountAnalysisSubjectAnalysisSubjectCodeList");
             //_container.RegisterType<IReport, MetaCurrentAccountAnalysisElementList>("Meta_CurrentAccountAnalysisElementAnalysisElementCodeList");
 
