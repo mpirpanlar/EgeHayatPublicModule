@@ -123,6 +123,10 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="QuotationUIModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LiveOutputs\Debug\QuotationUIModule.dll</HintPath>
+    </Reference>
     <Reference Include="Reeb.SqlOM">
       <HintPath>..\..\..\..\Libs\Outputs\Release\Reeb.SqlOM.dll</HintPath>
     </Reference>
@@ -151,9 +155,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\NermaMetalManagementModule.Inventory.cs" />
+    <Compile Include="Commands\NermaMetalManagementModule.QuotationReceipt.cs" />
     <Compile Include="Models\UnitItemSizeSetDetailsBO.cs" />
     <Compile Include="SecurityDefinitions.cs" />
     <Compile Include="SecurityEnumerations.cs" />
+    <Compile Include="Services\CreatMetaDataFieldsService.cs" />
     <Compile Include="Services\FaultQueryService.cs" />
     <Compile Include="Services\FaultTaskControlPolicy.cs" />
     <Compile Include="Services\SalesShipmentComparePolicy.cs" />
@@ -182,6 +188,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\NermaMetalManagementModule.Properties.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
