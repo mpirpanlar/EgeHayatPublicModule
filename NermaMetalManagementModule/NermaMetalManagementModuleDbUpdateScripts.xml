@@ -225,9 +225,220 @@ GO
 
 </Script>
   </Updates>
+  <Updates>
+    <Version>
+      <Build>4</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>	IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_VariantItemMark]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_VariantItemMark] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[TypeId] [dbo].[UdtInt32] NULL
+		,[CardId] [dbo].[UdtInt32] NULL
+		,[VariantItemId] [dbo].[UdtInt32] NULL
+		,[MarkId] [dbo].[UdtInt64] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_VariantItemMark] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.indexes
+		WHERE object_id = OBJECT_ID(N'[Erp_VariantItemMark]')
+		AND name = N'Erp_VariantItemMark_IX0')
+		CREATE NONCLUSTERED INDEX [Erp_VariantItemMark_IX0] ON [Erp_VariantItemMark]
+		(
+		[VariantItemId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantItem] FOREIGN KEY ([VariantItemId])
+		REFERENCES [Erp_VariantItem] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantItem]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_Mark] FOREIGN KEY ([MarkId])
+		REFERENCES [Erp_Mark] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_Mark]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantCard]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantCard] FOREIGN KEY ([CardId])
+		REFERENCES [Erp_VariantCard] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantCard]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantCard]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantType]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantType] FOREIGN KEY ([TypeId])
+		REFERENCES [Erp_VariantType] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantType]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantType]
+		GO
+
+				
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_InventoryMark]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_InventoryMark] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[InventoryId] [dbo].[UdtInt64] NULL
+		,[MarkId] [dbo].[UdtInt64] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_InventoryMark] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.indexes
+		WHERE object_id = OBJECT_ID(N'[Erp_InventoryMark]')
+		AND name = N'Erp_InventoryMark_IX0')
+		CREATE NONCLUSTERED INDEX [Erp_InventoryMark_IX0] ON [Erp_InventoryMark]
+		(
+		[InventoryId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Inventory]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryMark_Erp_Inventory] FOREIGN KEY ([InventoryId])
+		REFERENCES [Erp_Inventory] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Inventory]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] CHECK CONSTRAINT [FK_Erp_InventoryMark_Erp_Inventory]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryMark_Erp_Mark] FOREIGN KEY ([MarkId])
+		REFERENCES [Erp_Mark] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] CHECK CONSTRAINT [FK_Erp_InventoryMark_Erp_Mark]
+		GO
+		
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_Inventory'
+    AND COLUMN_NAME = 'IsSurfaceTreatment')
+BEGIN
+  ALTER TABLE Erp_Inventory ADD IsSurfaceTreatment UdtBool
+END		
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_VariantType'
+    AND COLUMN_NAME = 'IsMarkRelation')
+BEGIN
+  ALTER TABLE Erp_VariantType ADD IsMarkRelation UdtBool
+END		</Script>
+  </Updates>
   <CreateScript>
     <DbVersion>
-      <Build>3</Build>
+      <Build>4</Build>
       <Major>1</Major>
       <Minor>0</Minor>
       <Revision>-1</Revision>
@@ -434,6 +645,209 @@ GO
 
 
 
-		</CreateScript>
+	--SELECT * FROM Erp_VariantType EVT
+	IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_VariantItemMark]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_VariantItemMark] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[TypeId] [dbo].[UdtInt32] NULL
+		,[CardId] [dbo].[UdtInt32] NULL
+		,[VariantItemId] [dbo].[UdtInt32] NULL
+		,[MarkId] [dbo].[UdtInt64] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_VariantItemMark] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.indexes
+		WHERE object_id = OBJECT_ID(N'[Erp_VariantItemMark]')
+		AND name = N'Erp_VariantItemMark_IX0')
+		CREATE NONCLUSTERED INDEX [Erp_VariantItemMark_IX0] ON [Erp_VariantItemMark]
+		(
+		[VariantItemId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantItem] FOREIGN KEY ([VariantItemId])
+		REFERENCES [Erp_VariantItem] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantItem]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantItem]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_Mark] FOREIGN KEY ([MarkId])
+		REFERENCES [Erp_Mark] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_Mark]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantCard]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantCard] FOREIGN KEY ([CardId])
+		REFERENCES [Erp_VariantCard] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantCard]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantCard]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantType]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] WITH CHECK ADD CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantType] FOREIGN KEY ([TypeId])
+		REFERENCES [Erp_VariantType] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_VariantItemMark_Erp_VariantType]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_VariantItemMark]'))
+		ALTER TABLE [Erp_VariantItemMark] CHECK CONSTRAINT [FK_Erp_VariantItemMark_Erp_VariantType]
+		GO
+
+				
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_InventoryMark]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_InventoryMark] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[InventoryId] [dbo].[UdtInt64] NULL
+		,[MarkId] [dbo].[UdtInt64] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_InventoryMark] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.indexes
+		WHERE object_id = OBJECT_ID(N'[Erp_InventoryMark]')
+		AND name = N'Erp_InventoryMark_IX0')
+		CREATE NONCLUSTERED INDEX [Erp_InventoryMark_IX0] ON [Erp_InventoryMark]
+		(
+		[InventoryId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		GO
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Inventory]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryMark_Erp_Inventory] FOREIGN KEY ([InventoryId])
+		REFERENCES [Erp_Inventory] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Inventory]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] CHECK CONSTRAINT [FK_Erp_InventoryMark_Erp_Inventory]
+		GO
+
+
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] WITH CHECK ADD CONSTRAINT [FK_Erp_InventoryMark_Erp_Mark] FOREIGN KEY ([MarkId])
+		REFERENCES [Erp_Mark] ([RecId])
+		GO
+
+		IF EXISTS (SELECT
+		*
+		FROM sys.foreign_keys
+		WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryMark_Erp_Mark]')
+		AND parent_object_id = OBJECT_ID(N'[Erp_InventoryMark]'))
+		ALTER TABLE [Erp_InventoryMark] CHECK CONSTRAINT [FK_Erp_InventoryMark_Erp_Mark]
+		GO
+		
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_Inventory'
+    AND COLUMN_NAME = 'IsSurfaceTreatment')
+BEGIN
+  ALTER TABLE Erp_Inventory ADD IsSurfaceTreatment UdtBool
+END		
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_VariantType'
+    AND COLUMN_NAME = 'IsMarkRelation')
+BEGIN
+  ALTER TABLE Erp_VariantType ADD IsMarkRelation UdtBool
+END	</CreateScript>
   </CreateScript>
 </DbScripts>

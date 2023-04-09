@@ -23,6 +23,16 @@ namespace Sentez.NermaMetalManagementModule
 {
     public partial class NermaMetalManagementModule : IModule, ISentezModule
     {
+        private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
+        {
+            List<string> tableList = new List<string>();
+            tableList.AddRange(Tables);
+
+            tableList.Add("Erp_InventoryUnitItemSizeSetDetails");
+            tableList.Add("Erp_InventoryMark");
+            Tables = tableList.ToArray();
+        }
+
         private void InventoryPm_Init_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
         {
             inventoryPm = pm as InventoryPM;
@@ -42,6 +52,14 @@ namespace Sentez.NermaMetalManagementModule
                 var tsePublicParametersView = pMDesktop.LoadXamlRes("InventoryUnitItemSizeSetDetailsView");
                 (tsePublicParametersView._view as UserControl).DataContext = inventoryPm;
                 ldpInventoryUnitItemSizeSetDetails.Content = tsePublicParametersView._view;
+
+                ldpInventoryMark = new LiveDocumentPanel();
+                ldpInventoryMark.Caption = SLanguage.GetString("Markalar");
+                liveDocumentGroup.Items.Add(ldpInventoryMark);
+
+                var ldpInventoryMarkView = pMDesktop.LoadXamlRes("InventoryMarksView");
+                (ldpInventoryMarkView._view as UserControl).DataContext = inventoryPm;
+                ldpInventoryMark.Content = ldpInventoryMarkView._view;
             }
             if (inventoryPm.ActiveBO != null)
             {
@@ -138,6 +156,10 @@ namespace Sentez.NermaMetalManagementModule
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "InUse", 1);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsMainUnit", 0);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsDefault", 0);
+
+            bo.ValueFiller.AddRule("Erp_InventoryMark", "InUse", 1);
+
+            bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");
             //bo.AfterGet += Bo_AfterGet;
         }
     }

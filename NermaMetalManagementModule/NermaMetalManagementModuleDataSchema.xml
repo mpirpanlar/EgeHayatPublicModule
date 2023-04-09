@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SentezMetaData Application="3014" Version="1.0.3" >
+<SentezMetaData Application="3014" Version="1.0.4" >
 	<Tables>
 		<Table Id="600" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
@@ -113,6 +113,89 @@
 				</Relation>
 			</Relations>
 		</Table>
+
+		<Table Id="601" Name="Erp_InventoryMark" Description="Malzeme Kartı Marka Bağlantıları" PrimaryKey="RecId" Caption="Malzeme Kartı Marka Bağlantıları">
+			<Fields>
+				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
+				<Field Id="17" Name="InventoryId" Description="Malzeme Kodu" DataType="Int64" Ordinal="15" UdtType="UdtInt64" Caption="Malzeme Kodu" Precision="19" />
+				<Field Id="10" Name="MarkId" Description="Marka" DataType="Int64" Ordinal="8" UdtType="UdtInt64" Caption="Marka" Precision="19" />
+				<Field Id="24" Name="InUse" Description="Kullanımda Bilgisi" DataType="Boolean" Ordinal="7" UdtType="UdtBool" Caption="Kullanımda Bilgisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+				<Field Id="25" Name="InsertedAt" Description="Kaydı Ekleme Zamanı" DataType="DateTime" Ordinal="8" UdtType="UdtDateTime" Caption="Kayıt Zamanı" />
+				<Field Id="26" Name="InsertedBy" Description="Kaydı Ekleyen" DataType="Int32" Ordinal="9" UdtType="UdtInt32" Caption="Kayıt Eden" Precision="10" />
+				<Field Id="27" Name="UpdatedAt" Description="Kaydı Değiştirme Zamanı" DataType="DateTime" Ordinal="10" UdtType="UdtDateTime" Caption="Değişiklik Zamanı" />
+				<Field Id="28" Name="UpdatedBy" Description="Kaydı Değiştiren" DataType="Int32" Ordinal="11" UdtType="UdtInt32" Caption="Değiştiren" Precision="10" />
+				<Field Id="29" Name="IsDeleted" Description="Silindi Bilgisi" DataType="Boolean" Ordinal="12" UdtType="UdtBool" Caption="Silindi" Precision="3" />
+				<Field Id="30" Name="DeletedAt" Description="Kaydı Silme Zamanı" DataType="DateTime" Ordinal="13" UdtType="UdtDateTime" Caption="Silme Zamanı" />
+				<Field Id="31" Name="DeletedBy" Description="Kaydı Silen" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Silen" Precision="10" />
+			</Fields>
+			<Indexes>
+				<Index Id="0" Name="Erp_InventoryMark_IX0" Ordinal="2">
+					<IndexFields>
+						<IndexField Id="1" Name="InventoryId" Ordinal="1" />
+					</IndexFields>
+				</Index>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_InventoryMark_Erp_Mark" DestinationTable="Erp_Mark" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="MarkId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_InventoryMark_Erp_Inventory" DestinationTable="Erp_Inventory" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="InventoryId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+
+		<Table Id="601" Name="Erp_VariantItemMark" Description="Varyant Kartı Marka Bağlantıları" PrimaryKey="RecId" Caption="Varyant Kartı Marka Bağlantıları">
+			<Fields>
+				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
+				<Field Id="2" Name="TypeId" Description="Varyant Tipi" DataType="Int32" Ordinal="2" UdtType="UdtInt32" Caption="Varyant Tipi" Precision="10" IsFilterField="True" IsDefaultFilterField="True" />
+				<Field Id="2" Name="CardId" Description="Varyant Kartı Kayıt Numarası" DataType="Int32" Ordinal="2" UdtType="UdtInt32" Caption="Varyant No" Precision="10" IsFilterField="True" />
+				<Field Id="18" Name="VariantItemId" Description="Varyant Kodu" DataType="Int32" Ordinal="16" UdtType="UdtInt32" Caption="Varyant Kodu" Precision="10" IsFilterField="True" />
+				<Field Id="10" Name="MarkId" Description="Marka" DataType="Int64" Ordinal="8" UdtType="UdtInt64" Caption="Marka" Precision="19" />
+				<Field Id="24" Name="InUse" Description="Kullanımda Bilgisi" DataType="Boolean" Ordinal="7" UdtType="UdtBool" Caption="Kullanımda Bilgisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+				<Field Id="25" Name="InsertedAt" Description="Kaydı Ekleme Zamanı" DataType="DateTime" Ordinal="8" UdtType="UdtDateTime" Caption="Kayıt Zamanı" />
+				<Field Id="26" Name="InsertedBy" Description="Kaydı Ekleyen" DataType="Int32" Ordinal="9" UdtType="UdtInt32" Caption="Kayıt Eden" Precision="10" />
+				<Field Id="27" Name="UpdatedAt" Description="Kaydı Değiştirme Zamanı" DataType="DateTime" Ordinal="10" UdtType="UdtDateTime" Caption="Değişiklik Zamanı" />
+				<Field Id="28" Name="UpdatedBy" Description="Kaydı Değiştiren" DataType="Int32" Ordinal="11" UdtType="UdtInt32" Caption="Değiştiren" Precision="10" />
+				<Field Id="29" Name="IsDeleted" Description="Silindi Bilgisi" DataType="Boolean" Ordinal="12" UdtType="UdtBool" Caption="Silindi" Precision="3" />
+				<Field Id="30" Name="DeletedAt" Description="Kaydı Silme Zamanı" DataType="DateTime" Ordinal="13" UdtType="UdtDateTime" Caption="Silme Zamanı" />
+				<Field Id="31" Name="DeletedBy" Description="Kaydı Silen" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Silen" Precision="10" />
+			</Fields>
+			<Indexes>
+				<Index Id="0" Name="Erp_VariantItemMark_IX0" Ordinal="2">
+					<IndexFields>
+						<IndexField Id="1" Name="VariantItemId" Ordinal="1" />
+					</IndexFields>
+				</Index>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_VariantItemMark_Erp_VariantItem" DestinationTable="Erp_VariantItem" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="VariantItemId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_VariantItemMark_Erp_Mark" DestinationTable="Erp_Mark" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="MarkId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_VariantItemMark_Erp_VariantCard" DestinationTable="Erp_VariantCard" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="CardId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="1" Name="FK_Erp_VariantItemMark_Erp_VariantType" DestinationTable="Erp_VariantType" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="CardId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+
 		<Table Id="216" Name="Erp_QuotationReceiptItem" Description="Teklif Fişleri Detay Bilgileri" PrimaryKey="RecId" KeyField="Explanation" Caption="Teklif Fişi Detay">
 			<Fields>
 				<Field Id="500" Name="InventoryUnitItemSizeSetDetailsId" Description="Ölçü Tanımı Kayıt Numarası" DataType="Int64" Ordinal="11" UdtType="UdtInt64" Caption="Ölçü Tanımı Kayıt Numarası" Precision="19" />
@@ -123,6 +206,20 @@
 						<RelationField Id="1" Name="InventoryUnitItemSizeSetDetailsId" DestinationField="RecId" />
 					</RelationFields>
 				</Relation>
+			</Relations>
+		</Table>
+		<Table Id="129" Name="Erp_Inventory" Description="Malzeme Kartları" PrimaryKey="RecId" KeyField="InventoryCode" Caption="Malzeme">
+			<Fields>
+				<Field Id="500" Name="IsSurfaceTreatment" Description="Yüzey İşlem" DataType="Boolean" Ordinal="94" UdtType="UdtBool" Caption="Yüzey İşlem" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+			</Fields>
+			<Relations>
+			</Relations>
+		</Table>
+		<Table Id="260" Name="Erp_VariantType" Description="Varyant Tipleri" PrimaryKey="RecId" KeyField="TypeName" Caption="Varyant Tip">
+			<Fields>
+				<Field Id="500" Name="IsMarkRelation" Description="Marka İlişkisi" DataType="Boolean" Ordinal="94" UdtType="UdtBool" Caption="Marka İlişkisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+			</Fields>
+			<Relations>
 			</Relations>
 		</Table>
 	</Tables>

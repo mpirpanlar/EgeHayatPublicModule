@@ -25,6 +25,7 @@ using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
 using Sentez.Localization;
 using System.Windows;
+using NermaMetalManagementModule.Models;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -79,7 +80,7 @@ namespace Sentez.NermaMetalManagementModule
             RegisterModuleCommands();
             RegisterServices();
             RegisterList();
-            VogueCostModuleSecurity.RegisterSecurityDefinitions();
+            NermaMetalManagementModuleSecurity.RegisterSecurityDefinitions();
 
             MenuManager.Instance.RegisterMenu("NermaMetalManagementModule", "NermaMetalManagementModuleMenu", moduleID, true);
             _sysMng.AddApplication("NermaMetalManagementModule");
@@ -102,16 +103,13 @@ namespace Sentez.NermaMetalManagementModule
             PMBase.AddCustomInit("QuotationReceiptPM", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomViewLoaded("QuotationReceiptPM", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomDispose("QuotationReceiptPM", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
-        }
 
-        private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
-        {
-            List<string> tableList = new List<string>();
-            tableList.AddRange(Tables);
-
-            tableList.Add("Erp_InventoryUnitItemSizeSetDetails");
-            Tables = tableList.ToArray();
-        }
+            BusinessObjectBase.AddCustomConstruction("VariantTypeBO", VariantTypeBoCustomCons);
+            BusinessObjectBase.AddCustomInit("VariantTypeBO", VariantTypeBo_Init_VariantItemMark);
+            PMBase.AddCustomInit("VariantType", VariantTypePm_Init_VariantItemMark);
+            PMBase.AddCustomViewLoaded("VariantType", VariantTypePm_ViewLoaded_VariantItemMark);
+            PMBase.AddCustomDispose("VariantType", VariantTypePm_Dispose_VariantItemMark);
+        }     
 
         private void RegisterRes()
         {
@@ -151,6 +149,9 @@ namespace Sentez.NermaMetalManagementModule
 
             ResMng.AddRes("InventoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/InventoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("UnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/UnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+
+            ResMng.AddRes("InventoryMarksView", "NermaMetalManagementModule;component/Views/InventoryMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("VariantItemMarksView", "NermaMetalManagementModule;component/Views/VariantItemMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
 
         private void RegisterPM()

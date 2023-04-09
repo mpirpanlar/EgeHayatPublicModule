@@ -156,7 +156,10 @@
   <ItemGroup>
     <Compile Include="Commands\NermaMetalManagementModule.Inventory.cs" />
     <Compile Include="Commands\NermaMetalManagementModule.QuotationReceipt.cs" />
+    <Compile Include="Commands\NermaMetalManagementModule.VariantItem.cs" />
     <Compile Include="Models\UnitItemSizeSetDetailsBO.cs" />
+    <Compile Include="Models\InventoryMarkBO.cs" />
+    <Compile Include="Models\VariantItemMarkBO.cs" />
     <Compile Include="SecurityDefinitions.cs" />
     <Compile Include="SecurityEnumerations.cs" />
     <Compile Include="Services\CreatMetaDataFieldsService.cs" />
@@ -192,6 +195,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\NermaMetalManagementModule.Properties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\VariantItemMarks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\InventoryMarks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

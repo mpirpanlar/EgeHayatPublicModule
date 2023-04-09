@@ -1,0 +1,36 @@
+﻿using Microsoft.Practices.Unity;
+
+using Sentez.Common.Commands;
+using Sentez.Common.ModuleBase;
+using Sentez.Common.Security;
+using Sentez.Data.BusinessObjects;
+using Sentez.Data.Query;
+using Sentez.NermaMetalManagementModule;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace NermaMetalManagementModule.Models
+{
+    [BusinessObjectExplanation("Varyant Kartı Marka Bağlantıları")]
+    [SecurityModuleId((short)Modules.ExternalModule15)]
+    [SecurityItemId((short)NermaMetalManagementModuleSecurityItems.VariantItemMark)]
+    public class VariantItemMarkBO : BusinessObjectBase
+    {
+        [InjectionConstructor()]
+        public VariantItemMarkBO(IUnityContainer container)
+            : base(container, 0, "GroupCode", string.Empty, new string[] { "Erp_CurrentAccountGroup" })
+        {
+            KeyFields.Add(new WhereField("Erp_CurrentAccountGroup", "CompanyId", _companyId, WhereCondition.Equal));
+
+            Lookups.AddLookUp("Erp_VariantItemMark", "VariantItemId", true, "Erp_VariantItem", "ItemCode", "ItemCode", "ItemName", "ItemName");
+            Lookups.AddLookUp("Erp_VariantItemMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");
+            
+            ValueFiller.AddRule("Erp_VariantItemMark", "InUse", 1);
+
+            SecurityChecker.LogicalModuleID = (short)Modules.ExternalModule15;
+        }
+    }
+}

@@ -8,16 +8,16 @@
         Reports, 
         Settings 
     }
-    public enum VogueCostModuleSecurityItems : short
+    public enum NermaMetalManagementModuleSecurityItems : short
     {
         None,
-        SalesShipmentCompare,
-        FaultControlMechanism,
+        VariantItemMark,
+        InventoryMark,
         FaultTaskControl,
         MonthlyActualCost,
         OrderAllHistory
     }
-    public enum VogueCostModuleSecuritySubItems : short
+    public enum NermaMetalManagementModuleSecuritySubItems : short
     {
         None
     }
