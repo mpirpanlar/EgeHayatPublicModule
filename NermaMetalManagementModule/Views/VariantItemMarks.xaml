@@ -10,9 +10,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <live:LiveGridControl  MaxHeight="2000"  x:Name="gridVariantItemMarks" TableName="Erp_VariantItemMark" BusinessObject="{Binding ActiveBO}" ForeignKey="FK_Erp_VariantItemMark_Erp_VariantType" Lookups="{sye:SBinding Lists}">
+        <live:LiveCheckEdit Grid.Column="0" Margin="5,1,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Content="{lange:Translate Marka Tanımı Yapılacak mı?}" IsChecked="{sye:SBinding Field=Erp_VariantType.IsMarkRelation}"/>
+        <live:LiveGridControl Grid.Row="1" MaxHeight="2000"  x:Name="gridVariantItemMarks" TableName="Erp_VariantItemMark" BusinessObject="{Binding ActiveBO}" ForeignKey="FK_Erp_VariantItemMark_Erp_VariantType" Lookups="{sye:SBinding Lists}">
             <live:LiveGridControl.ColumnDefinitions>
                 <UtilCore:ReceiptColumn ColumnName="MarkName" Caption="Marka Kodu" NewRowCheckColumn="True" EditorType="ListSelector" Width="70" LookUpTable="Erp_Mark" LookUpField="MarkName"/>
                 <UtilCore:ReceiptColumn ColumnName="MarkExplanation" Caption="Marka Açıklama" NewRowCheckColumn="True" EditorType="ReadOnlyTextEditor" Width="120" LookUpTable="Erp_Mark" LookUpField="Explanation"/>

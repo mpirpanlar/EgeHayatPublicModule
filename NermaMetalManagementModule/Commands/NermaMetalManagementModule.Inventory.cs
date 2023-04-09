@@ -3,6 +3,8 @@
 //using Microsoft.Office.Interop.Excel;
 using Microsoft.Practices.Composite.Modularity;
 
+using NermaMetalManagementModule.BoExtensions;
+
 using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
 using Sentez.Common.Utilities;
@@ -159,7 +161,7 @@ namespace Sentez.NermaMetalManagementModule
 
             bo.ValueFiller.AddRule("Erp_InventoryMark", "InUse", 1);
 
-            bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");
+            bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");           
             //bo.AfterGet += Bo_AfterGet;
         }
     }

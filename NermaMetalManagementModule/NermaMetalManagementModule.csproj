@@ -154,6 +154,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoExtensions\DemandReceiptControlExtension.cs" />
     <Compile Include="Commands\NermaMetalManagementModule.Inventory.cs" />
     <Compile Include="Commands\NermaMetalManagementModule.QuotationReceipt.cs" />
     <Compile Include="Commands\NermaMetalManagementModule.VariantItem.cs" />

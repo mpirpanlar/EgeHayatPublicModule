@@ -26,6 +26,9 @@ using Sentez.Data.Tools;
 using Sentez.Localization;
 using System.Windows;
 using NermaMetalManagementModule.Models;
+using LiveCore.Desktop.UI.Controls;
+using System.Windows.Input;
+using System.Data;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -109,7 +112,85 @@ namespace Sentez.NermaMetalManagementModule
             PMBase.AddCustomInit("VariantType", VariantTypePm_Init_VariantItemMark);
             PMBase.AddCustomViewLoaded("VariantType", VariantTypePm_ViewLoaded_VariantItemMark);
             PMBase.AddCustomDispose("VariantType", VariantTypePm_Dispose_VariantItemMark);
-        }     
+            PMBase.AddCustomCommandExecutes("QuotationReceiptPM", QuotationReceiptPm_OnListCommand);
+        }
+
+        private bool QuotationReceiptPm_OnListCommand(PMBase pm, PmParam parameter, ISysCommandParam commandParam)
+        {
+            //throw new NotImplementedException();
+            if (commandParam?.cmdName == "ListCommand" && quotationReceiptPm != null)
+            {
+                var focusScope = FocusManager.GetFocusScope(quotationReceiptPm.ActiveViewControl);
+                var element = FocusManager.GetFocusedElement(focusScope) as FrameworkElement;
+                var visualelement = FrameworkTreeHelper.FindVisualParent<LiveGridControl>(element);
+                string name = quotationReceiptPm.GetFocusedField();
+                if (visualelement is LiveGridControl && (visualelement?.Name == "GridDetail"))
+                {
+                    if (visualelement.CurrentColumn?.FieldName == "ItemVariant2Code")
+                    {
+                        (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = "";
+                        if (visualelement.CurrentItem is DataRowView)
+                        {
+                            bool inventoryIsSurfaceTreatment;
+                            bool.TryParse((visualelement.CurrentItem as DataRowView).Row["InventoryIsSurfaceTreatment"].ToString(), out inventoryIsSurfaceTreatment);
+                            if (!inventoryIsSurfaceTreatment)
+                            {
+                                quotationReceiptPm.sysMng.ActWndMng.ShowMsg($"{(visualelement.CurrentItem as DataRowView).Row["ItemCode"]}-{(visualelement.CurrentItem as DataRowView).Row["ItemName"]} {SLanguage.GetString("malzemesi için yüzey işlem yapılacak özelliği aktif edilmemiş!")}", ConstantStr.Warning, Common.InformationMessages.MessageBoxButton.OK, Common.InformationMessages.MessageBoxImage.Warning);
+                                return true;
+                            }
+                            else
+                            {
+                                if (!(visualelement.CurrentItem as DataRowView).Row.IsNull("MarkId"))
+                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_InventoryMark where InventoryId={(visualelement.CurrentItem as DataRowView).Row["InventoryId"]} and MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
+                                return false;
+                            }
+                        }
+                    }
+                    else if (visualelement.CurrentColumn?.FieldName == "MarkName")
+                    {
+                        (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = "";
+                        if (visualelement.CurrentItem is DataRowView)
+                        {
+                            bool inventoryIsSurfaceTreatment;
+                            bool.TryParse((visualelement.CurrentItem as DataRowView).Row["InventoryIsSurfaceTreatment"].ToString(), out inventoryIsSurfaceTreatment);
+                            if (!inventoryIsSurfaceTreatment)
+                            {
+                                quotationReceiptPm.sysMng.ActWndMng.ShowMsg($"{(visualelement.CurrentItem as DataRowView).Row["ItemCode"]}-{(visualelement.CurrentItem as DataRowView).Row["ItemName"]} {SLanguage.GetString("malzemesi için yüzey işlem yapılacak özelliği aktif edilmemiş!")}", ConstantStr.Warning, Common.InformationMessages.MessageBoxButton.OK, Common.InformationMessages.MessageBoxImage.Warning);
+                                return true;
+                            }
+                            else
+                            {
+                                if (!(visualelement.CurrentItem as DataRowView).Row.IsNull("ItemVariant2Id"))
+                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" and [erp_mark].[RecId] in (select RecId from Erp_InventoryMark with (nolock) where InventoryId={(visualelement.CurrentItem as DataRowView).Row["InventoryId"]})";
+                                return false;
+                            }
+                        }
+                    }
+                    else if (visualelement.CurrentColumn?.FieldName == "NER_SurfaceType")
+                    {
+                        if (visualelement.CurrentItem is DataRowView)
+                        {
+                            bool inventoryIsSurfaceTreatment;
+                            bool.TryParse((visualelement.CurrentItem as DataRowView).Row["InventoryIsSurfaceTreatment"].ToString(), out inventoryIsSurfaceTreatment);
+                            if (!inventoryIsSurfaceTreatment)
+                            {
+                                quotationReceiptPm.sysMng.ActWndMng.ShowMsg($"{(visualelement.CurrentItem as DataRowView).Row["ItemCode"]}-{(visualelement.CurrentItem as DataRowView).Row["ItemName"]} {SLanguage.GetString("malzemesi için yüzey işlem yapılacak özelliği aktif edilmemiş!")}", ConstantStr.Warning, Common.InformationMessages.MessageBoxButton.OK, Common.InformationMessages.MessageBoxImage.Warning);
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
 
         private void RegisterRes()
         {

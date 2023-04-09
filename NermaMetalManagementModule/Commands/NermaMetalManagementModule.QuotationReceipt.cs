@@ -2,7 +2,11 @@
 
 //using Microsoft.Office.Interop.Excel;
 using Microsoft.Practices.Composite.Modularity;
+using Microsoft.Practices.Composite.Presentation.Commands;
 
+using NermaMetalManagementModule.BoExtensions;
+
+using Sentez.Common.Commands;
 using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
 using Sentez.Common.Utilities;
@@ -29,24 +33,35 @@ namespace Sentez.NermaMetalManagementModule
         private void QuotationReceiptBo_Init_InventoryUnitItemSizeSetDetails(BusinessObjectBase bo, BoParam parameter)
         {
             bo.Lookups.AddLookUp("Erp_QuotationReceiptItem", "InventoryUnitItemSizeSetDetailsId", true, "Erp_InventoryUnitItemSizeSetDetails", "SizeDetailCode", "InventoryUnitItemSizeSetDetails_SizeDetailCode"
-            , new string[] { 
+            , new string[] {
                 "SizeDetailName", 
                 //"UnitItemId", 
-                "UnitFactor", 
-                "UnitDivisor", 
-                "UnitWidth", 
-                "UnitLength", 
-                "UnitHeight" 
+                "UnitFactor",
+                "UnitDivisor",
+                "UnitWidth",
+                "UnitLength",
+                "UnitHeight"
             }
-            , new string[] { 
+            , new string[] {
                 "InventoryUnitItemSizeSetDetails_SizeDetailName", 
                 //"InventoryUnitItemSizeSetDetails_UnitItemId", 
-                "InventoryUnitItemSizeSetDetails_UnitFactor", 
-                "InventoryUnitItemSizeSetDetails_UnitDivisor", 
-                "InventoryUnitItemSizeSetDetails_UnitWidth", 
-                "InventoryUnitItemSizeSetDetails_UnitLength", 
-                "InventoryUnitItemSizeSetDetails_UnitHeight" 
+                "InventoryUnitItemSizeSetDetails_UnitFactor",
+                "InventoryUnitItemSizeSetDetails_UnitDivisor",
+                "InventoryUnitItemSizeSetDetails_UnitWidth",
+                "InventoryUnitItemSizeSetDetails_UnitLength",
+                "InventoryUnitItemSizeSetDetails_UnitHeight"
             });
+            foreach (LookUpParameter lp in bo.Lookups.LookUps.ToArray())
+            {
+                if (lp.FKTable == "Erp_QuotationReceiptItem" && lp.FKColumn == "InventoryId")
+                {
+                    bo.Lookups.LookUps.Remove(lp);
+                    break;
+                }
+            }
+            bo.Lookups.AddLookUp("Erp_QuotationReceiptItem", "InventoryId", true, "Erp_Inventory", "InventoryCode", "InventoryCode", new string[] { "InventoryName", "HasVariant", "HasRowVariant", "Variant1TypeId", "Variant2TypeId", "Variant3TypeId", "Variant4TypeId", "Variant5TypeId", "Variant1TypeControlType", "Variant2TypeControlType", "Variant3TypeControlType", "Variant4TypeControlType", "Variant5TypeControlType", "MarkId", "ModelId", "InUse", "CategoryId", "GroupId", "IsSurfaceTreatment" }, new string[] { "InventoryName", "HasVariant", "HasRowVariant", "Variant1TypeId", "Variant2TypeId", "Variant3TypeId", "Variant4TypeId", "Variant5TypeId", "Variant1TypeControlType", "Variant2TypeControlType", "Variant3TypeControlType", "Variant4TypeControlType", "Variant5TypeControlType", "InventoryMarkId", "InventoryModelId", "InventoryInUse", "InventoryCategoryId", "InventoryGroupId", "InventoryIsSurfaceTreatment" });
+
+            new DemandReceiptControlExtension(bo);
         }
 
         private void QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
