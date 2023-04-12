@@ -164,5 +164,103 @@ namespace Sentez.NermaMetalManagementModule
             bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");           
             //bo.AfterGet += Bo_AfterGet;
         }
+
+        private void CategoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
+        {
+            List<string> tableList = new List<string>();
+            tableList.AddRange(Tables);
+
+            tableList.Add("Erp_InventoryUnitItemSizeSetDetails");
+            Tables = tableList.ToArray();
+        }
+
+        private void CategoryBo_Init_InventoryUnitItemSizeSetDetails(BusinessObjectBase bo, BoParam parameter)
+        {
+            bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "InUse", 1);
+            bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsMainUnit", 0);
+            bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsDefault", 0);
+        }
+
+        private void CategoryPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
+        {
+        }
+
+        private void CategoryPm_Init_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
+        {
+            categoryPm = pm as CardPM;
+            if (categoryPm == null)
+            {
+                return;
+            }
+            Lists = categoryPm.ActiveSession.LookupList.GetChild(UtilityFunctions.GetConnection(categoryPm.ActiveSession.dbInfo.DBProvider, categoryPm.ActiveSession.dbInfo.ConnectionString));
+            LiveTabControl liveDocumentGroup = categoryPm.FCtrl("GenelTab") as LiveTabControl;
+            if (liveDocumentGroup != null)
+            {
+                ldpCategoryUnitItemSizeSetDetails = new LiveTabItem();
+                ldpCategoryUnitItemSizeSetDetails.Header = SLanguage.GetString("Ölçüler");
+                liveDocumentGroup.Items.Add(ldpCategoryUnitItemSizeSetDetails);
+
+                PMDesktop pMDesktop = categoryPm.container.Resolve<PMDesktop>();
+                var tsePublicParametersView = pMDesktop.LoadXamlRes("CategoryUnitItemSizeSetDetailsView");
+                (tsePublicParametersView._view as UserControl).DataContext = categoryPm;
+                ldpCategoryUnitItemSizeSetDetails.Content = tsePublicParametersView._view;
+            }
+            if (categoryPm.ActiveBO != null)
+            {
+                //categoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
+                categoryPm.ActiveBO.ColumnChanged += categoryPm_ActiveBO_ColumnChanged;
+            }
+        }
+
+        private void categoryPm_ActiveBO_ColumnChanged(object sender, DataColumnChangeEventArgs e)
+        {
+            if (_suppressEvent)
+                return;
+            try
+            {
+                if (categoryPm.ActiveBO?.CurrentRow != null)
+                {
+                    if (e.Row.Table.TableName == "Erp_InventoryUnitItemSizeSetDetails")
+                    {
+                        if (e.Column.ColumnName == "SizeDetailCode")
+                        {
+                            long recId;
+                            long.TryParse(e.Row[e.Column.ColumnName].ToString(), out recId);
+                            if (recId > 0L)
+                            {
+                                _suppressEvent = true;
+                                using (DataTable table = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, categoryPm.ActiveBO.Transaction, "Erp_UnitItemSizeSetDetails", $"select * from Erp_UnitItemSizeSetDetails with (nolock) where RecId={recId}"))
+                                {
+                                    if (table?.Rows.Count > 0)
+                                        UpdateUnitItemSizeSetDetailsValue(e, table);
+                                    else
+                                    {
+                                        using (DataTable table2 = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, inventoryPm.ActiveBO.Transaction, "Erp_UnitItemSizeSetDetails", $"select * from Erp_UnitItemSizeSetDetails with (nolock) where SizeDetailCode='{e.Row["SizeDetailCode"]}'"))
+                                        {
+                                            if (table2?.Rows.Count > 0)
+                                                UpdateUnitItemSizeSetDetailsValue(e, table2);
+                                        }
+                                    }
+                                }
+                                _suppressEvent = false;
+                            }
+                            else
+                            {
+                                _suppressEvent = true;
+                                using (DataTable table = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, categoryPm.ActiveBO.Transaction, "Erp_UnitItemSizeSetDetails", $"select * from Erp_UnitItemSizeSetDetails with (nolock) where SizeDetailCode='{e.Row["SizeDetailCode"]}'"))
+                                {
+                                    if (table?.Rows.Count > 0)
+                                        UpdateUnitItemSizeSetDetailsValue(e, table);
+                                }
+                                _suppressEvent = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }

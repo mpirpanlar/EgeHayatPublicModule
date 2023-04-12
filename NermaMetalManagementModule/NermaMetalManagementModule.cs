@@ -113,6 +113,11 @@ namespace Sentez.NermaMetalManagementModule
             PMBase.AddCustomViewLoaded("VariantType", VariantTypePm_ViewLoaded_VariantItemMark);
             PMBase.AddCustomDispose("VariantType", VariantTypePm_Dispose_VariantItemMark);
             PMBase.AddCustomCommandExecutes("QuotationReceiptPM", QuotationReceiptPm_OnListCommand);
+
+            BusinessObjectBase.AddCustomConstruction("CategoryBO", CategoryBoCustomCons);
+            BusinessObjectBase.AddCustomInit("CategoryBO", CategoryBo_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomInit("Category", CategoryPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Category", CategoryPm_Dispose_InventoryUnitItemSizeSetDetails);
         }
 
         private bool QuotationReceiptPm_OnListCommand(PMBase pm, PmParam parameter, ISysCommandParam commandParam)
@@ -230,6 +235,8 @@ namespace Sentez.NermaMetalManagementModule
 
             ResMng.AddRes("InventoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/InventoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("UnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/UnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+
+            ResMng.AddRes("CategoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/CategoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
             ResMng.AddRes("InventoryMarksView", "NermaMetalManagementModule;component/Views/InventoryMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("VariantItemMarksView", "NermaMetalManagementModule;component/Views/VariantItemMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);

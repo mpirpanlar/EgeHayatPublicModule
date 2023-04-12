@@ -26,8 +26,10 @@ namespace Sentez.NermaMetalManagementModule
 		public LookupList Lists { get; set; }
         public LookupList Lists_QuotationReceiptPM { get; set; }
         LiveDocumentPanel ldpInventoryUnitItemSizeSetDetails, ldpInventoryMark, ldpVariantItemMark;
-		InventoryPM inventoryPm;
-		VariantTypePM variantTypePm;
+		LiveTabItem ldpCategoryUnitItemSizeSetDetails;
+        InventoryPM inventoryPm;
+		CardPM categoryPm;
+        VariantTypePM variantTypePm;
 		LiveTabItem ltiVariantItemMark;
 		LiveGridControl gridVariantItems, gridVariantItemMarks;
         QuotationReceiptPM quotationReceiptPm;
