@@ -896,6 +896,15 @@ BEGIN
 END	
 
 IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_InventoryUnitItemSizeSetDetails'
+    AND COLUMN_NAME = 'CategoryId')
+BEGIN
+  ALTER TABLE Erp_InventoryUnitItemSizeSetDetails ADD CategoryId UdtInt32
+END
+
+IF NOT EXISTS (SELECT
       *
     FROM sys.indexes
     WHERE object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]')
