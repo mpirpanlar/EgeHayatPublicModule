@@ -15,6 +15,7 @@ using Microsoft.Practices.Unity;
 using Sentez.Localization;
 using Sentez.Common.ModuleBase;
 using System.Data;
+using Sentez.InventoryModule.PresentationModels;
 
 namespace Sentez.NermaMetalManagementModule.WorkList
 {
@@ -55,11 +56,38 @@ namespace Sentez.NermaMetalManagementModule.WorkList
 
             if (PolicyParam?.ObjectActiveRow != null)
             {
-                if(PolicyParam.ObjectActiveRow is DataRowView && (PolicyParam.ObjectActiveRow as DataRowView).Row.Table.Columns.Contains("InventoryId"))
+                if (PolicyParam.ObjectActiveRow is DataRowView && (PolicyParam.ObjectActiveRow as DataRowView).Row.Table.Columns.Contains("InventoryId"))
                 {
-                    long inventoryId;
-                    long.TryParse((PolicyParam.ObjectActiveRow as DataRowView).Row["InventoryId"].ToString(), out inventoryId);
-                    _statement1.AddWhere(new FilterItem(WhereTermType.Compare, SqlDataType.Number, CompareOperator.Equal, "erp_inventoryunititemsizesetdetails", "InventoryId", null)).valueList[0] = inventoryId;
+                    //long inventoryId;
+                    //long.TryParse((PolicyParam.ObjectActiveRow as DataRowView).Row["InventoryId"].ToString(), out inventoryId);
+                    //_statement1.AddWhere(new FilterItem(WhereTermType.Compare, SqlDataType.Number, CompareOperator.Equal, "erp_inventoryunititemsizesetdetails", "InventoryId", null)).valueList[0] = inventoryId;
+                    int inventoryCategoryId;
+                    int.TryParse((PolicyParam.ObjectActiveRow as DataRowView).Row["InventoryCategoryId"].ToString(), out inventoryCategoryId);
+                    int catId = inventoryCategoryId;
+                    string catPath = "";
+                    while (catId > 0)
+                    {
+                        using (DataTable table = UtilityFunctions.GetDataTableList(activeSession.dbInfo.DBProvider, activeSession.dbInfo.Connection, null, "Erp_Category", $"select * from Erp_Category with (nolock) where RecId={catId}"))
+                        {
+                            if (table?.Rows.Count > 0)
+                            {
+                                if (string.IsNullOrEmpty(catPath))
+                                    catPath = table.Rows[0]["RecId"].ToString();
+                                else catPath += "," + $"{table.Rows[0]["RecId"]}";
+                                int parentId;
+                                int.TryParse(table.Rows[0]["ParentId"].ToString().Trim(), out parentId);
+                                catId = parentId;
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(catPath))
+                    {
+                        _statement1.AddWhere(WhereTermType.AddSql, "a", "b",$" [erp_inventoryunititemsizesetdetails].[CategoryId] in ({catPath})");
+                    }
+                    else 
+                    {
+                        _statement1.AddWhere(WhereTermType.AddSql, "a", "b", $" [erp_inventoryunititemsizesetdetails].[CategoryId]=-1");
+                    }
                 }
             }
 
