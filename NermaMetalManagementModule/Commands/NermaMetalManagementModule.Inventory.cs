@@ -9,6 +9,7 @@ using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
 using Sentez.Common.Utilities;
 using Sentez.Data.BusinessObjects;
+using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
 using Sentez.InventoryModule.PresentationModels;
 using Sentez.Localization;
@@ -65,9 +66,16 @@ namespace Sentez.NermaMetalManagementModule
             }
             if (inventoryPm.ActiveBO != null)
             {
-                //inventoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
+                inventoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
                 inventoryPm.ActiveBO.ColumnChanged += ActiveBO_ColumnChanged;
             }
+        }
+
+        private void ActiveBO_AfterGet(object sender, EventArgs e)
+        {
+            int categoryId;
+            int.TryParse(inventoryPm.ActiveBO.CurrentRow["CategoryId"].ToString(), out categoryId);
+            inventoryPm.ActiveBO.CurrentRow["CategoryFullPath"] = GetCategoryFullPath(categoryId);
         }
 
         private void InventoryPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
@@ -79,6 +87,7 @@ namespace Sentez.NermaMetalManagementModule
             }
             if (inventoryPm.ActiveBO != null)
             {
+                inventoryPm.ActiveBO.AfterGet -= ActiveBO_AfterGet;
                 inventoryPm.ActiveBO.ColumnChanged -= ActiveBO_ColumnChanged;
             }
         }
@@ -127,11 +136,45 @@ namespace Sentez.NermaMetalManagementModule
                             }
                         }
                     }
+                    else if (e.Row.Table.TableName == "Erp_Inventory")
+                    {
+                        if (e.Column.ColumnName == "CategoryName" && !e.Row.IsNull("CategoryId"))
+                        {
+                            _suppressEvent = true;
+                            int categoryId;
+                            int.TryParse(e.Row["CategoryId"].ToString(), out categoryId);
+                            e.Row["CategoryFullPath"] = GetCategoryFullPath(categoryId);
+                            _suppressEvent = false;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
+                _suppressEvent = false;
             }
+        }
+
+        private object GetCategoryFullPath(int categoryId)
+        {
+            int catId = categoryId;
+            string catPath = "";
+            while (catId > 0)
+            {
+                using (DataTable table = UtilityFunctions.GetDataTableList(inventoryPm.ActiveBO.Provider, inventoryPm.ActiveBO.Connection, inventoryPm.ActiveBO.Transaction, "Erp_Category", $"select * from Erp_Category with (nolock) where RecId={catId}"))
+                {
+                    if (table?.Rows.Count > 0)
+                    {
+                        if (string.IsNullOrEmpty(catPath))
+                            catPath = table.Rows[0]["CategoryName2"].ToString();
+                        else catPath = $"{table.Rows[0]["CategoryName2"]} > {catPath}";
+                        int parentId;
+                        int.TryParse(table.Rows[0]["ParentId"].ToString().Trim(), out parentId);
+                        catId = parentId;
+                    }
+                }
+            }
+            return catPath;
         }
 
         private static void UpdateUnitItemSizeSetDetailsValue(DataColumnChangeEventArgs e, DataTable table)
@@ -161,8 +204,12 @@ namespace Sentez.NermaMetalManagementModule
 
             bo.ValueFiller.AddRule("Erp_InventoryMark", "InUse", 1);
 
-            bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");           
-            //bo.AfterGet += Bo_AfterGet;
+            bo.Lookups.AddLookUp("Erp_InventoryMark", "MarkId", true, "Erp_Mark", "MarkName", "MarkName", "Explanation", "MarkExplanation");
+            if (bo.Data.Tables.Contains("Erp_Inventory"))
+            {
+                if (!bo.Data.Tables["Erp_Inventory"].Columns.Contains("CategoryFullPath"))
+                    bo.Data.Tables["Erp_Inventory"].Columns.Add(new DataColumn() { ColumnName = "CategoryFullPath", DataType = UdtTypes.GetUdtSystemType(Schema.Tables["Erp_InventoryReceiptItem"].Fields["Explanation"].UdtType) });
+            }
         }
 
         private void CategoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)

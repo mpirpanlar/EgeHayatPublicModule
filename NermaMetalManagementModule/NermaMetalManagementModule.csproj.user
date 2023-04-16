@@ -4,4 +4,8 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\SourceControl\SENTEZ-ERP\dev\LiveOutputs\Debug\LIVE.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\SourceControl\SENTEZ-ERP\dev\LiveOutputs\Debug\LIVE.exe</StartProgram>
+  </PropertyGroup>
 </Project>
