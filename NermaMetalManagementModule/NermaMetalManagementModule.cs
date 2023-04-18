@@ -29,6 +29,9 @@ using NermaMetalManagementModule.Models;
 using LiveCore.Desktop.UI.Controls;
 using System.Windows.Input;
 using System.Data;
+using DevExpress.Xpf.Core;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -146,7 +149,12 @@ namespace Sentez.NermaMetalManagementModule
                             else
                             {
                                 if (!(visualelement.CurrentItem as DataRowView).Row.IsNull("MarkId"))
-                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_InventoryMark where InventoryId={(visualelement.CurrentItem as DataRowView).Row["InventoryId"]} and MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
+                                {
+                                    //(visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_VariantItemMark with (nolock) where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
+                                    //(visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_VariantItemMark where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]} and CardId in (select RecId from Erp_VariantCard where TypeId={(visualelement.CurrentItem as DataRowView).Row["Variant2TypeId"]})) and RecId in (select VariantItemId from Erp_VariantItemMark where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
+                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] IN (SELECT RecId FROM Erp_VariantItem EVI WITH (NOLOCK) WHERE EVI.RecId IN(SELECT EVIM.VariantItemId FROM Erp_VariantItemMark EVIM WITH (NOLOCK) WHERE EVIM.MarkId = {(visualelement.CurrentItem as DataRowView).Row["MarkId"]}) AND EVI.CardId IN (SELECT EVC.RecId FROM Erp_VariantCard EVC WITH (NOLOCK) WHERE EVC.TypeId={(visualelement.CurrentItem as DataRowView).Row["Variant2TypeId"]}))";
+                                    
+                                }
                                 return false;
                             }
                         }
@@ -166,7 +174,10 @@ namespace Sentez.NermaMetalManagementModule
                             else
                             {
                                 if (!(visualelement.CurrentItem as DataRowView).Row.IsNull("ItemVariant2Id"))
-                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" and [erp_mark].[RecId] in (select RecId from Erp_InventoryMark with (nolock) where InventoryId={(visualelement.CurrentItem as DataRowView).Row["InventoryId"]})";
+                                {
+                                    //(visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" and [erp_mark].[RecId] in (select RecId from Erp_InventoryMark with (nolock) where InventoryId={(visualelement.CurrentItem as DataRowView).Row["InventoryId"]})";
+                                    (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" and [erp_mark].[RecId] in (select MarkId from Erp_VariantItemMark with (nolock) where VariantItemId={(visualelement.CurrentItem as DataRowView).Row["ItemVariant2Id"]})";
+                                }
                                 return false;
                             }
                         }
