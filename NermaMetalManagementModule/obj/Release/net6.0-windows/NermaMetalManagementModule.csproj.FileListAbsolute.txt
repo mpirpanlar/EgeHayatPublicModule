@@ -1,0 +1,12 @@
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\NermaMetalManagementModule.deps.json
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\NermaMetalManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\NermaMetalManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.csproj.AssemblyReference.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.g.resources
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.csproj.CoreCompileInputs.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.csproj.CopyComplete
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\refint\NermaMetalManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\NermaMetalManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Release\net6.0-windows\ref\NermaMetalManagementModule.dll

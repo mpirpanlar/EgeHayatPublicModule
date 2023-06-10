@@ -1,19 +1,15 @@
 ﻿using LiveCore.Desktop.SBase.MenuManager;
-using Microsoft.Practices.Composite.Modularity;
-using Microsoft.Practices.Unity;
 using Sentez.Common;
 using Sentez.Common.Commands;
 using Sentez.Common.ModuleBase;
 using Sentez.Common.Report;
 using Sentez.Common.ResourceManager;
-using Sentez.Common.SBase;
 using Sentez.Common.SystemServices;
 using Sentez.Data.BusinessObjects;
 using Sentez.Data.MetaData.DatabaseControl;
 //using Sentez.NermaMetalManagementModule.PresentationModels;
 using Sentez.NermaMetalManagementModule.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using NermaMetalManagementModule.Services;
@@ -25,20 +21,19 @@ using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
 using Sentez.Localization;
 using System.Windows;
-using NermaMetalManagementModule.Models;
 using LiveCore.Desktop.UI.Controls;
 using System.Windows.Input;
 using System.Data;
-using DevExpress.Xpf.Core;
-using System.Windows.Controls.Primitives;
-using System.Windows.Forms;
+using LiveCore.Desktop.Common;
+using Prism.Ioc;
+using System.Collections.Generic;
 
 namespace Sentez.NermaMetalManagementModule
 {
-    public partial class NermaMetalManagementModule : IModule, ISentezModule
+    public partial class NermaMetalManagementModule : LiveModule
     {
         //Deneme değişiklik
-        IUnityContainer _container;
+        IContainerExtension _container;
         SysMng _sysMng;
         LiveSession ActiveSession
         {
@@ -49,7 +44,7 @@ namespace Sentez.NermaMetalManagementModule
         }
 
         public Stream _MenuDefination = null;
-        public Stream MenuDefination
+        public override Stream MenuDefination
         {
             get
             {
@@ -57,9 +52,9 @@ namespace Sentez.NermaMetalManagementModule
             }
         }
 
-        public short moduleID { get { return (short)Modules.ExternalModule15; } }
+        public override short moduleID { get { return (short)Modules.ExternalModule15; } }
 
-        public NermaMetalManagementModule(IUnityContainer container)
+        public NermaMetalManagementModule(IContainerExtension container)
         {
             _container = container;
             _sysMng = _container.Resolve<SysMng>();
@@ -68,14 +63,7 @@ namespace Sentez.NermaMetalManagementModule
                 _sysMng.AfterDesktopLogin += _sysMng_AfterDesktopLogin;
             }
         }
-
-        private void _sysMng_AfterDesktopLogin(object sender, EventArgs e)
-        {
-            if (!Schema.Tables["Erp_DemandReceiptItem"].Fields.Contains("UD_SizeDetailCode"))
-                CreatMetaDataFieldsService.CreatMetaDataFields("Erp_DemandReceiptItem", "UD_SizeDetailCode", SLanguage.GetString("Ölçü Kodu"), (byte)UdtType.UdtCode, (byte)FieldUsage.Code, (byte)EditorType.ListSelector, (byte)ValueInputMethod.FreeType, 0);
-        }
-
-        public void Initialize()
+        public override void OnRegister(IContainerRegistry containerRegistry)
         {
             RegisterCoreDocuments();
             RegisterBO();
@@ -89,23 +77,44 @@ namespace Sentez.NermaMetalManagementModule
             NermaMetalManagementModuleSecurity.RegisterSecurityDefinitions();
 
             MenuManager.Instance.RegisterMenu("NermaMetalManagementModule", "NermaMetalManagementModuleMenu", moduleID, true);
+        }
+
+        public override void OnInitialize(IContainerProvider containerProvider)
+        {
             _sysMng.AddApplication("NermaMetalManagementModule");
+        }
+
+        public override void RegisterModuleCommands()
+        {
+        }
+
+
+        private void _sysMng_AfterDesktopLogin(object sender, EventArgs e)
+        {
+            if (!Schema.Tables["Erp_DemandReceiptItem"].Fields.Contains("UD_SizeDetailCode"))
+                CreatMetaDataFieldsService.CreatMetaDataFields("Erp_DemandReceiptItem", "UD_SizeDetailCode", SLanguage.GetString("Ölçü Kodu"), (byte)UdtType.UdtCode, (byte)FieldUsage.Code, (byte)EditorType.ListSelector, (byte)ValueInputMethod.FreeType, 0);
+        }
+
+        public void Initialize()
+        {
         }
 
         private void RegisterBO()
         {
-            _container.RegisterType<IBusinessObject, UnitItemSizeSetDetailsBO>("UnitItemSizeSetDetailsBO");
+            _container.Register<IBusinessObject, UnitItemSizeSetDetailsBO>("UnitItemSizeSetDetailsBO");
+            _container.Register<IBusinessObject, AttributeSetDetailsBO>("AttributeSetDetailsBO");
         }
 
         private void RegisterServices()
         {
-            _container.RegisterType<ISystemService, CreatMetaDataFieldsService>("CreatMetaDataFieldsService");
+            _container.Register<ISystemService, CreatMetaDataFieldsService>("CreatMetaDataFieldsService");
             BusinessObjectBase.AddCustomConstruction("InventoryBO", InventoryBoCustomCons);
             BusinessObjectBase.AddCustomInit("InventoryBO", InventoryBo_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomInit("InventoryPM", InventoryPm_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomDispose("InventoryPM", InventoryPm_Dispose_InventoryUnitItemSizeSetDetails);
 
             BusinessObjectBase.AddCustomInit("QuotationReceiptBO", QuotationReceiptBo_Init_InventoryUnitItemSizeSetDetails);
+            BusinessObjectBase.AddCustomConstruction("QuotationReceiptBO", QuotationReceiptBoCustomCons);
             PMBase.AddCustomInit("QuotationReceiptPM", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomViewLoaded("QuotationReceiptPM", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomDispose("QuotationReceiptPM", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
@@ -120,7 +129,33 @@ namespace Sentez.NermaMetalManagementModule
             BusinessObjectBase.AddCustomConstruction("CategoryBO", CategoryBoCustomCons);
             BusinessObjectBase.AddCustomInit("CategoryBO", CategoryBo_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomInit("Category", CategoryPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomInit("InventoryAttributeSet", CardPm_Init_InventoryAttributeSetItem);
             PMBase.AddCustomDispose("Category", CategoryPm_Dispose_InventoryUnitItemSizeSetDetails);
+
+        }
+
+        private void QuotationReceiptBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
+        {
+            List<string> tableList = new List<string>();
+            tableList.AddRange(Tables);
+
+            tableList.Add("Erp_QuotationReceiptRecipeItem");
+            Tables = tableList.ToArray();
+        }
+
+        private void CardPm_Init_InventoryAttributeSetItem(PMBase pm, PmParam parameter)
+        {
+            inventoryAttributeSetPm = pm as CardPM;
+            if (inventoryAttributeSetPm == null)
+            {
+                return;
+            }
+            LiveGridControl gridDetail = inventoryAttributeSetPm.FCtrl("gridDetail") as LiveGridControl;
+            if (gridDetail != null)
+            {
+                if (!gridDetail.ColumnDefinitions.Contains("IsSelect"))
+                    gridDetail.ColumnDefinitions.Add(new ReceiptColumn() { ColumnName = "IsSelect", Caption = "Seçim", EditorType = EditorType.CheckBox, Width = 80 });
+            }
         }
 
         private bool QuotationReceiptPm_OnListCommand(PMBase pm, PmParam parameter, ISysCommandParam commandParam)
@@ -153,7 +188,7 @@ namespace Sentez.NermaMetalManagementModule
                                     //(visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_VariantItemMark with (nolock) where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
                                     //(visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] in (select VariantItemId from Erp_VariantItemMark with (nolock) where MarkId in (select MarkId from Erp_VariantItemMark where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]} and CardId in (select RecId from Erp_VariantCard where TypeId={(visualelement.CurrentItem as DataRowView).Row["Variant2TypeId"]})) and RecId in (select VariantItemId from Erp_VariantItemMark where MarkId={(visualelement.CurrentItem as DataRowView).Row["MarkId"]}))";
                                     (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = $" [erp_variantitem].[RecId] IN (SELECT RecId FROM Erp_VariantItem EVI WITH (NOLOCK) WHERE EVI.RecId IN(SELECT EVIM.VariantItemId FROM Erp_VariantItemMark EVIM WITH (NOLOCK) WHERE EVIM.MarkId = {(visualelement.CurrentItem as DataRowView).Row["MarkId"]}) AND EVI.CardId IN (SELECT EVC.RecId FROM Erp_VariantCard EVC WITH (NOLOCK) WHERE EVC.TypeId={(visualelement.CurrentItem as DataRowView).Row["Variant2TypeId"]}))";
-                                    
+
                                 }
                                 return false;
                             }
@@ -215,10 +250,13 @@ namespace Sentez.NermaMetalManagementModule
 
         private void RegisterList()
         {
-            _container.RegisterType<IReport, UnitItemSizeSetDetailsList>("Erp_UnitItemSizeSetDetailsSizeDetailCodeList");
-            _container.RegisterType<IReport, InventoryUnitItemSizeSetDetails>("Erp_InventoryUnitItemSizeSetDetailsSizeDetailCodeList");
-            //_container.RegisterType<IReport, MetaCurrentAccountAnalysisSubjectList>("Meta_CurrentAccountAnalysisSubjectAnalysisSubjectCodeList");
-            //_container.RegisterType<IReport, MetaCurrentAccountAnalysisElementList>("Meta_CurrentAccountAnalysisElementAnalysisElementCodeList");
+            _container.Register<IReport, UnitItemSizeSetDetailsList>("Erp_UnitItemSizeSetDetailsSizeDetailCodeList");
+            _container.Register<IReport, InventoryUnitItemSizeSetDetails>("Erp_InventoryUnitItemSizeSetDetailsSizeDetailCodeList");
+
+            _container.Register<IReport, AttributeSetDetailsList>("Erp_AttributeSetDetailsAttributeSetCodeList");
+            _container.Register<IReport, CategoryAttributeSetDetails>("Erp_CategoryAttributeSetDetailsAttributeSetCodeList");
+            //_container.Register<IReport, MetaCurrentAccountAnalysisSubjectList>("Meta_CurrentAccountAnalysisSubjectAnalysisSubjectCodeList");
+            //_container.Register<IReport, MetaCurrentAccountAnalysisElementList>("Meta_CurrentAccountAnalysisElementAnalysisElementCodeList");
 
             //LookupList.Instance.AddLookupList("CekCalismasiList", "Display", typeof(string), new object[] {
             //    "Sorunlu","Sorunsuz"
@@ -251,27 +289,28 @@ namespace Sentez.NermaMetalManagementModule
 
             ResMng.AddRes("InventoryMarksView", "NermaMetalManagementModule;component/Views/InventoryMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("VariantItemMarksView", "NermaMetalManagementModule;component/Views/VariantItemMarks.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+
+            ResMng.AddRes("AttributeSetDetailsView", "NermaMetalManagementModule;component/Views/AttributeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("CategoryAttributeSetDetailsView", "NermaMetalManagementModule;component/Views/CategoryAttributeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+
+            ResMng.AddRes("QuotationRecipeItemView", "NermaMetalManagementModule;component/Views/QuotationRecipeItem.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
 
         private void RegisterPM()
         {
-            //_container.RegisterType<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
-            //_container.RegisterType<IPMBase, FaultTaskControlPM>("FaultTaskControlPM");
-            //_container.RegisterType<IPMBase, VCMMonthlyActualCostPM>("VCMMonthlyActualCostPM");
-            //_container.RegisterType<IPMBase, SalesShipmentDetailsPM>("SalesShipmentDetailsPM");
-            //_container.RegisterType<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
-            //_container.RegisterType<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
+            //_container.Register<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
+            //_container.Register<IPMBase, FaultTaskControlPM>("FaultTaskControlPM");
+            //_container.Register<IPMBase, VCMMonthlyActualCostPM>("VCMMonthlyActualCostPM");
+            //_container.Register<IPMBase, SalesShipmentDetailsPM>("SalesShipmentDetailsPM");
+            //_container.Register<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
+            //_container.Register<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
         }
 
         private void RegisterRpr()
         {
-            _container.RegisterType<IReport, SalesShipmentComparePolicy>("SalesShipmentComparePolicy");
-            _container.RegisterType<IReport, FaultTaskControlPolicy>("FaultTaskControlPolicy");
-            _container.RegisterType<ISystemService, FaultQueryService>("FaultQueryService");
-        }
-
-        public void RegisterModuleCommands()
-        {
+            _container.Register<IReport, SalesShipmentComparePolicy>("SalesShipmentComparePolicy");
+            _container.Register<IReport, FaultTaskControlPolicy>("FaultTaskControlPolicy");
+            _container.Register<ISystemService, FaultQueryService>("FaultQueryService");
         }
 
         public void RegisterCoreDocuments()

@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Prism.Ioc;
 
 using Sentez.Common.Commands;
 using Sentez.Common.ModuleBase;
@@ -19,8 +19,7 @@ namespace NermaMetalManagementModule.Models
     [SecurityItemId((short)NermaMetalManagementModuleSecurityItems.VariantItemMark)]
     public class InventoryMarkBO : BusinessObjectBase
     {
-        [InjectionConstructor()]
-        public InventoryMarkBO(IUnityContainer container)
+        public InventoryMarkBO(IContainerExtension container)
             : base(container, 0, "RecId", string.Empty, new string[] { "Erp_InventoryMark" })
         {
             Lookups.AddLookUp("Erp_InventoryMark", "VariantItemId", true, "Erp_Inventory", "InventoryCode", "InventoryCode", "InventoryName", "InventoryName");

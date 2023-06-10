@@ -6,6 +6,9 @@
 				<MenuItem CommandName="CmdGeneralOpen" Caption="Ölçü Tanımları">
 					<CommandParam viewname="UnitItemSizeSetDetailsView" boname="UnitItemSizeSetDetailsBO" pmparam="UnitItemSizeSetDetailsListEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
 				</MenuItem>
+				<MenuItem CommandName="CmdGeneralOpen" Caption="Özellik Tanımları">
+					<CommandParam viewname="AttributeSetDetailsView" boname="AttributeSetDetailsBO" pmparam="AttributeSetDetailsView,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
+				</MenuItem>
 			</MenuItem>
 		</MenuRoot>
 	</Application>

@@ -11,7 +11,7 @@ using System.Xml;
 using System.Windows.Controls;
 using Sentez.Common.Commands;
 using System.IO;
-using Microsoft.Practices.Unity;
+using Prism.Ioc;
 using Sentez.Localization;
 using Sentez.Common.ModuleBase;
 using System.Data;
@@ -29,7 +29,7 @@ namespace Sentez.NermaMetalManagementModule.WorkList
             }
         }
 
-        public InventoryUnitItemSizeSetDetails(IUnityContainer container)
+        public InventoryUnitItemSizeSetDetails(IContainerExtension container)
             : base(container)
         {
             Name = "Erp_InventoryUnitItemSizeSetDetailsSizeDetailCodeList";

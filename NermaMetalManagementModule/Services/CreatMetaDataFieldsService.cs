@@ -1,4 +1,6 @@
-﻿using Sentez.ApplicationTools;
+﻿using Prism.Ioc;
+
+using Sentez.ApplicationTools;
 using Sentez.Common.Commands;
 using Sentez.Common.SystemServices;
 using Sentez.Data.MetaData;

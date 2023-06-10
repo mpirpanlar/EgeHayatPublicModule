@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Prism.Ioc;
 
 using Sentez.Common.Commands;
 using Sentez.Common.ModuleBase;
@@ -19,8 +19,8 @@ namespace NermaMetalManagementModule.Models
     [SecurityItemId((short)NermaMetalManagementModuleSecurityItems.VariantItemMark)]
     public class VariantItemMarkBO : BusinessObjectBase
     {
-        [InjectionConstructor()]
-        public VariantItemMarkBO(IUnityContainer container)
+        
+        public VariantItemMarkBO(IContainerExtension container)
             : base(container, 0, "GroupCode", string.Empty, new string[] { "Erp_CurrentAccountGroup" })
         {
             KeyFields.Add(new WhereField("Erp_CurrentAccountGroup", "CompanyId", _companyId, WhereCondition.Equal));

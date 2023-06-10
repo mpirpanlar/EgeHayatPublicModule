@@ -8,4 +8,15 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\SourceControl\SENTEZ-ERP\dev\LiveOutputs\Debug\LIVE.exe</StartProgram>
   </PropertyGroup>
+  <ItemGroup>
+    <Resource Update="Views\AttributeSetDetails.xaml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Update="Views\CategoryAttributeSetDetails.xaml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Update="Views\QuotationRecipeItem.xaml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
 </Project>

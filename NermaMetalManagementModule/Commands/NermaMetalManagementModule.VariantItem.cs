@@ -1,6 +1,7 @@
-﻿using LiveCore.Desktop.UI.Controls;
+﻿using LiveCore.Desktop.Common;
+using LiveCore.Desktop.UI.Controls;
 
-using Microsoft.Practices.Composite.Modularity;
+using Prism.Ioc;
 
 using Sentez.Common.Commands;
 using Sentez.Common.ModuleBase;
@@ -23,7 +24,7 @@ using System.Windows.Input;
 
 namespace Sentez.NermaMetalManagementModule
 {
-    public partial class NermaMetalManagementModule : IModule, ISentezModule
+    public partial class NermaMetalManagementModule : LiveModule
     {
         private void VariantTypeBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
         {

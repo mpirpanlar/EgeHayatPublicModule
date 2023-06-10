@@ -1,13 +1,11 @@
-﻿using LiveCore.Desktop.UI.Controls;
+﻿using LiveCore.Desktop.Common;
+using LiveCore.Desktop.UI.Controls;
+
+using Prism.Ioc;
 
 //using Microsoft.Office.Interop.Excel;
-using Microsoft.Practices.Composite.Modularity;
-
-using NermaMetalManagementModule.BoExtensions;
-
 using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
-using Sentez.Common.Utilities;
 using Sentez.Data.BusinessObjects;
 using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
@@ -17,14 +15,12 @@ using Sentez.Localization;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Sentez.NermaMetalManagementModule
 {
-    public partial class NermaMetalManagementModule : IModule, ISentezModule
+    public partial class NermaMetalManagementModule : LiveModule
     {
         private void InventoryBoCustomCons(ref short itemId, ref string keyColumn, ref string typeField, ref string[] Tables)
         {
@@ -188,6 +184,17 @@ namespace Sentez.NermaMetalManagementModule
             }
         }
 
+        private static void UpdateCategoryAttributeSetDetailsValue(DataColumnChangeEventArgs e, DataTable table)
+        {
+            foreach (DataColumn dataColumn in table.Columns)
+            {
+                if (dataColumn.ColumnName == "RecId")
+                    continue;
+                if (e.Row.Table.Columns.Contains(dataColumn.ColumnName))
+                    e.Row[dataColumn.ColumnName] = table.Rows[0][dataColumn.ColumnName];
+            }
+        }
+
         private void InventoryPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.F9)
@@ -218,6 +225,7 @@ namespace Sentez.NermaMetalManagementModule
             tableList.AddRange(Tables);
 
             tableList.Add("Erp_InventoryUnitItemSizeSetDetails");
+            tableList.Add("Erp_CategoryAttributeSetDetails");
             Tables = tableList.ToArray();
         }
 
@@ -226,6 +234,12 @@ namespace Sentez.NermaMetalManagementModule
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "InUse", 1);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsMainUnit", 0);
             bo.ValueFiller.AddRule("Erp_InventoryUnitItemSizeSetDetails", "IsDefault", 0);
+
+            bo.ValueFiller.AddRule("Erp_CategoryAttributeSetDetails", "InUse", 1);
+            bo.ValueFiller.AddRule("Erp_CategoryAttributeSetDetails", "IsSelect", 0);
+            bo.ValueFiller.AddRule("Erp_CategoryAttributeSetDetails", "IsDeleted", 0);
+
+            bo.Lookups.AddLookUp("Erp_Category", "AttributeSetId", true, "Erp_InventoryAttributeSet", "AttributeCode", "AttributeCode", "AttributeName", "AttributeName");
         }
 
         private void CategoryPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
@@ -251,6 +265,14 @@ namespace Sentez.NermaMetalManagementModule
                 var tsePublicParametersView = pMDesktop.LoadXamlRes("CategoryUnitItemSizeSetDetailsView");
                 (tsePublicParametersView._view as UserControl).DataContext = categoryPm;
                 ldpCategoryUnitItemSizeSetDetails.Content = tsePublicParametersView._view;
+
+                ldpCategoryAttributeSetDetails = new LiveTabItem();
+                ldpCategoryAttributeSetDetails.Header = SLanguage.GetString("Özellikler");
+                liveDocumentGroup.Items.Add(ldpCategoryAttributeSetDetails);
+
+                var tseCategoryAttributeSetDetailsView = pMDesktop.LoadXamlRes("CategoryAttributeSetDetailsView");
+                (tseCategoryAttributeSetDetailsView._view as UserControl).DataContext = categoryPm;
+                ldpCategoryAttributeSetDetails.Content = tseCategoryAttributeSetDetailsView._view;
             }
             if (categoryPm.ActiveBO != null)
             {
@@ -298,6 +320,42 @@ namespace Sentez.NermaMetalManagementModule
                                 {
                                     if (table?.Rows.Count > 0)
                                         UpdateUnitItemSizeSetDetailsValue(e, table);
+                                }
+                                _suppressEvent = false;
+                            }
+                        }
+                    }
+                    else if (e.Row.Table.TableName == "Erp_CategoryAttributeSetDetails")
+                    {
+                        if (e.Column.ColumnName == "AttributeSetCode")
+                        {
+                            long recId;
+                            long.TryParse(e.Row[e.Column.ColumnName].ToString(), out recId);
+                            if (recId > 0L)
+                            {
+                                _suppressEvent = true;
+                                using (DataTable table = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, categoryPm.ActiveBO.Transaction, "Erp_AttributeSetDetails", $"select * from Erp_AttributeSetDetails with (nolock) where RecId={recId}"))
+                                {
+                                    if (table?.Rows.Count > 0)
+                                        UpdateCategoryAttributeSetDetailsValue(e, table);
+                                    else
+                                    {
+                                        using (DataTable table2 = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, inventoryPm.ActiveBO.Transaction, "Erp_AttributeSetDetails", $"select * from Erp_AttributeSetDetails with (nolock) where AttributeSetCode='{e.Row["AttributeSetCode"]}'"))
+                                        {
+                                            if (table2?.Rows.Count > 0)
+                                                UpdateCategoryAttributeSetDetailsValue(e, table2);
+                                        }
+                                    }
+                                }
+                                _suppressEvent = false;
+                            }
+                            else
+                            {
+                                _suppressEvent = true;
+                                using (DataTable table = UtilityFunctions.GetDataTableList(categoryPm.ActiveBO.Provider, categoryPm.ActiveBO.Connection, categoryPm.ActiveBO.Transaction, "Erp_AttributeSetDetails", $"select * from Erp_AttributeSetDetails with (nolock) where AttributeSetCode='{e.Row["AttributeSetCode"]}'"))
+                                {
+                                    if (table?.Rows.Count > 0)
+                                        UpdateCategoryAttributeSetDetailsValue(e, table);
                                 }
                                 _suppressEvent = false;
                             }

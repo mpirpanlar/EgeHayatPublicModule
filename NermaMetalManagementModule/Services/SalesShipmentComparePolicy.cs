@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Prism.Ioc;
 using Reeb.SqlOM;
 using Sentez.Common.Report;
 using Sentez.Common.SqlBuilder;
@@ -11,7 +11,7 @@ namespace Sentez.NermaMetalManagementModule.Services
 {
     class SalesShipmentComparePolicy : ReportBase
     {
-        public SalesShipmentComparePolicy(IUnityContainer container)
+        public SalesShipmentComparePolicy(IContainerExtension container)
            : base(container)
         {
             Name = "SalesShipmentComparePolicy";

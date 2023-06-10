@@ -128,6 +128,7 @@
 		BEGIN
 		CREATE TABLE [Erp_UnitItemSizeSetDetails] (
 		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CompanyId] [dbo].[UdtInt32] NULL
 		,[SizeDetailCode] [dbo].[UdtCode] NULL
 		,[SizeDetailName] [dbo].[UdtName] NULL
 		,[UnitItemId] [dbo].[UdtInt32] NULL
@@ -187,7 +188,36 @@
 		WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]')
 		AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
 		ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Meta_UnitSetItem]
-		GO</Script>
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]')
+    AND name = N'Erp_UnitItemSizeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_UnitItemSizeSetDetails_IX0] ON [Erp_UnitItemSizeSetDetails]
+  (
+  [CompanyId] ASC,
+  [SizeDetailCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company] FOREIGN KEY ([CompanyId])
+  REFERENCES [Erp_Company] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company]
+GO		</Script>
   </Updates>
   <Updates>
     <Version>
@@ -480,9 +510,364 @@ IF EXISTS (SELECT
   ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Category]
 GO</Script>
   </Updates>
+  <Updates>
+    <Version>
+      <Build>6</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_UnitItemSizeSetDetails'
+    AND COLUMN_NAME = 'CompanyId')
+BEGIN
+  ALTER TABLE Erp_UnitItemSizeSetDetails ADD CompanyId UdtInt32
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]')
+    AND name = N'Erp_UnitItemSizeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_UnitItemSizeSetDetails_IX0] ON [Erp_UnitItemSizeSetDetails]
+  (
+  [CompanyId] ASC,
+  [SizeDetailCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company] FOREIGN KEY ([CompanyId])
+  REFERENCES [Erp_Company] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company]
+GO</Script>
+  </Updates>
+  <Updates>
+    <Version>
+      <Build>7</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>/****** Object:  Table [dbo].[Erp_AttributeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_AttributeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CompanyId] [dbo].[UdtInt32] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[SpecialCode01] [dbo].[UdtName] NULL
+		,[SpecialCode02] [dbo].[UdtName] NULL
+		,[SpecialCode03] [dbo].[UdtName] NULL
+		,[SpecialCode04] [dbo].[UdtName] NULL
+		,[SpecialCode05] [dbo].[UdtName] NULL
+		,[SpecialCode06] [dbo].[UdtName] NULL
+		,[SpecialCode07] [dbo].[UdtName] NULL
+		,[SpecialCode08] [dbo].[UdtName] NULL
+		,[SpecialCode09] [dbo].[UdtName] NULL
+		,[SpecialCode10] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_AttributeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]')
+    AND name = N'Erp_AttributeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_AttributeSetDetails_IX0] ON [Erp_AttributeSetDetails]
+  (
+  [CompanyId] ASC,
+  [AttributeSetCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_AttributeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]'))
+  ALTER TABLE [Erp_AttributeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_AttributeSetDetails_Erp_Company] FOREIGN KEY ([CompanyId])
+  REFERENCES [Erp_Company] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_AttributeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]'))
+  ALTER TABLE [Erp_AttributeSetDetails] CHECK CONSTRAINT [FK_Erp_AttributeSetDetails_Erp_Company]
+GO
+
+/****** Object:  Table [dbo].[Erp_CategoryAttributeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_CategoryAttributeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CategoryId] [dbo].[UdtInt32] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[SpecialCode01] [dbo].[UdtName] NULL
+		,[SpecialCode02] [dbo].[UdtName] NULL
+		,[SpecialCode03] [dbo].[UdtName] NULL
+		,[SpecialCode04] [dbo].[UdtName] NULL
+		,[SpecialCode05] [dbo].[UdtName] NULL
+		,[SpecialCode06] [dbo].[UdtName] NULL
+		,[SpecialCode07] [dbo].[UdtName] NULL
+		,[SpecialCode08] [dbo].[UdtName] NULL
+		,[SpecialCode09] [dbo].[UdtName] NULL
+		,[SpecialCode10] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_CategoryAttributeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]')
+    AND name = N'Erp_CategoryAttributeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_CategoryAttributeSetDetails_IX0] ON [Erp_CategoryAttributeSetDetails]
+  (
+  [CategoryId] ASC,
+  [AttributeSetCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_CategoryAttributeSetDetails_Erp_Category]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]'))
+  ALTER TABLE [Erp_CategoryAttributeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_CategoryAttributeSetDetails_Erp_Category] FOREIGN KEY ([CategoryId])
+  REFERENCES [Erp_Category] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_CategoryAttributeSetDetails_Erp_Category]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]'))
+  ALTER TABLE [Erp_CategoryAttributeSetDetails] CHECK CONSTRAINT [FK_Erp_CategoryAttributeSetDetails_Erp_Category]
+GO
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_QuotationReceiptItem'
+    AND COLUMN_NAME = 'CategoryAttributeSetDetailsId')
+BEGIN
+  ALTER TABLE Erp_QuotationReceiptItem ADD CategoryAttributeSetDetailsId UdtInt64
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [dbo].[Erp_QuotationReceiptItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails] FOREIGN KEY ([CategoryAttributeSetDetailsId])
+  REFERENCES [dbo].[Erp_CategoryAttributeSetDetails] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [dbo].[Erp_QuotationReceiptItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]
+GO
+
+
+</Script>
+  </Updates>
+  <Updates>
+    <Version>
+      <Build>8</Build>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Revision>-1</Revision>
+    </Version>
+    <Script>IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_Category'
+    AND COLUMN_NAME = 'AttributeSetId')
+BEGIN
+  ALTER TABLE Erp_Category ADD AttributeSetId UdtInt32
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] WITH CHECK ADD CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet] FOREIGN KEY ([AttributeSetId])
+  REFERENCES [Erp_InventoryAttributeSet] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] CHECK CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet]
+GO
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_InventoryAttributeSetItem'
+    AND COLUMN_NAME = 'IsSelect')
+BEGIN
+  ALTER TABLE Erp_InventoryAttributeSetItem ADD IsSelect UdtBool
+END
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_QuotationReceiptItem'
+    AND COLUMN_NAME = 'AttributeSetItemId')
+BEGIN
+  ALTER TABLE Erp_QuotationReceiptItem ADD AttributeSetItemId UdtInt64
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem] FOREIGN KEY ([AttributeSetItemId])
+  REFERENCES [Erp_InventoryAttributeSetItem] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]
+GO
+
+/****** Object:  Table [dbo].[Erp_QuotationReceiptRecipeItem]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_QuotationReceiptRecipeItem] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[QuotationReceiptId] [dbo].[UdtInt64] NULL
+		,[InventoryCode] [dbo].[UdtCode] NULL
+		,[InventoryName] [dbo].[UdtName] NULL
+		,[ArticelNo] [dbo].[UdtName] NULL
+		,[PozNo] [dbo].[UdtName] NULL
+		,[Quantity] [dbo].[UdtName] NULL
+		,[UnitPrice] [dbo].[UdtName] NULL
+		,[SizeDetailCode] [dbo].[UdtCode] NULL
+		,[SizeDetailName] [dbo].[UdtName] NULL
+		,[MarkCode] [dbo].[UdtCode] NULL
+		,[MarkName] [dbo].[UdtName] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_QuotationReceiptRecipeItem] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]'))
+  ALTER TABLE [Erp_QuotationReceiptRecipeItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt] FOREIGN KEY ([QuotationReceiptId])
+  REFERENCES [Erp_QuotationReceipt] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]'))
+  ALTER TABLE [Erp_QuotationReceiptRecipeItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]
+GO</Script>
+  </Updates>
   <CreateScript>
     <DbVersion>
-      <Build>5</Build>
+      <Build>8</Build>
       <Major>1</Major>
       <Minor>0</Minor>
       <Revision>-1</Revision>
@@ -601,6 +986,7 @@ GO</Script>
 		BEGIN
 		CREATE TABLE [Erp_UnitItemSizeSetDetails] (
 		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CompanyId] [dbo].[UdtInt32] NULL
 		,[SizeDetailCode] [dbo].[UdtCode] NULL
 		,[SizeDetailName] [dbo].[UdtName] NULL
 		,[UnitItemId] [dbo].[UdtInt32] NULL
@@ -690,7 +1076,6 @@ GO
 
 
 
-	--SELECT * FROM Erp_VariantType EVT
 	IF NOT EXISTS (SELECT
 		*
 		FROM sys.objects
@@ -930,6 +1315,393 @@ IF EXISTS (SELECT
     WHERE object_id = OBJECT_ID(N'[FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Category]')
     AND parent_object_id = OBJECT_ID(N'[Erp_InventoryUnitItemSizeSetDetails]'))
   ALTER TABLE [Erp_InventoryUnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_InventoryUnitItemSizeSetDetails_Erp_Category]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]')
+    AND name = N'Erp_UnitItemSizeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_UnitItemSizeSetDetails_IX0] ON [Erp_UnitItemSizeSetDetails]
+  (
+  [CompanyId] ASC,
+  [SizeDetailCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company] FOREIGN KEY ([CompanyId])
+  REFERENCES [Erp_Company] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_UnitItemSizeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_UnitItemSizeSetDetails]'))
+  ALTER TABLE [Erp_UnitItemSizeSetDetails] CHECK CONSTRAINT [FK_Erp_UnitItemSizeSetDetails_Erp_Company]
+GO
+
+/****** Object:  Table [dbo].[Erp_AttributeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_AttributeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CompanyId] [dbo].[UdtInt32] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[SpecialCode01] [dbo].[UdtName] NULL
+		,[SpecialCode02] [dbo].[UdtName] NULL
+		,[SpecialCode03] [dbo].[UdtName] NULL
+		,[SpecialCode04] [dbo].[UdtName] NULL
+		,[SpecialCode05] [dbo].[UdtName] NULL
+		,[SpecialCode06] [dbo].[UdtName] NULL
+		,[SpecialCode07] [dbo].[UdtName] NULL
+		,[SpecialCode08] [dbo].[UdtName] NULL
+		,[SpecialCode09] [dbo].[UdtName] NULL
+		,[SpecialCode10] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_AttributeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]')
+    AND name = N'Erp_AttributeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_AttributeSetDetails_IX0] ON [Erp_AttributeSetDetails]
+  (
+  [CompanyId] ASC,
+  [AttributeSetCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_AttributeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]'))
+  ALTER TABLE [Erp_AttributeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_AttributeSetDetails_Erp_Company] FOREIGN KEY ([CompanyId])
+  REFERENCES [Erp_Company] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_AttributeSetDetails_Erp_Company]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_AttributeSetDetails]'))
+  ALTER TABLE [Erp_AttributeSetDetails] CHECK CONSTRAINT [FK_Erp_AttributeSetDetails_Erp_Company]
+GO
+
+/****** Object:  Table [dbo].[Erp_CategoryAttributeSetDetails]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_CategoryAttributeSetDetails] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[CategoryId] [dbo].[UdtInt32] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[SpecialCode01] [dbo].[UdtName] NULL
+		,[SpecialCode02] [dbo].[UdtName] NULL
+		,[SpecialCode03] [dbo].[UdtName] NULL
+		,[SpecialCode04] [dbo].[UdtName] NULL
+		,[SpecialCode05] [dbo].[UdtName] NULL
+		,[SpecialCode06] [dbo].[UdtName] NULL
+		,[SpecialCode07] [dbo].[UdtName] NULL
+		,[SpecialCode08] [dbo].[UdtName] NULL
+		,[SpecialCode09] [dbo].[UdtName] NULL
+		,[SpecialCode10] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_CategoryAttributeSetDetails] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.indexes
+    WHERE object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]')
+    AND name = N'Erp_CategoryAttributeSetDetails_IX0')
+  CREATE NONCLUSTERED INDEX [Erp_CategoryAttributeSetDetails_IX0] ON [Erp_CategoryAttributeSetDetails]
+  (
+  [CategoryId] ASC,
+  [AttributeSetCode] ASC
+  ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_CategoryAttributeSetDetails_Erp_Category]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]'))
+  ALTER TABLE [Erp_CategoryAttributeSetDetails] WITH CHECK ADD CONSTRAINT [FK_Erp_CategoryAttributeSetDetails_Erp_Category] FOREIGN KEY ([CategoryId])
+  REFERENCES [Erp_Category] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_CategoryAttributeSetDetails_Erp_Category]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_CategoryAttributeSetDetails]'))
+  ALTER TABLE [Erp_CategoryAttributeSetDetails] CHECK CONSTRAINT [FK_Erp_CategoryAttributeSetDetails_Erp_Category]
+GO
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_QuotationReceiptItem'
+    AND COLUMN_NAME = 'CategoryAttributeSetDetailsId')
+BEGIN
+  ALTER TABLE Erp_QuotationReceiptItem ADD CategoryAttributeSetDetailsId UdtInt64
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [dbo].[Erp_QuotationReceiptItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails] FOREIGN KEY ([CategoryAttributeSetDetailsId])
+  REFERENCES [dbo].[Erp_CategoryAttributeSetDetails] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [dbo].[Erp_QuotationReceiptItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails]
+GO
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_Category'
+    AND COLUMN_NAME = 'AttributeSetId')
+BEGIN
+  ALTER TABLE Erp_Category ADD AttributeSetId UdtInt32
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] WITH CHECK ADD CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet] FOREIGN KEY ([AttributeSetId])
+  REFERENCES [Erp_InventoryAttributeSet] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] CHECK CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet]
+GO
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_InventoryAttributeSetItem'
+    AND COLUMN_NAME = 'IsSelect')
+BEGIN
+  ALTER TABLE Erp_InventoryAttributeSetItem ADD IsSelect UdtBool
+END
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_QuotationReceiptItem'
+    AND COLUMN_NAME = 'AttributeSetItemId')
+BEGIN
+  ALTER TABLE Erp_QuotationReceiptItem ADD AttributeSetItemId UdtInt64
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem] FOREIGN KEY ([AttributeSetItemId])
+  REFERENCES [Erp_InventoryAttributeSetItem] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]
+GO
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_Category'
+    AND COLUMN_NAME = 'AttributeSetId')
+BEGIN
+  ALTER TABLE Erp_Category ADD AttributeSetId UdtInt32
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] WITH CHECK ADD CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet] FOREIGN KEY ([AttributeSetId])
+  REFERENCES [Erp_InventoryAttributeSet] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_Category_Erp_InventoryAttributeSet]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_Category]'))
+  ALTER TABLE [Erp_Category] CHECK CONSTRAINT [FK_Erp_Category_Erp_InventoryAttributeSet]
+GO
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_InventoryAttributeSetItem'
+    AND COLUMN_NAME = 'IsSelect')
+BEGIN
+  ALTER TABLE Erp_InventoryAttributeSetItem ADD IsSelect UdtBool
+END
+
+
+IF NOT EXISTS (SELECT
+      COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'Erp_QuotationReceiptItem'
+    AND COLUMN_NAME = 'AttributeSetItemId')
+BEGIN
+  ALTER TABLE Erp_QuotationReceiptItem ADD AttributeSetItemId UdtInt64
+END
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem] FOREIGN KEY ([AttributeSetItemId])
+  REFERENCES [Erp_InventoryAttributeSetItem] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptItem]'))
+  ALTER TABLE [Erp_QuotationReceiptItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem]
+GO
+
+/****** Object:  Table [dbo].[Erp_QuotationReceiptRecipeItem]    Script Date: 02/10/2011 12:25:43 ******/
+		SET ANSI_PADDING ON
+		GO
+		IF NOT EXISTS (SELECT
+		*
+		FROM sys.objects
+		WHERE object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]')
+		AND type IN (N'U'))
+		BEGIN
+		CREATE TABLE [Erp_QuotationReceiptRecipeItem] (
+		[RecId] [dbo].[UdtRecId] IDENTITY (1, 1) NOT NULL
+		,[QuotationReceiptId] [dbo].[UdtInt64] NULL
+		,[InventoryCode] [dbo].[UdtCode] NULL
+		,[InventoryName] [dbo].[UdtName] NULL
+		,[ArticelNo] [dbo].[UdtName] NULL
+		,[PozNo] [dbo].[UdtName] NULL
+		,[Quantity] [dbo].[UdtName] NULL
+		,[UnitPrice] [dbo].[UdtName] NULL
+		,[SizeDetailCode] [dbo].[UdtCode] NULL
+		,[SizeDetailName] [dbo].[UdtName] NULL
+		,[MarkCode] [dbo].[UdtCode] NULL
+		,[MarkName] [dbo].[UdtName] NULL
+		,[AttributeSetCode] [dbo].[UdtCode] NULL
+		,[AttributeSetName] [dbo].[UdtName] NULL
+		,[InUse] [dbo].[UdtBool] NULL
+		,[InsertedAt] [dbo].[UdtDateTime] NULL
+		,[InsertedBy] [dbo].[UdtInt32] NULL
+		,[UpdatedAt] [dbo].[UdtDateTime] NULL
+		,[UpdatedBy] [dbo].[UdtInt32] NULL
+		,[IsDeleted] [dbo].[UdtBool] NULL
+		,[DeletedAt] [dbo].[UdtDateTime] NULL
+		,[DeletedBy] [dbo].[UdtInt32] NULL
+		,CONSTRAINT [PK_Erp_QuotationReceiptRecipeItem] PRIMARY KEY CLUSTERED
+		(
+		[RecId] ASC
+		) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+		END
+		GO
+
+		SET ANSI_PADDING OFF
+		GO
+
+IF NOT EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]'))
+  ALTER TABLE [Erp_QuotationReceiptRecipeItem] WITH CHECK ADD CONSTRAINT [FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt] FOREIGN KEY ([QuotationReceiptId])
+  REFERENCES [Erp_QuotationReceipt] ([RecId])
+GO
+
+IF EXISTS (SELECT
+      *
+    FROM sys.foreign_keys
+    WHERE object_id = OBJECT_ID(N'[FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]')
+    AND parent_object_id = OBJECT_ID(N'[Erp_QuotationReceiptRecipeItem]'))
+  ALTER TABLE [Erp_QuotationReceiptRecipeItem] CHECK CONSTRAINT [FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt]
 GO</CreateScript>
   </CreateScript>
 </DbScripts>

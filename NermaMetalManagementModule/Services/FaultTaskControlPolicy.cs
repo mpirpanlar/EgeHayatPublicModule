@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Prism.Ioc;
 using Reeb.SqlOM;
 using Sentez.Common.Report;
 using Sentez.Common.SqlBuilder;
@@ -9,7 +9,7 @@ namespace Sentez.NermaMetalManagementModule.Services
 {
     class FaultTaskControlPolicy : ReportBase
     {
-        public FaultTaskControlPolicy(IUnityContainer container)
+        public FaultTaskControlPolicy(IContainerExtension container)
            : base(container)
         {
             Name = "FaultTaskControlPolicy";
