@@ -7,6 +7,7 @@ using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
 using Sentez.Common.Utilities;
 using Sentez.InventoryModule.PresentationModels;
+using Sentez.OrderModule.PresentationModels;
 using Sentez.QuotationModule.PresentationModels;
 
 namespace Sentez.NermaMetalManagementModule
@@ -15,6 +16,7 @@ namespace Sentez.NermaMetalManagementModule
 	{
 		public LookupList Lists { get; set; }
         public LookupList Lists_QuotationReceiptPM { get; set; }
+        public LookupList Lists_OrderReceiptPM { get; set; }
         LiveDocumentPanel ldpInventoryUnitItemSizeSetDetails, ldpInventoryMark, ldpVariantItemMark;
 		LiveTabItem ldpCategoryUnitItemSizeSetDetails, ldpCategoryAttributeSetDetails;
         InventoryPM inventoryPm;
@@ -22,6 +24,7 @@ namespace Sentez.NermaMetalManagementModule
         VariantTypePM variantTypePm;
 		LiveGridControl gridVariantItems, gridVariantItemMarks;
         QuotationReceiptPM quotationReceiptPm;
+        OrderReceiptPM orderReceiptPm;
 
         bool _suppressEvent = false;
     }

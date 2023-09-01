@@ -19,12 +19,6 @@
 		<SignAssembly>true</SignAssembly>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Remove="PresentationModels\**" />
-	  <EmbeddedResource Remove="PresentationModels\**" />
-	  <None Remove="PresentationModels\**" />
-	  <Page Remove="PresentationModels\**" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Page Remove="Views\AttributeSetDetails.xaml" />
 	  <Page Remove="Views\CategoryAttributeSetDetails.xaml" />
 	  <Page Remove="Views\CategoryUnitItemSizeSetDetails.xaml" />
@@ -35,6 +29,10 @@
 	  <Page Remove="Views\VariantItemMarks.xaml" />
 	</ItemGroup>
 	<ItemGroup>
+		
+		<Reference Include="InventoryModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\InventoryModule.dll</HintPath>
+		</Reference>
 		
 		<Reference Include="InventoryUIModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
 			<SpecificVersion>False</SpecificVersion>
@@ -47,6 +45,9 @@
 		<Reference Include="LiveCore.Desktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
 			<SpecificVersion>False</SpecificVersion>
 			<HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\LiveCore.Desktop.dll</HintPath>
+		</Reference>
+		<Reference Include="OrderUIModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\OrderUIModule.dll</HintPath>
 		</Reference>
 		<Reference Include="QuotationUIModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
 			<SpecificVersion>False</SpecificVersion>
@@ -88,5 +89,8 @@
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 		<PackageReference Include="System.ServiceModel.Federation" Version="4.8.1" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="PresentationModels\" />
 	</ItemGroup>
 </Project>

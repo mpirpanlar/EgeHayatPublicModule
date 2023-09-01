@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2DygAXSddTPRPhIBuRKirh7+fU5Qdg/Ylf8j7os/shHQ1LY6wBaUQRPY6ml4hgU2AXiTtfM18YFp7UPIPwPGjw==",
+  "dgSpecHash": "l9s7AO9mSvpqNGfitI+BlUPaOT4wRX3JIgiay2cIhx6A3ZX0FTpahas9UdZu8Ag5LX8x5g4Yy5Oug16LKpWZCw==",
   "success": true,
   "projectFilePath": "C:\\SourceControl\\SENTEZ-ERP\\dev-v2.0.0.1\\ExternalModules\\NermaMetalManagementModule\\NermaMetalManagementModule\\NermaMetalManagementModule.csproj",
   "expectedPackageFiles": [
@@ -154,12 +154,12 @@
     "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
     "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.18\\microsoft.netcore.app.runtime.win-x86.6.0.18.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.18\\microsoft.aspnetcore.app.runtime.win-x86.6.0.18.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.18\\microsoft.aspnetcore.app.runtime.win-x64.6.0.18.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.18\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.18.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.18\\microsoft.netcore.app.runtime.win-x64.6.0.18.nupkg.sha512",
-    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.18\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.18.nupkg.sha512"
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.21\\microsoft.netcore.app.runtime.win-x86.6.0.21.nupkg.sha512",
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.21\\microsoft.aspnetcore.app.runtime.win-x86.6.0.21.nupkg.sha512",
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.21\\microsoft.aspnetcore.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.21\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.21\\microsoft.netcore.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\Mustafa Pırpanlar\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.21\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.21.nupkg.sha512"
   ],
   "logs": []
 }

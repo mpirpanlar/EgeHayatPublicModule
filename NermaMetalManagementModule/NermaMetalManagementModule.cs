@@ -27,6 +27,10 @@ using System.Data;
 using LiveCore.Desktop.Common;
 using Prism.Ioc;
 using System.Collections.Generic;
+using Sentez.Core.ParameterClasses;
+using Sentez.InventoryModule.PresentationModels;
+using Sentez.NermaMetalManagementModule.PresentationModels;
+using Sentez.Common.SBase;
 
 namespace Sentez.NermaMetalManagementModule
 {
@@ -93,6 +97,8 @@ namespace Sentez.NermaMetalManagementModule
         {
             if (!Schema.Tables["Erp_DemandReceiptItem"].Fields.Contains("UD_SizeDetailCode"))
                 CreatMetaDataFieldsService.CreatMetaDataFields("Erp_DemandReceiptItem", "UD_SizeDetailCode", SLanguage.GetString("Ölçü Kodu"), (byte)UdtType.UdtCode, (byte)FieldUsage.Code, (byte)EditorType.ListSelector, (byte)ValueInputMethod.FreeType, 0);
+            if (!Schema.Tables["Erp_OrderReceiptItem"].Fields.Contains("UD_SizeDetailCode"))
+                CreatMetaDataFieldsService.CreatMetaDataFields("Erp_OrderReceiptItem", "UD_SizeDetailCode", SLanguage.GetString("Ölçü Kodu"), (byte)UdtType.UdtCode, (byte)FieldUsage.Code, (byte)EditorType.ListSelector, (byte)ValueInputMethod.FreeType, 0);
         }
 
         public void Initialize()
@@ -115,16 +121,139 @@ namespace Sentez.NermaMetalManagementModule
 
             BusinessObjectBase.AddCustomInit("QuotationReceiptBO", QuotationReceiptBo_Init_InventoryUnitItemSizeSetDetails);
             BusinessObjectBase.AddCustomConstruction("QuotationReceiptBO", QuotationReceiptBoCustomCons);
+
+            #region Teklif fiş giriş ekran menüleri
             PMBase.AddCustomInit("QuotationReceiptPM", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomViewLoaded("QuotationReceiptPM", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
             PMBase.AddCustomDispose("QuotationReceiptPM", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("QuotationReceiptPM", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Urun", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Urun", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Urun", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Urun", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("AluminyumProfil", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("AluminyumProfil", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("AluminyumProfil", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("AluminyumProfil", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Kompozit", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Kompozit", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Kompozit", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Kompozit", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Cam", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Cam", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Cam", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Cam", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Donanım", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Donanım", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Donanım", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Donanım", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Aksesuar", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Aksesuar", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Aksesuar", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Aksesuar", QuotationReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Diger", QuotationReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Diger", QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Diger", QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Diger", QuotationReceiptPm_OnListCommand);
+            #endregion
+
+            BusinessObjectBase.AddCustomInit("OrderReceiptBO", OrderReceiptBo_Init_InventoryUnitItemSizeSetDetails);
+            BusinessObjectBase.AddCustomConstruction("OrderReceiptBO", OrderReceiptBoCustomCons);
+
+            #region Sipariş fişi giriş ekran menüleri
+            PMBase.AddCustomInit("OrderReceiptPM2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("OrderReceiptPM2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("OrderReceiptPM2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("OrderReceiptPM2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("OrderReceiptPM2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("OrderReceiptPM2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("OrderReceiptPM2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("OrderReceiptPM2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Urun2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Urun2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Urun2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Urun2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Urun2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Urun2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Urun2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Urun2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("AluminyumProfil2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("AluminyumProfil2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("AluminyumProfil2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("AluminyumProfil2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("AluminyumProfil2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("AluminyumProfil2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("AluminyumProfil2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("AluminyumProfil2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Kompozit2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Kompozit2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Kompozit2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Kompozit2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Kompozit2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Kompozit2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Kompozit2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Kompozit2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Cam2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Cam2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Cam2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Cam2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Cam2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Cam2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Cam2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Cam2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Donanım2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Donanım2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Donanım2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Donanım2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Donanım2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Donanım2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Donanım2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Donanım2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Aksesuar2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Aksesuar2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Aksesuar2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Aksesuar2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Aksesuar2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Aksesuar2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Aksesuar2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Aksesuar2", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Diger2_2_0", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Diger2_2_0", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Diger2_2_0", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Diger2_2_0", OrderReceiptPm_OnListCommand);
+
+            PMBase.AddCustomInit("Diger2", OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomViewLoaded("Diger2", OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomDispose("Diger2", OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails);
+            PMBase.AddCustomCommandExecutes("Diger2", OrderReceiptPm_OnListCommand);
+            #endregion
 
             BusinessObjectBase.AddCustomConstruction("VariantTypeBO", VariantTypeBoCustomCons);
             BusinessObjectBase.AddCustomInit("VariantTypeBO", VariantTypeBo_Init_VariantItemMark);
             PMBase.AddCustomInit("VariantType", VariantTypePm_Init_VariantItemMark);
             PMBase.AddCustomViewLoaded("VariantType", VariantTypePm_ViewLoaded_VariantItemMark);
             PMBase.AddCustomDispose("VariantType", VariantTypePm_Dispose_VariantItemMark);
-            PMBase.AddCustomCommandExecutes("QuotationReceiptPM", QuotationReceiptPm_OnListCommand);
 
             BusinessObjectBase.AddCustomConstruction("CategoryBO", CategoryBoCustomCons);
             BusinessObjectBase.AddCustomInit("CategoryBO", CategoryBo_Init_InventoryUnitItemSizeSetDetails);
@@ -234,6 +363,65 @@ namespace Sentez.NermaMetalManagementModule
                             }
                         }
                     }
+                    else if (visualelement.CurrentColumn?.FieldName == "ItemCode")
+                    {
+                        string whereStr = "";
+                        if (visualelement.CurrentItem is DataRowView)
+                        {
+                            (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = "";
+                            DataRow itemRow = (visualelement.CurrentItem as DataRowView).Row;
+                            if (itemRow != null)
+                            {
+                                short receiptSubType;
+                                short.TryParse(itemRow["ReceiptSubType"].ToString(), out receiptSubType);
+                                if (receiptSubType > 0)
+                                {
+                                    if (!string.IsNullOrEmpty(quotationReceiptPm.ActiveSession.ParamService.GetParameterClass<QuotationParameters>().IssuedQuotationReceiptSubTypeValues))
+                                    {
+                                        DataSet dataSet = new DataSet();
+                                        StringReader sr = new StringReader(quotationReceiptPm.ActiveSession.ParamService.GetParameterClass<QuotationParameters>().IssuedQuotationReceiptSubTypeValues);
+                                        dataSet.ReadXml(sr);
+                                        if (dataSet?.Tables.Count > 0)
+                                        {
+                                            if (dataSet.Tables[0].Columns.Contains("InventoryCodes"))
+                                            {
+                                                foreach (DataRow row in dataSet.Tables[0].Rows)
+                                                {
+                                                    short paramReceiptSubType;
+                                                    short.TryParse(row["TypeId"].ToString().ToString(), out paramReceiptSubType);
+                                                    if (receiptSubType == paramReceiptSubType && !string.IsNullOrEmpty(row["InventoryCodes"].ToString()))
+                                                    {
+                                                        string[] invCodes = row["InventoryCodes"].ToString().Trim().Split(',');
+                                                        foreach (string invCode in invCodes)
+                                                        {
+                                                            if (string.IsNullOrEmpty(whereStr))
+                                                            {
+                                                                whereStr = $"i.InventoryCode LIKE '{invCode}%'";
+                                                            }
+                                                            else
+                                                            {
+                                                                whereStr += $" OR i.InventoryCode LIKE '{invCode}%'";
+                                                            }
+                                                        }
+                                                        break;
+                                                    }
+                                                }
+                                                if (!string.IsNullOrEmpty(whereStr))
+                                                {
+                                                    if (quotationReceiptPm.ActiveSession.ParamService.GetParameterClass<InventoryParameters>().IsInventoryListBasedOnCategory == 1)
+                                                    {
+                                                        whereStr = $" And ({whereStr})";
+                                                        (visualelement.CurrentColumn.Tag as ReceiptColumn).ListWhereStr = whereStr;
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     else
                         return false;
                 }
@@ -284,6 +472,7 @@ namespace Sentez.NermaMetalManagementModule
 
             ResMng.AddRes("InventoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/InventoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             ResMng.AddRes("UnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/UnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("InventoryPriceListDetailsView", "NermaMetalManagementModule;component/Views/InventoryPriceListDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
             ResMng.AddRes("CategoryUnitItemSizeSetDetailsView", "NermaMetalManagementModule;component/Views/CategoryUnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
@@ -294,6 +483,7 @@ namespace Sentez.NermaMetalManagementModule
             ResMng.AddRes("CategoryAttributeSetDetailsView", "NermaMetalManagementModule;component/Views/CategoryAttributeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
             ResMng.AddRes("QuotationRecipeItemView", "NermaMetalManagementModule;component/Views/QuotationRecipeItem.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("OrderRecipeItemView", "NermaMetalManagementModule;component/Views/OrderRecipeItem.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
 
         private void RegisterPM()
@@ -303,7 +493,7 @@ namespace Sentez.NermaMetalManagementModule
             //_container.Register<IPMBase, VCMMonthlyActualCostPM>("VCMMonthlyActualCostPM");
             //_container.Register<IPMBase, SalesShipmentDetailsPM>("SalesShipmentDetailsPM");
             //_container.Register<IPMBase, CollectiveActualCostPM>("CollectiveActualCostPM");
-            //_container.Register<IPMBase, OrderAllHistoryPM>("OrderAllHistoryPM");
+            _container.Register<IPMBase, InventoryPriceListDetailsPM>("InventoryPriceListDetailsPM");
         }
 
         private void RegisterRpr()

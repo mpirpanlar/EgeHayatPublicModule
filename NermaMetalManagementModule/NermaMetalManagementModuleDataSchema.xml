@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SentezMetaData Application="3014" Version="1.0.8" >
+<SentezMetaData Application="3014" Version="1.0.9" >
 	<Tables>
 		<Table Id="600" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
@@ -234,24 +234,24 @@
 			</Relations>
 		</Table>
 
-		<Table Id="216" Name="Erp_QuotationReceiptItem" Description="Teklif Fişleri Detay Bilgileri" PrimaryKey="RecId" KeyField="Explanation" Caption="Teklif Fişi Detay">
+		<Table Id="216" Name="Erp_OrderReceiptItem" Description="Sipariş Fişleri Detay Bilgileri" PrimaryKey="RecId" KeyField="Explanation" Caption="Sipariş Fişi Detay">
 			<Fields>
 				<Field Id="500" Name="InventoryUnitItemSizeSetDetailsId" Description="Ölçü Tanımı Kayıt Numarası" DataType="Int64" Ordinal="11" UdtType="UdtInt64" Caption="Ölçü Tanımı Kayıt Numarası" Precision="19" />
 				<Field Id="501" Name="CategoryAttributeSetDetailsId" Description="Özellik Tanımı Kayıt Numarası" DataType="Int64" Ordinal="11" UdtType="UdtInt64" Caption="Özellik Tanımı Kayıt Numarası" Precision="19" />
 				<Field Id="501" Name="AttributeSetItemId" Description="Malzeme Özellik Detayı" DataType="Int64" Ordinal="11" UdtType="UdtInt64" Caption="Malzeme Özellik Detayı" Precision="19" />
 			</Fields>
 			<Relations>
-				<Relation Id="0" Name="FK_Erp_QuotationReceiptItem_Erp_InventoryUnitItemSizeSetDetails_InventoryUnitItemSizeSetDetailsId" DestinationTable="Erp_InventoryUnitItemSizeSetDetails" CheckExistingData="False" EnforceForReplication="False">
+				<Relation Id="0" Name="FK_Erp_OrderReceiptItem_Erp_InventoryUnitItemSizeSetDetails_InventoryUnitItemSizeSetDetailsId" DestinationTable="Erp_InventoryUnitItemSizeSetDetails" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="InventoryUnitItemSizeSetDetailsId" DestinationField="RecId" />
 					</RelationFields>
 				</Relation>
-				<Relation Id="0" Name="FK_Erp_QuotationReceiptItem_Erp_CategoryAttributeSetDetails" DestinationTable="Erp_CategoryAttributeSetDetails" CheckExistingData="False" EnforceForReplication="False">
+				<Relation Id="0" Name="FK_Erp_OrderReceiptItem_Erp_CategoryAttributeSetDetails" DestinationTable="Erp_CategoryAttributeSetDetails" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="CategoryAttributeSetDetailsId" DestinationField="RecId" />
 					</RelationFields>
 				</Relation>
-				<Relation Id="0" Name="FK_Erp_QuotationReceiptItem_Erp_InventoryAttributeSetItem" DestinationTable="Erp_InventoryAttributeSetItem" CheckExistingData="False" EnforceForReplication="False">
+				<Relation Id="0" Name="FK_Erp_OrderReceiptItem_Erp_InventoryAttributeSetItem" DestinationTable="Erp_InventoryAttributeSetItem" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="AttributeSetItemId" DestinationField="RecId" />
 					</RelationFields>
@@ -414,6 +414,42 @@
 				<Relation Id="0" Name="FK_Erp_QuotationReceiptRecipeItem_Erp_QuotationReceipt" DestinationTable="Erp_QuotationReceipt" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="QuotationReceiptId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+
+		<Table Id="601" Name="Erp_OrderReceiptRecipeItem" Description="Sipariş Reçete Detayları" PrimaryKey="RecId" Caption="Sipariş Reçete Detayları">
+			<Fields>
+				<Field Id="1" Name="RecId" Description="Kayıt Numarası" DataType="Int64" Ordinal="1" UdtType="UdtRecId" Caption="Kayıt Numarası" IsNullable="False" Precision="19" />
+				<Field Id="2" Name="OrderReceiptId" Description="Teklif Numarası" DataType="Int64" Ordinal="54" UdtType="UdtInt64" Caption="Teklif Numarası" Precision="19" />
+				<Field Id="3" Name="InventoryCode" Description="Malzeme Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Malzeme Kodu" Size="25" IsFilterField="True" />
+				<Field Id="4" Name="InventoryName" Description="Malzeme Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Malzeme Adı" Size="50" IsFilterField="True" />
+				<Field Id="5" Name="ArticelNo" Description="Artikel No" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Artikel No" Size="25" IsFilterField="True" />
+				<Field Id="6" Name="PozNo" Description="Poz Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Poz Kodu" Size="25" IsFilterField="True" />
+				<Field Id="7" Name="Quantity" Description="Miktar" DataType="Decimal" Ordinal="26" UdtType="UdtQuantity" FieldUsage="Quantity" Caption="Miktar" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="8" Name="UnitPrice" Description="Birim Fiyat" DataType="Decimal" Ordinal="32" UdtType="UdtAmount" FieldUsage="UnitPrice" Caption="Birim Fiyat" Precision="28" Scale="8" IsFilterField="True" />
+				<Field Id="9" Name="SizeDetailCode" Description="Ölçü Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Ölçü Kodu" Size="25" IsFilterField="True" />
+				<Field Id="10" Name="SizeDetailName" Description="Ölçü Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Ölçü Adı" Size="50" IsFilterField="True" />
+				<Field Id="11" Name="MarkCode" Description="Marka Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Marka Kodu" Size="25" IsFilterField="True" />
+				<Field Id="12" Name="MarkName" Description="Marka Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Marka Adı" Size="50" IsFilterField="True" />
+				<Field Id="13" Name="AttributeSetCode" Description="Özellik Kodu" DataType="String" Ordinal="16" UdtType="UdtCode" Caption="Özellik Kodu" Size="25" IsFilterField="True" />
+				<Field Id="14" Name="AttributeSetName" Description="Özellik Adı" DataType="String" Ordinal="17" UdtType="UdtName" Caption="Özellik Adı" Size="50" IsFilterField="True" />
+				<Field Id="15" Name="InUse" Description="Kullanımda Bilgisi" DataType="Boolean" Ordinal="7" UdtType="UdtBool" Caption="Kullanımda Bilgisi" Precision="3" IsFilterField="True" IsDefaultFilterField="True" ReportEditorType="ListSelector" ReportListName="YesNo" ReportDefaultNullSelection="Yes" />
+				<Field Id="16" Name="InsertedAt" Description="Kaydı Ekleme Zamanı" DataType="DateTime" Ordinal="8" UdtType="UdtDateTime" Caption="Kayıt Zamanı" />
+				<Field Id="17" Name="InsertedBy" Description="Kaydı Ekleyen" DataType="Int32" Ordinal="9" UdtType="UdtInt32" Caption="Kayıt Eden" Precision="10" />
+				<Field Id="18" Name="UpdatedAt" Description="Kaydı Değiştirme Zamanı" DataType="DateTime" Ordinal="10" UdtType="UdtDateTime" Caption="Değişiklik Zamanı" />
+				<Field Id="19" Name="UpdatedBy" Description="Kaydı Değiştiren" DataType="Int32" Ordinal="11" UdtType="UdtInt32" Caption="Değiştiren" Precision="10" />
+				<Field Id="20" Name="IsDeleted" Description="Silindi Bilgisi" DataType="Boolean" Ordinal="12" UdtType="UdtBool" Caption="Silindi" Precision="3" />
+				<Field Id="21" Name="DeletedAt" Description="Kaydı Silme Zamanı" DataType="DateTime" Ordinal="13" UdtType="UdtDateTime" Caption="Silme Zamanı" />
+				<Field Id="22" Name="DeletedBy" Description="Kaydı Silen" DataType="Int32" Ordinal="14" UdtType="UdtInt32" Caption="Silen" Precision="10" />
+			</Fields>
+			<Indexes>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_Erp_OrderReceiptRecipeItem_Erp_OrderReceipt" DestinationTable="Erp_OrderReceipt" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="OrderReceiptId" DestinationField="RecId" />
 					</RelationFields>
 				</Relation>
 			</Relations>

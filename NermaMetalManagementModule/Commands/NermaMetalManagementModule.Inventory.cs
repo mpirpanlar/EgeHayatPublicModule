@@ -195,13 +195,13 @@ namespace Sentez.NermaMetalManagementModule
             }
         }
 
-        private void InventoryPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.F9)
-            {
+        //private void InventoryPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.F9)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void InventoryBo_Init_InventoryUnitItemSizeSetDetails(BusinessObjectBase bo, BoParam parameter)
         {

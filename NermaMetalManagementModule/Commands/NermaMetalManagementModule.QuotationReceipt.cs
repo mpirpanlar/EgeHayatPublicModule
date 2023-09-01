@@ -1,5 +1,10 @@
 ﻿
 //using Microsoft.Office.Interop.Excel;
+using DevExpress.CodeParser;
+using DevExpress.Data.Helpers;
+
+using FastExpressionCompiler.LightExpression;
+
 using LiveCore.Desktop.Common;
 using LiveCore.Desktop.UI.Controls;
 
@@ -77,6 +82,9 @@ namespace Sentez.NermaMetalManagementModule
 
             bo.Lookups.AddLookUp("Erp_QuotationReceiptItem", "AttributeSetItemId", true, "Erp_InventoryAttributeSetItem", "AttributeItemCode", "AttributeItemCode", new string[] { "AttributeItemName", "IsSelect" }, new string[] { "AttributeItemName", "AttributeItemIsSelect" });
 
+            if (bo.BoBoParam != null)
+                bo.ValueFiller.AddRule("Erp_QuotationReceipt", "ReceiptSubType", bo.BoBoParam.DetailType);
+
             new DemandReceiptControlExtension(bo);
         }
 
@@ -93,7 +101,7 @@ namespace Sentez.NermaMetalManagementModule
                 quotationReceiptPm.ActiveBO.ColumnChanged += ActiveBO_ColumnChanged_QuotationReceiptPm;
             }
             LiveDocumentGroup liveDetailPanel = quotationReceiptPm.FCtrl("DetailPanel") as LiveDocumentGroup;
-            if(liveDetailPanel != null)
+            if (liveDetailPanel != null)
             {
                 LiveDocumentPanel ldpQuotationRecipeItemView = new LiveDocumentPanel();
                 ldpQuotationRecipeItemView.Caption = SLanguage.GetString("Teklif POZ Detayı");
@@ -137,6 +145,18 @@ namespace Sentez.NermaMetalManagementModule
                 if (!quotationReceiptPm.ReceiptColumnCollection.Contains("AttributeItemName"))
                     quotationReceiptPm.ReceiptColumnCollection.Add(new ReceiptColumn() { ColumnName = "AttributeItemName", Caption = "Özellik Seti Detay Adı", EditorType = EditorType.ReadOnlyTextEditor, Width = 120, LookUpTable = "Erp_InventoryAttributeSetItem", LookUpField = "AttributeItemName", IsVisible = false });
             }
+            //if (quotationReceiptPm != null)
+            //{
+            //    foreach(var item in quotationReceiptPm.contextMenu.Items)
+            //    {
+            //        if (item is Separator)
+            //            continue;
+            //        if((item as MenuItem).Name == "")
+            //        {
+
+            //        }
+            //    }
+            //}
         }
 
         private void ActiveBO_ColumnChanged_QuotationReceiptPm(object sender, DataColumnChangeEventArgs e)
