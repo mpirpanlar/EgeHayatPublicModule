@@ -23,6 +23,7 @@
 	  <Page Remove="Views\CategoryAttributeSetDetails.xaml" />
 	  <Page Remove="Views\CategoryUnitItemSizeSetDetails.xaml" />
 	  <Page Remove="Views\InventoryMarks.xaml" />
+	  <Page Remove="Views\InventoryPriceListDetails.xaml" />
 	  <Page Remove="Views\InventoryUnitItemSizeSetDetails.xaml" />
 	  <Page Remove="Views\QuotationRecipeItem.xaml" />
 	  <Page Remove="Views\UnitItemSizeSetDetails.xaml" />
@@ -64,6 +65,7 @@
 		<Resource Include="Views\CategoryAttributeSetDetails.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</Resource>
+		<Resource Include="Views\InventoryPriceListDetails.xaml" />
 		<Resource Include="Views\InventoryUnitItemSizeSetDetails.xaml" />
 		<Resource Include="Views\AttributeSetDetails.xaml">
 		  <Generator>MSBuild:Compile</Generator>

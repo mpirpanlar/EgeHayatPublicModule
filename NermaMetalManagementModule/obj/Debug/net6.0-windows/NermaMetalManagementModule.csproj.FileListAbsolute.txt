@@ -10,5 +10,3 @@ C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementMod
 C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\net6.0-windows\refint\NermaMetalManagementModule.dll
 C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\net6.0-windows\NermaMetalManagementModule.pdb
 C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\net6.0-windows\ref\NermaMetalManagementModule.dll
-C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\net6.0-windows\Views\InventoryPriceListDetails.baml
-C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\NermaMetalManagementModule\NermaMetalManagementModule\obj\Debug\net6.0-windows\NermaMetalManagementModule_MarkupCompile.cache
