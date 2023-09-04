@@ -243,7 +243,25 @@ namespace Sentez.NermaMetalManagementModule
                 else
                     return false;
             }
-            return true;
+            else if (commandParam?.cmdName == "CardCommand" && orderReceiptPm != null)
+            {
+                var focusScope = FocusManager.GetFocusScope(orderReceiptPm.ActiveViewControl);
+                var element = FocusManager.GetFocusedElement(focusScope) as FrameworkElement;
+                var visualelement = FrameworkTreeHelper.FindVisualParent<LiveGridControl>(element);
+                if (visualelement is LiveGridControl && (visualelement?.Name == "GridDetail"))
+                {
+                    if (visualelement.CurrentColumn?.FieldName == "InventoryUnitItemSizeSetDetails_SizeDetailCode")
+                    {
+                        OpenInventoryCategoryCard(visualelement, orderReceiptPm);
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            return false;
         }
 
         private void OrderReceiptPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
@@ -257,7 +275,7 @@ namespace Sentez.NermaMetalManagementModule
             {
                 orderReceiptPm.ActiveBO.ColumnChanged -= ActiveBO_ColumnChanged_QuotationReceiptPm;
             }
-            //orderReceiptPm.PreviewKeyDown -= QuotationReceiptPm_PreviewKeyDown;
+            orderReceiptPm.PreviewKeyDown -= OrderReceiptPm_PreviewKeyDown;
         }
 
         private void OrderReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails(object sender, RoutedEventArgs e)
@@ -279,18 +297,6 @@ namespace Sentez.NermaMetalManagementModule
                 if (!orderReceiptPm.ReceiptColumnCollection.Contains("AttributeItemName"))
                     orderReceiptPm.ReceiptColumnCollection.Add(new ReceiptColumn() { ColumnName = "AttributeItemName", Caption = "Özellik Seti Detay Adı", EditorType = EditorType.ReadOnlyTextEditor, Width = 120, LookUpTable = "Erp_InventoryAttributeSetItem", LookUpField = "AttributeItemName", IsVisible = false });
             }
-            //if (orderReceiptPm != null)
-            //{
-            //    foreach(var item in orderReceiptPm.contextMenu.Items)
-            //    {
-            //        if (item is Separator)
-            //            continue;
-            //        if((item as MenuItem).Name == "")
-            //        {
-
-            //        }
-            //    }
-            //}
         }
 
         private void OrderReceiptPm_Init_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)
@@ -319,6 +325,32 @@ namespace Sentez.NermaMetalManagementModule
             }
 
             orderReceiptPm.CmdList.AddCmd(317, "OrderRecipeLoadExcelCommand", SLanguage.GetString("Excelden Yükle"), OnOrderRecipeLoadExcelCommand, null);
+            orderReceiptPm.PreviewKeyDown += OrderReceiptPm_PreviewKeyDown;
+        }
+
+        private void OrderReceiptPm_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F9 && Keyboard.Modifiers == ModifierKeys.Shift)
+            {
+                var focusScope = FocusManager.GetFocusScope(orderReceiptPm.ActiveViewControl);
+                var element = FocusManager.GetFocusedElement(focusScope) as FrameworkElement;
+                var visualelement = FrameworkTreeHelper.FindVisualParent<LiveGridControl>(element);
+                string name = orderReceiptPm.GetFocusedField();
+                if (visualelement is LiveGridControl && (visualelement?.Name == "GridDetail"))
+                {
+                    if (visualelement.CurrentItem != null && (visualelement.CurrentColumn.Tag is ReceiptColumn))
+                    {
+                        if ((visualelement.CurrentItem as DataRowView).Row.Table.Columns.Contains("InventoryCategoryId") && !(visualelement.CurrentItem as DataRowView).Row.IsNull("InventoryCategoryId"))
+                        {
+                            if ((visualelement.CurrentColumn.Tag as ReceiptColumn).ColumnName == "InventoryUnitItemSizeSetDetails_SizeDetailCode")
+                            {
+                                OpenInventoryCategoryCard(visualelement, orderReceiptPm);
+                            }
+                        }
+                    }
+                }
+                e.Handled = true;
+            }
         }
 
         private void OnOrderRecipeLoadExcelCommand(ISysCommandParam obj)

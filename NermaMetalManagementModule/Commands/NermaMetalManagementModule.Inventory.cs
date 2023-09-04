@@ -278,6 +278,11 @@ namespace Sentez.NermaMetalManagementModule
             {
                 //categoryPm.ActiveBO.AfterGet += ActiveBO_AfterGet;
                 categoryPm.ActiveBO.ColumnChanged += categoryPm_ActiveBO_ColumnChanged;
+                if (categoryPm.pmParam?.Tag2 is string && categoryPm.pmParam.Tag2.ToString() == "FromReceipt")
+                {
+                    if (liveDocumentGroup != null && ldpCategoryUnitItemSizeSetDetails != null)
+                        liveDocumentGroup.SelectedItem = ldpCategoryUnitItemSizeSetDetails;
+                }
             }
         }
 

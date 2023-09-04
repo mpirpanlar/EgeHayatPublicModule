@@ -23,49 +23,49 @@
 				<CommandParam modulename="SalesModule" secname="MenuSubRoots.Transactions" />
 				<MenuItem CommandName="ModuleDefault"  Caption="Kategori Bazında Teklifler" WebLink="" Tag="Root">
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Ürün Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Urun" boparam="Type.2" tag="SubType.1" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Urun,BOCardContext" boparam="Type.2" tag="SubType.1" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Aluminyum Profil Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="AluminyumProfil" boparam="Type.2" tag="SubType.2" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="AluminyumProfil,BOCardContext" boparam="Type.2" tag="SubType.2" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Kompozit Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Kompozit" boparam="Type.2" tag="SubType.3" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Kompozit,BOCardContext" boparam="Type.2" tag="SubType.3" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Cam Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Cam" boparam="Type.2" tag="SubType.4" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Cam,BOCardContext" boparam="Type.2" tag="SubType.4" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Donanım Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Donanım" boparam="Type.2" tag="SubType.5" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Donanım,BOCardContext" boparam="Type.2" tag="SubType.5" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Aksesuar Teklifi" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Aksesuar" boparam="Type.2" tag="SubType.6" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Aksesuar,BOCardContext" boparam="Type.2" tag="SubType.6" modulename="QuotationModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Diğer (Genel) Teklif" WebLink="">
-						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Diger" boparam="Type.2" tag="SubType.7" modulename="QuotationModule"/>
+						<CommandParam viewname="QuotationReceipt" pmname="QuotationReceiptPM" boname="QuotationReceiptBO" pmparam="Diger,BOCardContext" boparam="Type.2" tag="SubType.7" modulename="QuotationModule"/>
 					</MenuItem>
 				</MenuItem>
 
 				<MenuItem CommandName="ModuleDefault"  Caption="Kategori Bazında Siparişler" WebLink="" Tag="Root">
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Ürün Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Urun" boparam="Type.2" tag="SubType.1" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Urun,BOCardContext" boparam="Type.2" tag="SubType.1" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Aluminyum Profil Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="AluminyumProfil" boparam="Type.2" tag="SubType.2" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="AluminyumProfil,BOCardContext" boparam="Type.2" tag="SubType.2" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Kompozit Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Kompozit" boparam="Type.2" tag="SubType.3" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Kompozit,BOCardContext" boparam="Type.2" tag="SubType.3" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Cam Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Cam" boparam="Type.2" tag="SubType.4" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Cam,BOCardContext" boparam="Type.2" tag="SubType.4" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Donanım Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Donanım" boparam="Type.2" tag="SubType.5" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Donanım,BOCardContext" boparam="Type.2" tag="SubType.5" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Aksesuar Siparişi" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Aksesuar" boparam="Type.2" tag="SubType.6" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Aksesuar,BOCardContext" boparam="Type.2" tag="SubType.6" modulename="OrderModule"/>
 					</MenuItem>
 					<MenuItem CommandName="CmdGeneralOpen" Caption="Diğer (Genel) Sipariş" WebLink="">
-						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Diger" boparam="Type.2" tag="SubType.7" modulename="OrderModule"/>
+						<CommandParam viewname="OrderReceipt" pmname="OrderReceiptPM" boname="OrderReceiptBO" pmparam="Diger,BOCardContext" boparam="Type.2" tag="SubType.7" modulename="OrderModule"/>
 					</MenuItem>
 				</MenuItem>
 			</MenuItem>
