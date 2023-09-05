@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SentezMetaData Application="3014" Version="1.0.9" >
+<SentezMetaData Application="3014" Version="1.0.10" >
 	<Tables>
 		<Table Id="600" Name="Erp_InventoryUnitItemSizeSetDetails" Description="Malzeme Kartı Birim Ölçü Detayları" PrimaryKey="RecId" KeyField="InventoryId" Caption="Malzeme Kartı Birim Ölçü Detayları">
 			<Fields>
@@ -450,6 +450,27 @@
 				<Relation Id="0" Name="FK_Erp_OrderReceiptRecipeItem_Erp_OrderReceipt" DestinationTable="Erp_OrderReceipt" CheckExistingData="False" EnforceForReplication="False">
 					<RelationFields>
 						<RelationField Id="1" Name="OrderReceiptId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+			</Relations>
+		</Table>
+
+		<Table Id="259" Name="Erp_VariantItem" Description="Varyant Kartları Detay Bilgileri" PrimaryKey="RecId" KeyField="ItemCode" Caption="Varyant Detay">
+			<Fields>
+				<Field Id="500" Name="ForexId" Description="Döviz Cinsi" DataType="Int32" Ordinal="25" UdtType="UdtInt32" Caption="Döviz Cinsi" Precision="10"/>
+				<Field Id="501" Name="Price" Description="Fiyat" DataType="Decimal" Ordinal="24" UdtType="UdtAmount" FieldUsage="UnitPrice" Caption="Fiyat" Precision="28" Scale="8"/>
+			</Fields>
+			<Indexes>
+			</Indexes>
+			<Relations>
+				<Relation Id="0" Name="FK_VariantItem_VariantCard" DestinationTable="Erp_VariantCard" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="CardId" DestinationField="RecId" />
+					</RelationFields>
+				</Relation>
+				<Relation Id="0" Name="FK_VariantItem_VariantItem_DBOnly" DestinationTable="Erp_VariantItem" CheckExistingData="False" EnforceForReplication="False">
+					<RelationFields>
+						<RelationField Id="1" Name="RelatedId" DestinationField="RecId" />
 					</RelationFields>
 				</Relation>
 			</Relations>

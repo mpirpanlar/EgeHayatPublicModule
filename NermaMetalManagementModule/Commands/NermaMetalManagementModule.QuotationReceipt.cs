@@ -152,7 +152,6 @@ namespace Sentez.NermaMetalManagementModule
 
         private bool QuotationReceiptPm_OnListCommand(PMBase pm, PmParam parameter, ISysCommandParam commandParam)
         {
-            //throw new NotImplementedException();
             if (commandParam?.cmdName == "ListCommand" && quotationReceiptPm != null)
             {
                 var focusScope = FocusManager.GetFocusScope(quotationReceiptPm.ActiveViewControl);
@@ -362,12 +361,7 @@ namespace Sentez.NermaMetalManagementModule
 
         private void OnQuotationRecipeLoadExcelCommand(ISysCommandParam obj)
         {
-
         }
-
-        //private void QuotationReceiptPm_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        //{
-        //}
 
         private void QuotationReceiptPm_ViewLoaded_InventoryUnitItemSizeSetDetails(object sender, RoutedEventArgs e)
         {
@@ -404,7 +398,91 @@ namespace Sentez.NermaMetalManagementModule
 
         private void ActiveBO_ColumnChanged_QuotationReceiptPm(object sender, DataColumnChangeEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (_suppressEvent) return;
+            if (e.Row.Table.TableName == "Erp_QuotationReceiptItem"
+                && (
+                    e.Column.ColumnName == "ItemVariant1Code" ||
+                    e.Column.ColumnName == "ItemVariant2Code" ||
+                    e.Column.ColumnName == "ItemVariant3Code" ||
+                    e.Column.ColumnName == "MarkId" ||
+                    e.Column.ColumnName == "InventoryCategoryId"
+                    )
+                )
+            {
+                IBusinessObject inventoryBO = quotationReceiptPm.ActiveBO.Container.Resolve<IBusinessObject>("InventoryBO");
+                try
+                {
+                    _suppressEvent = true;
+                    long inventoryId;
+                    long.TryParse(e.Row["InventoryId"].ToString(), out inventoryId);
+                    if (inventoryId > 0L)
+                    {
+                        if (inventoryBO.Get("CATEGORY_INV") > 0)
+                        {
+                            string whereStr = "IsPriceDiscount=1 and ItemType=1 and PriceType=2 and IsNull(InUse,0)=1";
+                            if (!e.Row.IsNull("InventoryCategoryId"))
+                            {
+                                int categoryId;
+                                int.TryParse(e.Row["InventoryCategoryId"].ToString(), out categoryId);
+                                if (categoryId != 0)
+                                {
+                                    using (DataTable table = UtilityFunctions.GetDataTableList(quotationReceiptPm.ActiveBO.Provider, quotationReceiptPm.ActiveBO.Connection, quotationReceiptPm.ActiveBO.Transaction, "Erp_Category", $"select * from Erp_Category with (nolock) where RecId={categoryId}"))
+                                    {
+                                        if (table?.Rows.Count > 0)
+                                        {
+                                            int parentCategoryId;
+                                            int.TryParse(table.Rows[0]["ParentId"].ToString(), out parentCategoryId);
+                                            while (parentCategoryId != 0)
+                                            {
+                                                categoryId = parentCategoryId;
+                                                using (DataTable table1 = UtilityFunctions.GetDataTableList(quotationReceiptPm.ActiveBO.Provider, quotationReceiptPm.ActiveBO.Connection, quotationReceiptPm.ActiveBO.Transaction, "Erp_Category", $"select * from Erp_Category with (nolock) where RecId={parentCategoryId}"))
+                                                {
+                                                    if (table1?.Rows.Count > 0)
+                                                    {
+                                                        int.TryParse(table1.Rows[0]["ParentId"].ToString(), out parentCategoryId);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (categoryId != 0)
+                                {
+                                    whereStr += $" and InventoryCategoryId={categoryId}";
+                                }
+                            }
+                            if (!e.Row.IsNull("MarkId"))
+                                whereStr += $" and MarkId={e.Row["MarkId"]}";
+                            if (!string.IsNullOrEmpty(e.Row["ItemVariant1Code"].ToString()))
+                                whereStr += $" and ItemVariant1Code='{e.Row["ItemVariant1Code"]}'";
+                            if (!string.IsNullOrEmpty(e.Row["ItemVariant2Code"].ToString()))
+                                whereStr += $" and ItemVariant2Code='{e.Row["ItemVariant2Code"]}'";
+                            if (!string.IsNullOrEmpty(e.Row["ItemVariant3Code"].ToString()))
+                                whereStr += $" and ItemVariant3Code='{e.Row["ItemVariant3Code"]}'";
+                            DataRow[] priceListRows = inventoryBO.Data.Tables["Erp_InventoryPriceList"].Select(whereStr, "", DataViewRowState.CurrentRows);
+                            if (priceListRows?.Length > 0)
+                            {
+                                if (!priceListRows[0].IsNull("ForexId"))
+                                {
+                                    e.Row["ForexId"] = priceListRows[0]["ForexId"];
+                                    e.Row["ForexUnitPrice"] = priceListRows[0]["Price"];
+                                }
+                                else
+                                    e.Row["UnitPrice"] = priceListRows[0]["Price"];
+                            }
+                        }
+                    }
+                    _suppressEvent = false;
+                }
+                catch (Exception ex)
+                {
+                    _suppressEvent = false;
+                }
+                finally
+                {
+                    inventoryBO?.Dispose();
+                }
+            }
         }
 
         private void QuotationReceiptPm_Dispose_InventoryUnitItemSizeSetDetails(PMBase pm, PmParam parameter)

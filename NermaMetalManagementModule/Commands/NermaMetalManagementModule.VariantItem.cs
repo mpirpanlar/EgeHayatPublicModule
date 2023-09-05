@@ -8,6 +8,7 @@ using Sentez.Common.ModuleBase;
 using Sentez.Common.PresentationModels;
 using Sentez.Common.Utilities;
 using Sentez.Data.BusinessObjects;
+using Sentez.Data.MetaData;
 using Sentez.Data.Tools;
 using Sentez.InventoryModule.PresentationModels;
 using Sentez.Localization;
@@ -77,6 +78,11 @@ namespace Sentez.NermaMetalManagementModule
                         gridVariantItemMarks = grd;
                         gridVariantItemMarks.BeforeCreateNewRow += GridVariantItemMarks_BeforeCreateNewRow;
                         gridVariantItemMarks.AfterCreateNewRow += GridVariantItemMarks_AfterCreateNewRow;
+                    }
+                    foreach (LiveGridControl grd in grids.Where(b => b.Name == "gridDetail"))
+                    {
+                        grd.ColumnDefinitions.Add(new ReceiptColumn() { ColumnName = "ForexId", Caption = "Döviz", EditorType = EditorType.ComboBox, Width = 50, ComboLookup = "Forex", ComboDisplayMember = "ForexCode", ComboValueMember = "RecId" });
+                        grd.ColumnDefinitions.Add(new ReceiptColumn() { ColumnName = "Price", Caption = "Fiyat", UdtType = UdtType.UdtAmount, UsageType = FieldUsage.UnitPrice, EditorType = EditorType.MaskEditor, Width = 50 });
                     }
                 }
             }
