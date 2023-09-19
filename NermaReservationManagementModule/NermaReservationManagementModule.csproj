@@ -19,15 +19,7 @@
 		<SignAssembly>true</SignAssembly>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Page Remove="Views\AttributeSetDetails.xaml" />
-	  <Page Remove="Views\CategoryAttributeSetDetails.xaml" />
-	  <Page Remove="Views\CategoryUnitItemSizeSetDetails.xaml" />
-	  <Page Remove="Views\InventoryMarks.xaml" />
-	  <Page Remove="Views\InventoryPriceListDetails.xaml" />
-	  <Page Remove="Views\InventoryUnitItemSizeSetDetails.xaml" />
-	  <Page Remove="Views\QuotationRecipeItem.xaml" />
 	  <Page Remove="Views\UnitItemSizeSetDetails.xaml" />
-	  <Page Remove="Views\VariantItemMarks.xaml" />
 	</ItemGroup>
 	<ItemGroup>
 		
@@ -60,21 +52,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="ModuleMenu.xml" />
-		<Resource Include="Views\CategoryUnitItemSizeSetDetails.xaml" />
-		<Resource Include="Views\InventoryMarks.xaml" />
-		<Resource Include="Views\CategoryAttributeSetDetails.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</Resource>
-		<Resource Include="Views\InventoryPriceListDetails.xaml" />
-		<Resource Include="Views\InventoryUnitItemSizeSetDetails.xaml" />
-		<Resource Include="Views\AttributeSetDetails.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</Resource>
 		<Resource Include="Views\UnitItemSizeSetDetails.xaml" />
-		<Resource Include="Views\QuotationRecipeItem.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</Resource>
-		<Resource Include="Views\VariantItemMarks.xaml" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="NermaReservationManagementModuleDataSchema.xml" />
@@ -93,6 +71,9 @@
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.1" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="BoExtensions\" />
+	  <Folder Include="Models\" />
 	  <Folder Include="PresentationModels\" />
+	  <Folder Include="WorkList\" />
 	</ItemGroup>
 </Project>
