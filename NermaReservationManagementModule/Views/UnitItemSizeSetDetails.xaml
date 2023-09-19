@@ -1,0 +1,32 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:lange="clr-namespace:Sentez.Common.Localization;assembly=LiveCore.Desktop"
+    xmlns:syc="clr-namespace:Sentez.Controls;assembly=LiveCore.Desktop"
+    xmlns:sye="clr-namespace:Sentez.Common.Extension;assembly=LiveCore.Desktop"
+    xmlns:rec="clr-namespace:Sentez.Common.Utilities;assembly=LiveCore.Desktop"    
+    xmlns:UtilCore="clr-namespace:Sentez.Common.Utilities;assembly=LiveCore" 
+    xmlns:live="clr-namespace:LiveCore.Desktop.UI.Controls;assembly=LiveCore.Desktop"
+    x:Name="UnitItemSizeSetDetails"
+    Tag="{lange:TranslateExtension Günlük Rezervasyonlar}"
+    >
+    
+    <Grid   Margin="5,5,5,5" >
+        <live:LiveGridControl  MaxHeight="2000"  x:Name="gridDetail" TableName="Erp_Pos" BusinessObject="{Binding ActiveBO}" ItemsSource="{Binding ActiveBO.MasterTable}" Lookups="{sye:SBinding Lists}">
+            <live:LiveGridControl.ColumnDefinitions>
+                <UtilCore:ReceiptColumn ColumnName="ReceiptDate" Caption="Tarih" EditorType="DateEditor" NewRowCheckColumn="True" Width="90"/>
+                <UtilCore:ReceiptColumn ColumnName="ReceiptTime" Caption="Saat" EditorType="TimeEditor" Width="15"/>
+                <UtilCore:ReceiptColumn ColumnName="Pax" Caption="Kişi Sayısı" EditorType="TextEditor" Width="80"/>
+                <UtilCore:ReceiptColumn ColumnName="CurrentAccountCode" Caption="Acente/Otel" EditorType="TextEditor" Width="180"/>
+                <UtilCore:ReceiptColumn ColumnName="ResourceCode" Caption="Oda Numarası" EditorType="TextEditor" Width="80"/>
+                <UtilCore:ReceiptColumn ColumnName="GuestName" Caption="Misarif İsmi" EditorType="TextEditor" Width="180"/>
+                <UtilCore:ReceiptColumn ColumnName="Explanation" Caption="Not" EditorType="TextEditor" Width="250"/>
+                <UtilCore:ReceiptColumn ColumnName="Payment" Caption="Ödeme Bilgisi" EditorType="TextEditor" Width="150"/>
+            </live:LiveGridControl.ColumnDefinitions>
+            <live:LiveGridControl.View>
+                <live:ReceiptView></live:ReceiptView>
+            </live:LiveGridControl.View>
+        </live:LiveGridControl>
+    </Grid>
+</UserControl>
