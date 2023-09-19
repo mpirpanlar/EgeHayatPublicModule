@@ -14,6 +14,10 @@ using Sentez.Data.Tools;
 using Sentez.Localization;
 using LiveCore.Desktop.Common;
 using Prism.Ioc;
+using Sentez.NermaReservationManagementModule.PresentationModels;
+using Sentez.Common.SBase;
+using NermaMetalManagementModule.Models;
+using Sentez.Data.BusinessObjects;
 
 namespace Sentez.NermaReservationManagementModule
 {
@@ -102,7 +106,7 @@ namespace Sentez.NermaReservationManagementModule
 
         private void RegisterBO()
         {
-            //_container.Register<IBusinessObject, UnitItemSizeSetDetailsBO>("UnitItemSizeSetDetailsBO");
+            _container.Register<IBusinessObject, ReservationPosBO>("ReservationPosBO");
         }
 
         private void RegisterServices()
@@ -166,12 +170,12 @@ namespace Sentez.NermaReservationManagementModule
             //ResMng.AddRes("CollectiveActualCost", "NermaReservationManagementModule;component/Views/CollectiveActualCost.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
             //ResMng.AddRes("OrderAllHistory", "NermaReservationManagementModule;component/Views/OrderAllHistory.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
 
-            ResMng.AddRes("UnitItemSizeSetDetailsView", "NermaReservationManagementModule;component/Views/UnitItemSizeSetDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
+            ResMng.AddRes("PosReservationListDetailsView", "NermaReservationManagementModule;component/Views/PosReservationListDetails.xaml", ResSource.Resource, ResourceType.View, Modules.ExternalModule15, 0, 0);
         }
 
         private void RegisterPM()
         {
-            //_container.Register<IPMBase, SalesShipmentComparePM>("SalesShipmentComparePM");
+            _container.Register<IPMBase, PosReservationListDetailsPM>("PosReservationListDetailsPM");
         }
 
         private void RegisterRpr()

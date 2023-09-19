@@ -3,16 +3,16 @@
 	<Application Name="Live,RestManager">
 		<MenuRoot Caption="Nerma Rezervasyon Yönetim Modülü" ImagePath="M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z" Order="90000" >
 			<MenuItem CommandName="ModuleDefault"  Caption="Tanımlamalar" WebLink="" >
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Rezervasyonlar">
-					<CommandParam viewname="UnitItemSizeSetDetailsView" boname="UnitItemSizeSetDetailsBO" pmparam="UnitItemSizeSetDetailsListEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
-				</MenuItem>
-				<!--<MenuItem CommandName="CmdGeneralOpen" Caption="Özellik Tanımları">
-					<CommandParam viewname="AttributeSetDetailsView" boname="AttributeSetDetailsBO" pmparam="AttributeSetDetailsView,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
-				</MenuItem>
-
-				<MenuItem CommandName="CmdGeneralOpen" Caption="Kategori Bazlı Fiyat Tanımlama">
-					<CommandParam viewname="InventoryPriceListDetailsView" boname="InventoryBO" boparam="Type.0" pmname="InventoryPriceListDetailsPM" pmparam="InventoryPriceListDetailsEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule15"/>
+				<!--<MenuItem CommandName="CmdGeneralOpen" Caption="Rezervasyonlar">
+					<CommandParam viewname="UnitItemSizeSetDetailsView" boname="UnitItemSizeSetDetailsBO" pmparam="UnitItemSizeSetDetailsListEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule17"/>
 				</MenuItem>-->
+				<!--<MenuItem CommandName="CmdGeneralOpen" Caption="Özellik Tanımları">
+					<CommandParam viewname="AttributeSetDetailsView" boname="AttributeSetDetailsBO" pmparam="AttributeSetDetailsView,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule17"/>
+				</MenuItem>-->
+
+				<MenuItem CommandName="CmdGeneralOpen" Caption="Rezervasyonlar">
+					<CommandParam viewname="PosReservationListDetailsView" boname="ReservationPosBO" pmname="PosReservationListDetailsPM" pmparam="InventoryPriceListDetailsEditScreen,BOMetaContext" logicalmoduleid="2" modulename="ExternalModule17"/>
+				</MenuItem>
 			</MenuItem>
 		</MenuRoot>
 	</Application>

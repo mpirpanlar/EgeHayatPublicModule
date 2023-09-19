@@ -19,7 +19,7 @@
 		<SignAssembly>true</SignAssembly>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Page Remove="Views\UnitItemSizeSetDetails.xaml" />
+	  <Page Remove="Views\PosReservationListDetails.xaml" />
 	</ItemGroup>
 	<ItemGroup>
 		
@@ -39,8 +39,20 @@
 			<SpecificVersion>False</SpecificVersion>
 			<HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\LiveCore.Desktop.dll</HintPath>
 		</Reference>
+		<Reference Include="MetaPosModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\MetaPosModule.dll</HintPath>
+		</Reference>
+		<Reference Include="MetaPosUIModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\MetaPosUIModule.dll</HintPath>
+		</Reference>
 		<Reference Include="OrderUIModule">
 		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\OrderUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="PosModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\PosModule.dll</HintPath>
+		</Reference>
+		<Reference Include="PosUIModule">
+		  <HintPath>..\..\..\LiveOutputs\Debug\net6.0-windows\PosUIModule.dll</HintPath>
 		</Reference>
 		<Reference Include="QuotationUIModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cbee52b073ff68c3, processorArchitecture=MSIL">
 			<SpecificVersion>False</SpecificVersion>
@@ -52,7 +64,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="ModuleMenu.xml" />
-		<Resource Include="Views\UnitItemSizeSetDetails.xaml" />
+		<Resource Include="Views\PosReservationListDetails.xaml" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="NermaReservationManagementModuleDataSchema.xml" />
