@@ -11,26 +11,14 @@ using System;
 using LiveCore.Desktop.UI.Controls;
 using System.Windows.Input;
 using System.Windows;
-using System.Xml.Linq;
 using Sentez.Core.ParameterClasses;
 using DevExpress.Xpf.Grid;
-using DevExpress.CodeParser;
-using DevExpress.XtraRichEdit.SpellChecker;
 using System.Text;
-using DevExpress.Xpf.Core;
-using static DevExpress.Mvvm.Native.Either;
-using System.ComponentModel.Design;
-using System.Windows.Media;
 using Sentez.Data.BusinessObjects;
-using System.Linq;
 using Sentez.Common.ModuleBase;
 using Sentez.Localization;
 using Sentez.InventoryModule;
-using DevExpress.XtraPrinting.Export.Pdf;
 using Sentez.Common.SystemServices;
-using DevExpress.XtraRichEdit.Model;
-using System.Transactions;
-using System.Security.Cryptography;
 using Sentez.MetaPosModule.ParameterClasses;
 
 namespace Sentez.NermaReservationManagementModule.PresentationModels
@@ -123,48 +111,6 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
                     OperationMode = OperationMode.UserParameterMode,
                     Container = _container
                 };
-                //using (DataTable tableInv = UtilityFunctions.GetDataTableList(ActiveBO.Provider, ActiveBO.Connection, ActiveBO.Transaction, "Erp_Inventory", $"select RecId from Erp_Inventory with (nolock) where CompanyId={ActiveBO.CompanyId} AND InventoryCode='CATEGORY_INV'"))
-                //{
-                //    if (tableInv?.Rows.Count == 0)
-                //    {
-                //        ActiveBO.NewRecord();
-                //        ActiveBO.CurrentRow["InventoryCode"] = "CATEGORY_INV";
-                //        ActiveBO.CurrentRow["InventoryName"] = "CATEGORY_INV";
-                //        ActiveBO.CurrentRow["InventoryType"] = 1;
-                //        ActiveBO.CurrentRow["HasRowVariant"] = 1;
-                //        ActiveBO.CurrentRow["IsClass"] = 0;
-                //        using (DataTable table = UtilityFunctions.GetDataTableList(ActiveBO.Provider, ActiveBO.Connection, ActiveBO.Transaction, "Meta_UnitSet", "select * from Meta_UnitSet with (nolock)"))
-                //        {
-                //            if (table?.Rows.Count > 0)
-                //            {
-                //                ActiveBO.CurrentRow["UnitId"] = table.Rows[0]["RecId"];
-                //            }
-                //        }
-                //        ActiveBO.ExtensionsEnabled = false;
-                //        PostResult postResult = ActiveBO.PostData();
-                //        if (postResult == PostResult.Succeed)
-                //        {
-
-                //        }
-                //        ActiveBO.ExtensionsEnabled = true;
-                //    }
-                //    else
-                //    {
-                //        if (ActiveBO.Get(Convert.ToInt64(tableInv.Rows[0]["RecId"])) > 0)
-                //        {
-
-                //        }
-                //    }
-                //}
-
-                //if (_pmParam.itemID > 0)
-                //{
-                //    ActiveBO.Get(_pmParam.itemID);
-                //}
-                //else
-                //{
-                //    if (!ActiveBO.IsNewRecord) ActiveBO.NewRecord();
-                //}
                 CurrentDate = (DateTime)GetToday();
                 GetPosReceipt(CurrentDate);
                 ActiveBO.ColumnChanged += ActiveBO_ColumnChanged;
@@ -186,16 +132,6 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
                 gridDetailPriceSale.BeforeCreateNewRow += gridDetailPriceSale_BeforeCreateNewRow;
                 gridDetailPriceSale.BeforeDeleteItem += gridDetailPriceSale_BeforeDeleteItem;
                 gridDetailPriceSale.CurrentColumnChanged += gridDetailPriceSale_CurrentColumnChanged;
-                //if (ActiveSession.ActiveUser.AccessCodes != null && ActiveSession.ActiveUser.AccessCodes.Count > 0)
-                //{
-                //    string accessCodeList = string.Empty;
-                //    foreach (var item in ActiveSession.ActiveUser.AccessCodes)
-                //    {
-                //        accessCodeList += string.Format(" or AccessCode = '{0}'", item.AccessCode);
-                //    }
-                //    accessCodeList = string.Format("PriceType=2 and (AccessCode is null or {0})", accessCodeList.Remove(0, 4));
-                //    gridDetailPriceSale.RowFilter = accessCodeList;
-                //}
             }
         }
 
@@ -225,18 +161,6 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
                 if (string.IsNullOrEmpty(row["CashRegisterReceiptNo"].ToString()))
                     row["CashRegisterReceiptNo"] = guid.ToString().Substring(0, 30);
             }
-            //foreach (DataRow row in ActiveBO.Data.Tables[0].Select("", "", DataViewRowState.CurrentRows))
-            //{
-            //    if (ActiveBO.Data.Tables["Erp_InventoryReceipt"].Select($"PosReceiptId={row["RecId"]}", "", DataViewRowState.CurrentRows).Length == 0)
-            //    {
-            //        DataRow receiptRow = ActiveBO.Data.Tables["Erp_InventoryReceipt"].NewRow();
-            //        receiptRow.SetParentRow(row);
-            //        receiptRow["CurrentAccountId"] = ActiveBO.CurrentRow["CurrentAccountId"];
-            //        receiptRow["ReceiptTime"] = ActiveBO.CurrentRow["ReceiptTime"];
-            //        receiptRow["OutWarehouseId"] = ActiveBO.CurrentRow["WarehouseId"];
-            //        ActiveBO.Data.Tables["Erp_InventoryReceipt"].Rows.Add(receiptRow);
-            //    }
-            //}
         }
 
         private void GetPosReceipt(DateTime selDate)
@@ -248,7 +172,6 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
                 new WhereField(ActiveBO.BaseTable,"ReceiptType",(short)PosSalesTypeDefinition.PosReceiptType.Sales, WhereCondition.Equal),
                 new WhereField(ActiveBO.BaseTable,"SalesType",(short)PosSalesTypeDefinition.PosSalesType.IsReservation, WhereCondition.Equal)
                 }));
-            //ActiveBO.ExtensionsEnabled = false;
         }
 
         bool _suppressEvents;
@@ -420,24 +343,12 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
                 e.View["TransactionType"] = (short)PosSalesTypeDefinition.PosTransactionType.Reservation;
                 e.View["ReceiptType"] = (short)PosSalesTypeDefinition.PosReceiptType.Sales;
                 e.View["SalesType"] = (short)PosSalesTypeDefinition.PosSalesType.IsReservation;
-
-                //if (e.View.Row.Table.Columns.Contains("PriceType")) e.View["PriceType"] = 2;
-                //if (ActiveSession?.ActiveUser != null && ActiveSession.ActiveUser.AccessCodes.Count == 1)
-                //{
-                //    if (e.View.Row.Table.Columns.Contains("AccessCode")) e.View["AccessCode"] = ActiveSession.ActiveUser.AccessCodes[0].AccessCode;
-                //}
-                //if (e.View.Row.Table.Columns.Contains("VatIncluded"))
-                //{
-                //    e.View["VatIncluded"] = 0;
-                //    if (((InventoryParameters)ActiveBO.Parameters["InventoryParameters"]).DefaultSalesPriceVatIncluded == 1) e.View["VatIncluded"] = 1;
-                //}
-                //if (e.View.Row.Table.Columns.Contains("Priority")) e.View["Priority"] = e.View.Row.Table.AsEnumerable().Count(y => !y.IsNull("PriceType") && y.Field<byte>("PriceType") == 2) + 1;
             }
         }
 
         private void gridDetailPriceSale_BeforeCreateNewRow(object sender, LiveGridControl.BeforeCreateNewRowEventArgs e)
         {
-            if (!SysMng.Instance.CheckRights(Common.OperationType.Insert, (short)Modules.InventoryModule, (short)Modules.InventoryModule, (short)InventorySecurityItems.InventoryCard, (short)InventoryCardSubItems.SalesPriceDefinitions))
+            if (!SysMng.Instance.CheckRights(OperationType.Insert, (short)Modules.InventoryModule, (short)Modules.InventoryModule, (short)InventorySecurityItems.InventoryCard, (short)InventoryCardSubItems.SalesPriceDefinitions))
             {
                 sysMng.ActWndMng.ShowMsg(SLanguage.GetString("Satış Fiyatı Ekleme Yetkiniz Bulunmamaktadır."), ConstantStr.Warning, Common.InformationMessages.MessageBoxButton.OK);
                 e.Cancel = true;
@@ -484,6 +395,14 @@ namespace Sentez.NermaReservationManagementModule.PresentationModels
         public override void Dispose()
         {
             if (disposed) return;
+            if (gridDetailPriceSale != null)
+            {
+                gridDetailPriceSale.CreatedNewRow -= gridDetailPriceSale_CreatedNewRow;
+                gridDetailPriceSale.BeforeCreateNewRow -= gridDetailPriceSale_BeforeCreateNewRow;
+                gridDetailPriceSale.BeforeDeleteItem -= gridDetailPriceSale_BeforeDeleteItem;
+                gridDetailPriceSale.CurrentColumnChanged -= gridDetailPriceSale_CurrentColumnChanged;
+            }
+
             base.Dispose();
         }
     }
