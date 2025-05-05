@@ -1,0 +1,13 @@
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.csproj.AssemblyReference.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.g.resources
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.csproj.CoreCompileInputs.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.sourcelink.json
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.deps.json
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayat.B1C99248.Up2Date
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\refint\EgeHayatVehicleFleetManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\EgeHayatVehicleFleetManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatVehicleFleetManagementModule\EgeHayatVehicleFleetManagementModule\obj\Debug\net6.0-windows\ref\EgeHayatVehicleFleetManagementModule.dll

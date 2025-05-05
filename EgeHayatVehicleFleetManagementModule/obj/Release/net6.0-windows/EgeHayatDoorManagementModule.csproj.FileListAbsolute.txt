@@ -1,0 +1,13 @@
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\EgeHayatDoorManagementModule.deps.json
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\EgeHayatDoorManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\LiveOutputs\Release\net6.0-windows\EgeHayatDoorManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.csproj.AssemblyReference.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.g.resources
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.csproj.CoreCompileInputs.cache
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.sourcelink.json
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayat.EE7D5AC6.Up2Date
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\refint\EgeHayatDoorManagementModule.dll
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\EgeHayatDoorManagementModule.pdb
+C:\SourceControl\SENTEZ-ERP\dev-v2.0.0.1\ExternalModules\EgeHayatDoorManagementModule\EgeHayatDoorManagementModule\obj\Release\net6.0-windows\ref\EgeHayatDoorManagementModule.dll
