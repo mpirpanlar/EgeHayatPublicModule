@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Live": {
-      "commandName": "Executable",
-      "executablePath": "C:\\SourceControl\\SENTEZ-ERP\\dev-v2.0.0.1\\LiveOutputs\\Debug\\net6.0-windows\\LIVE.exe"
-    }
-  }
-}
